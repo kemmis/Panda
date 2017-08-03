@@ -13,6 +13,7 @@ using AutoMapper;
 using TrashPanda.Data.SqlServer;
 using EntityFramework.DbContextScope.Interfaces;
 using EntityFramework.DbContextScope;
+using Microsoft.EntityFrameworkCore;
 
 namespace TrashPanda
 {
@@ -30,12 +31,26 @@ namespace TrashPanda
         {
             services.AddMvc();
             services.AddAutoMapper();
+
+            #region EF / SqlServer
+
+            services.AddDbContext<TrashPandaDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            #endregion
+
+            #region register dependencies
+
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ITrashPandaDataProvider, SqlServerTrashPandaDataProvider>();
-
             services.AddTransient<IAmbientDbContextLocator, AmbientDbContextLocator>();
             services.AddTransient<IDbContextScopeFactory, DbContextScopeFactory>();
             services.AddTransient<ScopedDataProviderBaseDependencies>();
+            services.AddTransient<IDbContextFactory, TrashPandaDbContextFactory>();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

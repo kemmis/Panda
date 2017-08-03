@@ -11,5 +11,6 @@ namespace TrashPanda.Core.Models.Data
         public string Content { get; set; }
         public DateTime PublishDate { get; set; }
         public string Slug { get; set; }
+        public bool Published { get; set; }
     }
 }
