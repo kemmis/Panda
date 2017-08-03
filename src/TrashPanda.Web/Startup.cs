@@ -34,7 +34,7 @@ namespace TrashPanda
             services.AddTransient<ITrashPandaDataProvider, SqlServerTrashPandaDataProvider>();
 
             services.AddTransient<IAmbientDbContextLocator, AmbientDbContextLocator>();
-            services.AddTransient<IDbContextScopeFactory>(c => new DbContextScopeFactory());
+            services.AddTransient<IDbContextScopeFactory, DbContextScopeFactory>();
             services.AddTransient<ScopedDataProviderBaseDependencies>();
         }
 

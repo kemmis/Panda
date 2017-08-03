@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { Http, RequestOptions, Headers, URLSearchParams } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { Post } from "../models/post";
 import 'rxjs/add/operator/map';
@@ -8,9 +8,18 @@ export class PostService {
     constructor(private _http: Http) { }
 
     getPostBySlug(slug: string): Observable<Post> {
-        let params = new URLSearchParams();
-        params.append("slug", slug);
-        return this._http.get("/api/post/getbyslug/", { params: params }).map(res=>{
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        const params = new URLSearchParams()
+        params.set("slug", slug);
+
+        const getOpts = new RequestOptions({
+            headers: headers,
+            search: params
+        });
+
+        return this._http.get("/api/post/getbyslug/", getOpts).map(res => {
             return res.json();
         });
     }

@@ -17,7 +17,7 @@ export class PostComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.paramSub = this.route.params.subscribe(params => {
+        this.paramSub = this.route.params.subscribe(params => {            
             var slug = params['slug'];
             this._postService.getPostBySlug(slug).subscribe(post => {
                 this.post = post;
