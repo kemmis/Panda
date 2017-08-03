@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TrashPanda.Core.Models.View;
+using TrashPanda.Core.Contracts;
 
 namespace TrashPanda.Web.Controllers
 {
@@ -11,18 +13,17 @@ namespace TrashPanda.Web.Controllers
     [Route("api/Post")]
     public class PostController : Controller
     {
+        private readonly IPostService postService;
+
+        public PostController(IPostService postService)
+        {
+            this.postService = postService;
+        }
+
         [Route("GetBySlug")]
         public PostViewModel GetBySlug(string slug)
         {
-            return new PostViewModel
-            {
-                Title = "Node Blows My Mind"
-            };
+            return postService.GetPostBySlug(slug);
         }
-    }
-
-    public class PostViewModel
-    {
-        public string Title { get; set; }
     }
 }
