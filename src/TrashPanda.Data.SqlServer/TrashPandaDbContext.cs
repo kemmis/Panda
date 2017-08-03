@@ -10,6 +10,7 @@ namespace TrashPanda.Data.SqlServer
     public class TrashPandaDbContext : DbContext, IDbContext
     {
         public TrashPandaDbContext(DbContextOptions options) : base(options) { }
+        public TrashPandaDbContext() : base() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

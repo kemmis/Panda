@@ -23,12 +23,14 @@ namespace TrashPanda.Data.SqlServer
 
     public class ScopedDataProviderBaseDependencies
     {
-        public ScopedDataProviderBaseDependencies(IAmbientDbContextLocator dbContextLocator, IDbContextScopeFactory dbContextScopeFactor)
+        private readonly IAmbientDbContextLocator _dbContextLocator;
+        private readonly IDbContextScopeFactory _dbContextScopeFactory;
+        public ScopedDataProviderBaseDependencies(IAmbientDbContextLocator dbContextLocatory, IDbContextScopeFactory dbContextScopeFactory)
         {
-            this.dbContextLocator = dbContextLocator;
-            this.dbContextScopeFactory = dbContextScopeFactory;
+            _dbContextLocator = dbContextLocatory;
+            _dbContextScopeFactory = dbContextScopeFactory;
         }
-        public IAmbientDbContextLocator dbContextLocator { get; set; }
-        public IDbContextScopeFactory dbContextScopeFactory { get; set; }
+        public IAmbientDbContextLocator dbContextLocator => _dbContextLocator;
+        public IDbContextScopeFactory dbContextScopeFactory => _dbContextScopeFactory;
     }
 }

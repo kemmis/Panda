@@ -27,14 +27,14 @@ namespace TrashPanda
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {
             services.AddMvc();
             services.AddAutoMapper();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<ITrashPandaDataProvider, SqlServerTrashPandaDataProvider>();
-            
+
             services.AddTransient<IAmbientDbContextLocator, AmbientDbContextLocator>();
-            services.AddTransient<IDbContextScopeFactory, DbContextScopeFactory>();
+            services.AddTransient<IDbContextScopeFactory>(c => new DbContextScopeFactory());
             services.AddTransient<ScopedDataProviderBaseDependencies>();
         }
 
