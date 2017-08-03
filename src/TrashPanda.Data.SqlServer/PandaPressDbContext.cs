@@ -7,10 +7,10 @@ using TrashPanda.Core.Models.Data;
 
 namespace TrashPanda.Data.SqlServer
 {
-    public class TrashPandaDbContext : DbContext, IDbContext
+    public class PandaPressDbContext : DbContext, IDbContext
     {
-        public TrashPandaDbContext(DbContextOptions options) : base(options) { }
-        public TrashPandaDbContext() : base() { }
+        public PandaPressDbContext(DbContextOptions options) : base(options) { }
+        public PandaPressDbContext() : base() { }
 
         public DbSet<Post> Posts { get; set; }
     }

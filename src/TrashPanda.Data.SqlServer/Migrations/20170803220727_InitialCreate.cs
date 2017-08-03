@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace TrashPanda.Data.SqlServer.Migrations
+namespace PandaPress.Data.SqlServer.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -17,6 +17,8 @@ namespace TrashPanda.Data.SqlServer.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PublishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Published = table.Column<bool>(type: "bit", nullable: false),
+                    Slug = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

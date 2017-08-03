@@ -5,7 +5,7 @@ using TrashPanda.Core.Models.Data;
 
 namespace TrashPanda.Core.Contracts
 {
-    public interface ITrashPandaDataProvider
+    public interface IPandaPressDataProvider
     {
         void Init();
         Post GetPostBySlug(string slug);

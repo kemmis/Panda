@@ -39,9 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TrashPanda.Core\TrashPanda.Core.csproj" />
-    <ProjectReference Include="..\TrashPanda.Data.SqlServer\TrashPanda.Data.SqlServer.csproj" />
-    <ProjectReference Include="..\TrashPanda.Service\TrashPanda.Service.csproj" />
+    <ProjectReference Include="..\TrashPanda.Core\PandaPress.Core.csproj" />
+    <ProjectReference Include="..\TrashPanda.Data.SqlServer\PandaPress.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\TrashPanda.Service\PandaPress.Service.csproj" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

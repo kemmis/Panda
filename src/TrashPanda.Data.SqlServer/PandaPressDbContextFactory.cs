@@ -7,11 +7,11 @@ using System.Text;
 
 namespace TrashPanda.Data.SqlServer
 {
-    public class TrashPandaDbContextFactory : IDbContextFactory
+    public class PandaPressDbContextFactory : IDbContextFactory
     {
         private readonly IServiceProvider serviceProvider;
 
-        public TrashPandaDbContextFactory(IServiceProvider serviceProvider)
+        public PandaPressDbContextFactory(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
         }

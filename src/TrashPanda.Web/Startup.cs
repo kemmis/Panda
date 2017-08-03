@@ -34,7 +34,7 @@ namespace TrashPanda
 
             #region EF / SqlServer
 
-            services.AddDbContext<TrashPandaDbContext>(options =>
+            services.AddDbContext<PandaPressDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
@@ -44,17 +44,17 @@ namespace TrashPanda
             #region register dependencies
 
             services.AddTransient<IPostService, PostService>();
-            services.AddTransient<ITrashPandaDataProvider, SqlServerTrashPandaDataProvider>();
+            services.AddTransient<IPandaPressDataProvider, SqlServerPandaPressDataProvider>();
             services.AddTransient<IAmbientDbContextLocator, AmbientDbContextLocator>();
             services.AddTransient<IDbContextScopeFactory, DbContextScopeFactory>();
             services.AddTransient<ScopedDataProviderBaseDependencies>();
-            services.AddTransient<IDbContextFactory, TrashPandaDbContextFactory>();
+            services.AddTransient<IDbContextFactory, PandaPressDbContextFactory>();
 
             #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ITrashPandaDataProvider trashPandaDataProvider)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IPandaPressDataProvider pandaPressDataProvider)
         {
             if (env.IsDevelopment())
             {
@@ -82,7 +82,7 @@ namespace TrashPanda
                     defaults: new { controller = "Home", action = "Index" });
             });
 
-            trashPandaDataProvider.Init();
+            pandaPressDataProvider.Init();
         }
     }
 }

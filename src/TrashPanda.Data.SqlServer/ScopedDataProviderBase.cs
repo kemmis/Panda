@@ -14,7 +14,7 @@ namespace TrashPanda.Data.SqlServer
             this.baseDependencies = baseDependencies;
         }
 
-        public TrashPandaDbContext TrashPandaDbContext => baseDependencies.dbContextLocator.Get<TrashPandaDbContext>();
+        public PandaPressDbContext PandaPressDbContext => baseDependencies.dbContextLocator.Get<PandaPressDbContext>();
 
         public IDbContextReadOnlyScope ReadOnlyScope => baseDependencies.dbContextScopeFactory.CreateReadOnly();
 

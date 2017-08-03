@@ -9,10 +9,10 @@ namespace TrashPanda.Service
 {
     public class PostService : IPostService
     {
-        private readonly ITrashPandaDataProvider dataProvider;
+        private readonly IPandaPressDataProvider dataProvider;
         private readonly IMapper mapper;
 
-        public PostService(ITrashPandaDataProvider dataProvider, IMapper mapper)
+        public PostService(IPandaPressDataProvider dataProvider, IMapper mapper)
         {
             this.dataProvider = dataProvider;
             this.mapper = mapper;

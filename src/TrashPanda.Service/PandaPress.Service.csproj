@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TrashPanda.Core\TrashPanda.Core.csproj" />
+    <ProjectReference Include="..\TrashPanda.Core\PandaPress.Core.csproj" />
   </ItemGroup>
 
 </Project>

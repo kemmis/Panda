@@ -8,9 +8,9 @@ using TrashPanda.Data.SqlServer.Seed;
 
 namespace TrashPanda.Data.SqlServer
 {
-    public class SqlServerTrashPandaDataProvider : ScopedDataProviderBase, ITrashPandaDataProvider
+    public class SqlServerPandaPressDataProvider : ScopedDataProviderBase, IPandaPressDataProvider
     {
-        public SqlServerTrashPandaDataProvider(ScopedDataProviderBaseDependencies baseDependencies) : base(baseDependencies)
+        public SqlServerPandaPressDataProvider(ScopedDataProviderBaseDependencies baseDependencies) : base(baseDependencies)
         {
         }
 
@@ -18,14 +18,14 @@ namespace TrashPanda.Data.SqlServer
         {
             using (ReadOnlyScope)
             {
-                return TrashPandaDbContext.Posts.FirstOrDefault(p => p.Slug == slug);
+                return PandaPressDbContext.Posts.FirstOrDefault(p => p.Slug == slug);
             }
         }
         public void Init()
         {
             using (var scope = Scope)
             {
-                TrashPandaDbContext.EnsureSeeded();
+                PandaPressDbContext.EnsureSeeded();
                 scope.SaveChanges();
             }
         }

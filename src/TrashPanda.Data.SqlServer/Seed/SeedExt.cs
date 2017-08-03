@@ -8,7 +8,7 @@ namespace TrashPanda.Data.SqlServer.Seed
 {
     public static class SeedExt
     {
-        public static void EnsureSeeded(this TrashPandaDbContext context)
+        public static void EnsureSeeded(this PandaPressDbContext context)
         {
             context.Database.EnsureCreated();
 
