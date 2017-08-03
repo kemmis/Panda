@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TrashPanda.Service;
 using TrashPanda.Core.Contracts;
+using AutoMapper;
 
 namespace TrashPanda
 {
@@ -23,8 +24,9 @@ namespace TrashPanda
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {            
             services.AddMvc();
+            services.AddAutoMapper();
             services.AddTransient<IPostService, PostService>();
         }
 

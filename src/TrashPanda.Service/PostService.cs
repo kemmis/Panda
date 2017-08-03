@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using TrashPanda.Core.Contracts;
@@ -8,12 +9,22 @@ namespace TrashPanda.Service
 {
     public class PostService : IPostService
     {
+        private readonly ITrashPandaDataProvider dataProvider;
+        private readonly IMapper mapper;
+
+        public PostService(ITrashPandaDataProvider dataProvider, IMapper mapper)
+        {
+            this.dataProvider = dataProvider;
+            this.mapper = mapper;
+        }
+
         public PostViewModel GetPostBySlug(string slug)
         {
-            return new PostViewModel
-            {
-                Title = "Node Blows My Mind"
-            };
+            var post = dataProvider.GetPostBySlug(slug);
+
+            if (post == null) return null;
+            
+            return mapper.Map<PostViewModel>(post);
         }
     }
 }
