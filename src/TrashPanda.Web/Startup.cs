@@ -10,6 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 using TrashPanda.Service;
 using TrashPanda.Core.Contracts;
 using AutoMapper;
+using TrashPanda.Data.SqlServer;
+using EntityFramework.DbContextScope.Interfaces;
+using EntityFramework.DbContextScope;
 
 namespace TrashPanda
 {
@@ -28,10 +31,15 @@ namespace TrashPanda
             services.AddMvc();
             services.AddAutoMapper();
             services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ITrashPandaDataProvider, SqlServerTrashPandaDataProvider>();
+            
+            services.AddTransient<IAmbientDbContextLocator, AmbientDbContextLocator>();
+            services.AddTransient<IDbContextScopeFactory, DbContextScopeFactory>();
+            services.AddTransient<ScopedDataProviderBaseDependencies>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ITrashPandaDataProvider trashPandaDataProvider)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +66,8 @@ namespace TrashPanda
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+            trashPandaDataProvider.Init();
         }
     }
 }

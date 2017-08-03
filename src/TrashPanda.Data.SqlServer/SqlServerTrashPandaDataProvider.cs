@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TrashPanda.Core.Contracts;
 using TrashPanda.Core.Models.Data;
+using TrashPanda.Data.SqlServer.Seed;
 
 namespace TrashPanda.Data.SqlServer
 {
@@ -18,6 +19,14 @@ namespace TrashPanda.Data.SqlServer
             using (ReadOnlyScope)
             {
                 return TrashPandaDbContext.Posts.FirstOrDefault(p => p.Slug == slug);
+            }
+        }
+        public void Init()
+        {
+            using (var scope = Scope)
+            {
+                TrashPandaDbContext.EnsureSeeded();
+                scope.SaveChanges();
             }
         }
     }

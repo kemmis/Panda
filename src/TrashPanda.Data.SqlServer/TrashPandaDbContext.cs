@@ -9,10 +9,13 @@ namespace TrashPanda.Data.SqlServer
 {
     public class TrashPandaDbContext : DbContext, IDbContext
     {
-       
-        public TrashPandaDbContext(DbContextOptions<TrashPandaDbContext> options) : base(options)
-        { }
-                
+        public TrashPandaDbContext(DbContextOptions options) : base(options) { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(
+                @"Server=DESKTOP-116JPUG\SQLEXPRESS;Database=TrashPandaDb;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
         public DbSet<Post> Posts { get; set; }
     }
 }

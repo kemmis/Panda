@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrashPanda.Core\TrashPanda.Core.csproj" />
+    <ProjectReference Include="..\TrashPanda.Data.SqlServer\TrashPanda.Data.SqlServer.csproj" />
     <ProjectReference Include="..\TrashPanda.Service\TrashPanda.Service.csproj" />
   </ItemGroup>
 

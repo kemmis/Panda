@@ -7,6 +7,7 @@ namespace TrashPanda.Core.Contracts
 {
     public interface ITrashPandaDataProvider
     {
+        void Init();
         Post GetPostBySlug(string slug);
     }
 }

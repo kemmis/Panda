@@ -11,9 +11,10 @@ using TrashPanda.Data.SqlServer;
 namespace TrashPanda.Data.SqlServer.Migrations
 {
     [DbContext(typeof(TrashPandaDbContext))]
-    partial class TrashPandaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170803104059_AddSlugColumn")]
+    partial class AddSlugColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
