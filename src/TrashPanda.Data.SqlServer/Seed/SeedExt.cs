@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using TrashPanda.Core.Models.Data;
+using PandaPress.Core.Models.Data;
 
-namespace TrashPanda.Data.SqlServer.Seed
+namespace PandaPress.Data.SqlServer.Seed
 {
     public static class SeedExt
     {

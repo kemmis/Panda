@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TrashPanda.Core.Models.Data
+namespace PandaPress.Core.Models.Data
 {
     public class Post
     {

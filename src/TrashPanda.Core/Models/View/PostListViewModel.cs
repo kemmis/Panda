@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TrashPanda.Core.Models.View;
 
 namespace PandaPress.Core.Models.View
 {

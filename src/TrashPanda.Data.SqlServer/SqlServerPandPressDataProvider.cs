@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using TrashPanda.Core.Contracts;
-using TrashPanda.Core.Models.Data;
-using TrashPanda.Data.SqlServer.Seed;
+using PandaPress.Core.Contracts;
+using PandaPress.Core.Models.Data;
+using PandaPress.Data.SqlServer.Seed;
 
-namespace TrashPanda.Data.SqlServer
+namespace PandaPress.Data.SqlServer
 {
     public class SqlServerPandaPressDataProvider : ScopedDataProviderBase, IPandaPressDataProvider
     {

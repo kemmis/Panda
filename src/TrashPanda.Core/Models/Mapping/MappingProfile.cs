@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using TrashPanda.Core.Models.Data;
-using TrashPanda.Core.Models.View;
+using PandaPress.Core.Models.Data;
+using PandaPress.Core.Models.View;
 
-namespace TrashPanda.Core.Models.Mapping
+namespace PandaPress.Core.Models.Mapping
 {
     public class MappingProfile : Profile
     {

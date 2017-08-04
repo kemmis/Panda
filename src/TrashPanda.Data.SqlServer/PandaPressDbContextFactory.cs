@@ -1,11 +1,8 @@
-﻿using EntityFramework.DbContextScope.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using EntityFramework.DbContextScope.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TrashPanda.Data.SqlServer
+namespace PandaPress.Data.SqlServer
 {
     public class PandaPressDbContextFactory : IDbContextFactory
     {

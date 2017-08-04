@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TrashPanda.Core.Models.Data;
+﻿using System.Collections.Generic;
+using PandaPress.Core.Models.Data;
 
-namespace TrashPanda.Core.Contracts
+namespace PandaPress.Core.Contracts
 {
     public interface IPandaPressDataProvider
     {

@@ -1,13 +1,10 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using TrashPanda.Core.Contracts;
-using TrashPanda.Core.Models.View;
+﻿using System.Collections.Generic;
+using AutoMapper;
+using PandaPress.Core.Contracts;
 using PandaPress.Core.Models.Request;
 using PandaPress.Core.Models.View;
 
-namespace TrashPanda.Service
+namespace PandaPress.Service
 {
     public class PostService : IPostService
     {

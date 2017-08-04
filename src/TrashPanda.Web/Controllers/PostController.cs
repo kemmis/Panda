@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using TrashPanda.Core.Models.View;
-using TrashPanda.Core.Contracts;
-using PandaPress.Core.Models.View;
+﻿using Microsoft.AspNetCore.Mvc;
+using PandaPress.Core.Contracts;
 using PandaPress.Core.Models.Request;
+using PandaPress.Core.Models.View;
 
-namespace TrashPanda.Web.Controllers
+namespace PandaPress.Web.Controllers
 {
     [Produces("application/json")]
     [Route("api/Post")]

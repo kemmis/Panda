@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
+using EntityFramework.DbContextScope;
+using EntityFramework.DbContextScope.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TrashPanda.Service;
-using TrashPanda.Core.Contracts;
-using AutoMapper;
-using TrashPanda.Data.SqlServer;
-using EntityFramework.DbContextScope.Interfaces;
-using EntityFramework.DbContextScope;
-using Microsoft.EntityFrameworkCore;
+using PandaPress.Core.Contracts;
+using PandaPress.Data.SqlServer;
+using PandaPress.Service;
 
-namespace TrashPanda
+namespace PandaPress.Web
 {
     public class Startup
     {

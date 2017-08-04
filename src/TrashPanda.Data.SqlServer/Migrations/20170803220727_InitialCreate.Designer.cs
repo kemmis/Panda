@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
-using TrashPanda.Data.SqlServer;
 
 namespace PandaPress.Data.SqlServer.Migrations
 {

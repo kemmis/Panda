@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TrashPanda.Core.Models.View
+namespace PandaPress.Core.Models.View
 {
     public class PostViewModel
     {

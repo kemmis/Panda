@@ -1,9 +1,6 @@
 ﻿using EntityFramework.DbContextScope.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TrashPanda.Data.SqlServer
+namespace PandaPress.Data.SqlServer
 {
     public class ScopedDataProviderBase
     {

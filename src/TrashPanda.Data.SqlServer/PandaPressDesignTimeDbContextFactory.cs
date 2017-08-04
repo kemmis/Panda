@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TrashPanda.Data.SqlServer
+namespace PandaPress.Data.SqlServer
 {
     public class PandaPressDesignTimeDbContextFactory : IDesignTimeDbContextFactory<PandaPressDbContext>
     {

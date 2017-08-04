@@ -4,7 +4,7 @@ import { PostList } from "../../../models/post-list";
 import { PostListRequest } from "../../../models/post-list-request";
 
 @Component({
-    selector: 'home',
+    selector: 'home-page',
     templateUrl: './home.component.html'
 })
 export class HomePageComponent implements OnInit {
