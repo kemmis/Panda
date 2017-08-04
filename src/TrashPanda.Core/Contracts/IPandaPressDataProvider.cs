@@ -9,5 +9,6 @@ namespace TrashPanda.Core.Contracts
     {
         void Init();
         Post GetPostBySlug(string slug);
+        (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex);
     }
 }

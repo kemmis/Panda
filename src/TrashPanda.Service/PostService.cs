@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using TrashPanda.Core.Contracts;
 using TrashPanda.Core.Models.View;
+using PandaPress.Core.Models.Request;
+using PandaPress.Core.Models.View;
 
 namespace TrashPanda.Service
 {
@@ -25,6 +27,18 @@ namespace TrashPanda.Service
             if (post == null) return null;
             
             return mapper.Map<PostViewModel>(post);
+        }
+
+        public PostListViewModel GetPostList(PostListRequest request)
+        {
+            var posts = dataProvider.GetPosts(request.PageSize, request.PageIndex);
+            return new PostListViewModel
+            {
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Posts = mapper.Map<List<PostViewModel>>(posts.posts),
+                TotalPosts = posts.totalPosts
+            };
         }
     }
 }

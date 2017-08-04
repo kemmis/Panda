@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,18 @@ namespace TrashPanda.Data.SqlServer
                 return PandaPressDbContext.Posts.FirstOrDefault(p => p.Slug == slug);
             }
         }
+
+        public (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex)
+        {
+            using (ReadOnlyScope)
+            {
+                var totalPosts = PandaPressDbContext.Posts.Count(p => p.Published);
+                var posts = PandaPressDbContext.Posts.OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
+                    .Take(pageSize).ToList();
+                return (posts, totalPosts);
+            }
+        }
+
         public void Init()
         {
             using (var scope = Scope)
