@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrashPanda.Core.Models.View;
 using TrashPanda.Core.Contracts;
+using PandaPress.Core.Models.View;
+using PandaPress.Core.Models.Request;
 
 namespace TrashPanda.Web.Controllers
 {
@@ -24,6 +26,12 @@ namespace TrashPanda.Web.Controllers
         public PostViewModel GetBySlug(string slug)
         {
             return postService.GetPostBySlug(slug);
+        }
+
+        [Route("GetList")]
+        public PostListViewModel GetList([FromBody]PostListRequest request)
+        {
+            return postService.GetPostList(request);
         }
     }
 }

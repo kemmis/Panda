@@ -5,13 +5,15 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './components/app/app.component';
-import { HomeComponent } from './components/home/home.component';
+import { HomePageComponent } from "./components/pages/home/home.component";
+import { PostPageComponent } from "./components/pages/post/post.component";
 import { PostComponent } from "./components/post/post.component";
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
+        HomePageComponent,
+        PostPageComponent,
         PostComponent
     ],
     imports: [
@@ -19,8 +21,8 @@ import { PostComponent } from "./components/post/post.component";
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', component: HomeComponent },
-            { path: 'post/:slug', component: PostComponent },
+            { path: '', component: HomePageComponent },
+            { path: 'post/:slug', component: PostPageComponent },
             { path: '**', redirectTo: '' }
         ])
     ]
