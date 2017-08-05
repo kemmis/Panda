@@ -3,12 +3,15 @@ using EntityFramework.DbContextScope;
 using EntityFramework.DbContextScope.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PandaPress.Core.Contracts;
+using PandaPress.Core.Models.Data;
 using PandaPress.Data.SqlServer;
+using PandaPress.Data.SqlServer.Seed;
 using PandaPress.Service;
 
 namespace PandaPress.Web
@@ -33,7 +36,16 @@ namespace PandaPress.Web
             services.AddDbContext<PandaPressDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            }, ServiceLifetime.Transient, ServiceLifetime.Transient);
+
+            #endregion
+
+
+            #region Identity
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<PandaPressDbContext>()
+                .AddDefaultTokenProviders();
 
             #endregion
 
@@ -45,6 +57,7 @@ namespace PandaPress.Web
             services.AddTransient<IDbContextScopeFactory, DbContextScopeFactory>();
             services.AddTransient<ScopedDataProviderBaseDependencies>();
             services.AddTransient<IDbContextFactory, PandaPressDbContextFactory>();
+            services.AddTransient<DbInitializer>();
 
             #endregion
         }
@@ -78,7 +91,7 @@ namespace PandaPress.Web
                     defaults: new { controller = "Home", action = "Index" });
             });
 
-            pandaPressDataProvider.Init();
+            pandaPressDataProvider.Init().Wait();
         }
     }
 }

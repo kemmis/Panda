@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using PandaPress.Core.Models.Data;
+using PandaPress.Core.Models.Enum;
 
 namespace PandaPress.Data.SqlServer.Seed
 {
-    public static class SeedExt
+    public class DbInitializer
     {
-        public static void EnsureSeeded(this PandaPressDbContext context)
+        private PandaPressDbContext context;
+        private UserManager<ApplicationUser> userManager;
+        private RoleManager<IdentityRole> roleManager;
+
+        public DbInitializer(PandaPressDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        {
+            this.context = context;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
+
+        public async Task EnsureSeededAsync()
         {
             context.Database.EnsureCreated();
 
@@ -15,6 +30,30 @@ namespace PandaPress.Data.SqlServer.Seed
             {
                 return;   // DB has been seeded
             }
+
+            #region create roles and first user
+
+            string[] roleNames = { PandaPressRoles.Administrator, PandaPressRoles.Blogger };
+
+
+            foreach (var roleName in roleNames)
+            {
+                await roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+
+            var adminUser = new ApplicationUser
+            {
+                Email = "admin@pandapress.com",
+                UserName = "admin",
+                SecurityStamp = "pand-om-nom-nom-on-bamboo"
+            };
+
+            var result = await userManager.CreateAsync(adminUser, "PandaPassword123!");
+            await userManager.AddToRoleAsync(adminUser, PandaPressRoles.Administrator);
+            await userManager.AddToRoleAsync(adminUser, PandaPressRoles.Blogger);
+
+            #endregion
+
 
             var posts = new Post[]
             {
@@ -27,7 +66,9 @@ namespace PandaPress.Data.SqlServer.Seed
                 }
             };
 
-            context.Posts.AddRange(posts);
+            await context.Posts.AddRangeAsync(posts);
+
+            await context.SaveChangesAsync();
         }
     }
 }

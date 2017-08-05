@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PandaPress.Core.Contracts;
 using PandaPress.Core.Models.Data;
@@ -7,39 +9,38 @@ using PandaPress.Data.SqlServer.Seed;
 
 namespace PandaPress.Data.SqlServer
 {
-    public class SqlServerPandaPressDataProvider : ScopedDataProviderBase, IPandaPressDataProvider
+    public class SqlServerPandaPressDataProvider : IPandaPressDataProvider
     {
-        public SqlServerPandaPressDataProvider(ScopedDataProviderBaseDependencies baseDependencies) : base(baseDependencies)
+
+        private readonly PandaPressDbContext _db;
+        private readonly DbInitializer _dbInitializer;
+
+        public SqlServerPandaPressDataProvider(PandaPressDbContext pandaPressDbContext, DbInitializer dbInitializer)
         {
+            _db = pandaPressDbContext;
+            _dbInitializer = dbInitializer;
         }
 
         public Post GetPostBySlug(string slug)
         {
-            using (ReadOnlyScope)
-            {
-                return PandaPressDbContext.Posts.FirstOrDefault(p => p.Slug == slug);
-            }
+            return _db.Posts.FirstOrDefault(p => p.Slug == slug);
         }
 
         public (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex)
         {
-            using (ReadOnlyScope)
-            {
-                var totalPosts = PandaPressDbContext.Posts.Count(p => p.Published);
-                var posts = PandaPressDbContext.Posts.OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
-                    .Take(pageSize).ToList();
-                return (posts, totalPosts);
-            }
+            var totalPosts = _db.Posts.Count(p => p.Published);
+            var posts = _db.Posts.OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
+                .Take(pageSize).ToList();
+            return (posts, totalPosts);
         }
 
-        public void Init()
+        public async Task Init()
         {
-            using (var scope = Scope)
-            {
-                PandaPressDbContext.Database.Migrate(); // run migrations
-                PandaPressDbContext.EnsureSeeded(); // add seed data
-                scope.SaveChanges();
-            }
+
+            // _db.Database.Migrate(); // run migrations
+
+            await _dbInitializer.EnsureSeededAsync();
         }
     }
 }
+
