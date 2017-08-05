@@ -8,7 +8,8 @@ namespace PandaPress.Core.Models.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Post, PostViewModel>();
+            CreateMap<Post, PostViewModel>()
+                .ForMember(dest => dest.UserDisplayName, opts => opts.MapFrom(src => src.User.DisplayName));
         }
     }
 }

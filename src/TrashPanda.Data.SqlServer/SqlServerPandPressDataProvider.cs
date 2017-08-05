@@ -23,13 +23,13 @@ namespace PandaPress.Data.SqlServer
 
         public Post GetPostBySlug(string slug)
         {
-            return _db.Posts.FirstOrDefault(p => p.Slug == slug);
+            return _db.Posts.Include(p=>p.User).FirstOrDefault(p => p.Slug == slug);
         }
 
         public (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex)
         {
             var totalPosts = _db.Posts.Count(p => p.Published);
-            var posts = _db.Posts.OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
+            var posts = _db.Posts.Include(p => p.User).OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
                 .Take(pageSize).ToList();
             return (posts, totalPosts);
         }

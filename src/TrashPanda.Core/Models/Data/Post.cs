@@ -11,5 +11,6 @@ namespace PandaPress.Core.Models.Data
         public string Slug { get; set; }
         public bool Published { get; set; }
         public ApplicationUser User { get; set; }
+        public string UserId { get; set; }
     }
 }

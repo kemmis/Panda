@@ -7,6 +7,7 @@ namespace PandaPress.Core.Models.Data
 {
     public class ApplicationUser : IdentityUser
     {
+        public string DisplayName { get; set; }
         public List<Post> Posts { get; set; }
     }
 }
