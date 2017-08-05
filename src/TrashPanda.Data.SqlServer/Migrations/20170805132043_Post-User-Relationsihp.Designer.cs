@@ -11,9 +11,10 @@ using System;
 namespace PandaPress.Data.SqlServer.Migrations
 {
     [DbContext(typeof(PandaPressDbContext))]
-    partial class PandaPressDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170805132043_Post-User-Relationsihp")]
+    partial class PostUserRelationsihp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

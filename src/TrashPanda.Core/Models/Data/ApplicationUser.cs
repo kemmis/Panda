@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 namespace PandaPress.Core.Models.Data
 {
     public class ApplicationUser : IdentityUser
-    {   
+    {
+        public List<Post> Posts { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PandaPress.Core.Contracts;
 using PandaPress.Core.Models.Data;
 using PandaPress.Data.SqlServer.Seed;
@@ -35,7 +36,8 @@ namespace PandaPress.Data.SqlServer
         {
             using (var scope = Scope)
             {
-                PandaPressDbContext.EnsureSeeded();
+                PandaPressDbContext.Database.Migrate(); // run migrations
+                PandaPressDbContext.EnsureSeeded(); // add seed data
                 scope.SaveChanges();
             }
         }

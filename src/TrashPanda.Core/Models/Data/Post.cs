@@ -10,5 +10,6 @@ namespace PandaPress.Core.Models.Data
         public DateTime PublishDate { get; set; }
         public string Slug { get; set; }
         public bool Published { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
