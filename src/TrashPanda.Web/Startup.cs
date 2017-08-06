@@ -1,4 +1,5 @@
 using AutoMapper;
+using cloudscribe.MetaWeblog;
 using EntityFramework.DbContextScope;
 using EntityFramework.DbContextScope.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -58,6 +59,20 @@ namespace PandaPress.Web
             services.AddTransient<ScopedDataProviderBaseDependencies>();
             services.AddTransient<IDbContextFactory, PandaPressDbContextFactory>();
             services.AddTransient<DbInitializer>();
+
+            #region MetaWeblog dependencies
+
+            services.AddCloudscribeMetaWeblog();
+
+            services.AddTransient<IMetaWeblogService, MetaWeblogService>();
+            services.AddTransient<IMetaWeblogSecurity, MetaWeblogSecurity>();
+
+            //services.AddTransient<IMetaWeblogRequestParser, MetaWeblogRequestParser>();
+            //services.AddTransient<IMetaWeblogResultFormatter, MetaWeblogResultFormatter>();
+            //services.AddTransient<IMetaWeblogRequestValidator, MetaWeblogRequestValidator>();
+            //services.AddTransient<IMetaWeblogRequestProcessor, MetaWeblogRequestProcessor>();
+
+            #endregion
 
             #endregion
         }
