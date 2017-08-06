@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PandaPress.Core.Models.Data
 {
@@ -12,5 +13,8 @@ namespace PandaPress.Core.Models.Data
         public bool Published { get; set; }
         public ApplicationUser User { get; set; }
         public string UserId { get; set; }
+        public Blog Blog { get; set; }
+        public int BlogId { get; set; }
+        public List<PostCategory> PostCategories { get; set; }
     }
 }

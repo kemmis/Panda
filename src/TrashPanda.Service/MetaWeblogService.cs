@@ -5,11 +5,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using cloudscribe.MetaWeblog;
 using cloudscribe.MetaWeblog.Models;
+using PandaPress.Core.Contracts;
 
 namespace PandaPress.Service
 {
     public class MetaWeblogService : IMetaWeblogService
     {
+        private readonly IPostService _postService;
+
+        public MetaWeblogService(IPostService postService)
+        {
+            _postService = postService;
+        }
+
         public Task<bool> DeletePage(string blogId, string pageId, string userName, string password)
         {
             throw new NotImplementedException();

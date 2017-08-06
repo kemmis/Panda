@@ -23,7 +23,7 @@ namespace PandaPress.Data.SqlServer
 
         public Post GetPostBySlug(string slug)
         {
-            return _db.Posts.Include(p=>p.User).FirstOrDefault(p => p.Slug == slug);
+            return _db.Posts.Include(p => p.User).FirstOrDefault(p => p.Slug == slug);
         }
 
         public (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex)
@@ -36,8 +36,7 @@ namespace PandaPress.Data.SqlServer
 
         public async Task Init()
         {
-
-            // _db.Database.Migrate(); // run migrations
+            //_db.Database.Migrate(); // run migrations
 
             await _dbInitializer.EnsureSeededAsync();
         }

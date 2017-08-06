@@ -63,15 +63,9 @@ namespace PandaPress.Web
             #region MetaWeblog dependencies
 
             services.AddCloudscribeMetaWeblog();
-
             services.AddTransient<IMetaWeblogService, MetaWeblogService>();
             services.AddTransient<IMetaWeblogSecurity, MetaWeblogSecurity>();
-
-            //services.AddTransient<IMetaWeblogRequestParser, MetaWeblogRequestParser>();
-            //services.AddTransient<IMetaWeblogResultFormatter, MetaWeblogResultFormatter>();
-            //services.AddTransient<IMetaWeblogRequestValidator, MetaWeblogRequestValidator>();
-            //services.AddTransient<IMetaWeblogRequestProcessor, MetaWeblogRequestProcessor>();
-
+            
             #endregion
 
             #endregion
