@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using PandaPress.Core.Contracts;
+using PandaPress.Core.Models.Data;
 using PandaPress.Core.Models.Request;
 using PandaPress.Core.Models.View;
 
@@ -27,9 +29,20 @@ namespace PandaPress.Service
             throw new System.NotImplementedException();
         }
 
+        public List<Blog> GetBlogsForUser(string username)
+        {
+            var blogs = _dataProvider.GetBlogsForUser(username);
+            return blogs.ToList();
+        }
+
         public IEnumerable<PostEditRequest> GetCategories(string blogId, string userName)
         {
             throw new System.NotImplementedException();
+        }
+
+        public List<Category> GetCategories()
+        {
+            return _dataProvider.GetCategories().ToList();
         }
 
         public PostViewModel GetPost(string blogId, string postId)

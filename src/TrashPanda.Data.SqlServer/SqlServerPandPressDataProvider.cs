@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,17 @@ namespace PandaPress.Data.SqlServer
         {
             _db = pandaPressDbContext;
             _dbInitializer = dbInitializer;
+        }
+
+        public IEnumerable<Blog> GetBlogsForUser(string username)
+        {
+            return _db.Blogs.Where(b =>
+                b.BlogApplicationUsers.Any(ba => String.Equals(ba.ApplicationUser.UserName, username, StringComparison.CurrentCultureIgnoreCase)));
+        }
+
+        public IEnumerable<Category> GetCategories()
+        {
+            return _db.Categories;
         }
 
         public Post GetPostBySlug(string slug)

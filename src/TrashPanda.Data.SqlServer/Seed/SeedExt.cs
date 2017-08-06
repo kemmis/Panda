@@ -60,8 +60,16 @@ namespace PandaPress.Data.SqlServer.Seed
                 Name = "Default Blog"
             };
 
-            await context.Blogs.AddAsync(defaultBlog);
+            var blogUser = new BlogApplicationUser
+            {
+                Blog = defaultBlog,
+                ApplicationUserId = adminUser.Id
+            };
 
+            defaultBlog.BlogApplicationUsers.Add(blogUser);
+
+            await context.Blogs.AddAsync(defaultBlog);
+            
             var posts = new Post[]
             {
                 new Post

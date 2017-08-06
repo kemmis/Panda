@@ -8,7 +8,7 @@ namespace PandaPress.Core.Models.Data
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<BlogApplicationUser> BlogApplicationUsers { get; set; }
+        public List<BlogApplicationUser> BlogApplicationUsers { get; set; } = new List<BlogApplicationUser>();
         public List<Post> Posts { get; set; }
     }
 }

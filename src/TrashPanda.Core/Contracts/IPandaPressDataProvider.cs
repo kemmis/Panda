@@ -9,5 +9,7 @@ namespace PandaPress.Core.Contracts
         Task Init();
         Post GetPostBySlug(string slug);
         (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex);
+        IEnumerable<Blog> GetBlogsForUser(string username);
+        IEnumerable<Category> GetCategories();
     }
 }

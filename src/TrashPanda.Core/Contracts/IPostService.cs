@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using PandaPress.Core.Models.Data;
 using PandaPress.Core.Models.Request;
 using PandaPress.Core.Models.View;
 
@@ -17,5 +18,7 @@ namespace PandaPress.Core.Contracts
         void NewCategory(string blogId, string category);
         void NewMediaObject(string blogId);
         void NewPost(string blogId, PostCreateRequest request, bool publish, string authorDisplayName);
+        List<Blog> GetBlogsForUser(string username);
+        List<Category> GetCategories();
     }
 }
