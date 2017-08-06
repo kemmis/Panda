@@ -42,13 +42,21 @@ namespace PandaPress.Service
             throw new NotImplementedException();
         }
 
-        public Task<bool> EditPost(string blogId, string postId, string userName, string password, PostStruct post, bool publish)
+        public async Task<bool> EditPost(string blogId, string postId, string userName, string password, PostStruct post, bool publish)
         {
-            _postService.EditPost(blogId, postId, new PostEditRequest
+            if (!IsAuthenticated(userName, password).Result)
             {
+                throw new Exception("No Auth");
+            }
 
-            }, publish);
-            return Task.FromResult(true);
+            var request = _mapper.Map<PostEditRequest>(post);
+            request.PostId = int.Parse(postId);
+            request.Username = userName;
+            request.Publish = publish;
+
+            _postService.EditPost(request);
+
+            return true;
         }
 
         public async Task<List<CategoryStruct>> GetCategories(string blogId, string userName, string password, CancellationToken cancellationToken)
@@ -76,14 +84,16 @@ namespace PandaPress.Service
             throw new NotImplementedException();
         }
 
-        public Task<PostStruct> GetPost(string blogId, string postId, string userName, string password, CancellationToken cancellationToken)
+        public async Task<PostStruct> GetPost(string blogId, string postId, string userName, string password, CancellationToken cancellationToken)
         {
-            var post = _postService.GetPost(blogId, postId);
-            var postStruct = new PostStruct
+            if (!IsAuthenticated(userName, password).Result)
             {
+                throw new Exception("No Auth");
+            }
 
-            };
-            return Task.FromResult(postStruct);
+            var post = _postService.GetPost(postId);
+            
+            return _mapper.Map<PostStruct>(post);
         }
 
         public Task<List<PostStruct>> GetRecentPosts(string blogId, string userName, string password, int numberOfPosts, CancellationToken cancellationToken)
@@ -124,13 +134,21 @@ namespace PandaPress.Service
             throw new NotImplementedException();
         }
 
-        public Task<string> NewPost(string blogId, string userName, string password, PostStruct newPost, bool publish, string authorDisplayName)
+        public async Task<string> NewPost(string blogId, string userName, string password, PostStruct newPost, bool publish, string authorDisplayName)
         {
-            _postService.NewPost(blogId, new PostCreateRequest
+            if (!IsAuthenticated(userName, password).Result)
             {
+                return null;
+            }
 
-            }, publish, authorDisplayName);
-            return Task.FromResult("");
+            var request = _mapper.Map<PostCreateRequest>(newPost);
+            request.Username = userName;
+            request.BlogId = int.Parse(blogId);
+            request.Publish = publish;
+
+            var post =_postService.NewPost(request);
+            
+            return post.Id.ToString();
         }
 
         private async Task<bool> IsAuthenticated(string userName, string password)

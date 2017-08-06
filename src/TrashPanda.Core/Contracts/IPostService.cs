@@ -11,13 +11,13 @@ namespace PandaPress.Core.Contracts
         PostListViewModel GetPostList(PostListRequest request);
 
         void DeletePost(string blogId, string postId);
-        void EditPost(string blogId, string postId, PostEditRequest request, bool publish);
+        void EditPost(PostEditRequest request);
         IEnumerable<PostEditRequest> GetCategories(string blogId, string userName);
-        PostViewModel GetPost(string blogId, string postId);
+        PostViewModel GetPost(string postId);
         IEnumerable<PostViewModel> GetRecentPosts(string blogId);
         void NewCategory(string blogId, string category);
         void NewMediaObject(string blogId);
-        void NewPost(string blogId, PostCreateRequest request, bool publish, string authorDisplayName);
+        Post NewPost(PostCreateRequest request);
         List<Blog> GetBlogsForUser(string username);
         List<Category> GetCategories();
     }

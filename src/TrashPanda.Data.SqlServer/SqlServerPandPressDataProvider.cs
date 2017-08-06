@@ -38,6 +38,11 @@ namespace PandaPress.Data.SqlServer
             return _db.Posts.Include(p => p.User).FirstOrDefault(p => p.Slug == slug);
         }
 
+        public Post GetPostById(int postId)
+        {
+            return _db.Posts.Include(p => p.User).FirstOrDefault(p => p.Id == postId);
+        }
+
         public (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex)
         {
             var totalPosts = _db.Posts.Count(p => p.Published);
@@ -46,6 +51,38 @@ namespace PandaPress.Data.SqlServer
             return (posts, totalPosts);
         }
 
+        public Post CreatePost(string title, string content, string username, bool publish, int blogId)
+        {
+            var user = _db.Users.FirstOrDefault(u => String.Equals(u.UserName, username, StringComparison.CurrentCultureIgnoreCase));
+            var blog = _db.Blogs.FirstOrDefault(b => b.Id == blogId);
+
+            var post = new Post
+            {
+                Blog = blog,
+                User = user,
+                Title = title,
+                Content = content,
+                Published = publish,
+                PublishDate = DateTime.Now
+            };
+
+            _db.Posts.Add(post);
+            _db.SaveChanges();
+
+            return post;
+        }
+
+        public void UpdatePost(int postId, string title, string content, bool publish)
+        {
+            var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
+            if (post != null)
+            {
+                post.Title = title;
+                post.Content = content;
+                post.Published = publish;
+                _db.SaveChanges();
+            }
+        }
         public async Task Init()
         {
             //_db.Database.Migrate(); // run migrations

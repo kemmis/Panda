@@ -24,9 +24,9 @@ namespace PandaPress.Service
             throw new System.NotImplementedException();
         }
 
-        public void EditPost(string blogId, string postId, PostEditRequest request, bool publish)
+        public void EditPost(PostEditRequest request)
         {
-            throw new System.NotImplementedException();
+            _dataProvider.UpdatePost(request.PostId, request.Title, request.Content, request.Publish);
         }
 
         public List<Blog> GetBlogsForUser(string username)
@@ -45,9 +45,11 @@ namespace PandaPress.Service
             return _dataProvider.GetCategories().ToList();
         }
 
-        public PostViewModel GetPost(string blogId, string postId)
+        public PostViewModel GetPost(string postId)
         {
-            throw new System.NotImplementedException();
+            var post = _dataProvider.GetPostById(int.Parse(postId));
+            if (post == null) return null;
+            return _mapper.Map<PostViewModel>(post);
         }
 
         public PostViewModel GetPostBySlug(string slug)
@@ -55,7 +57,7 @@ namespace PandaPress.Service
             var post = _dataProvider.GetPostBySlug(slug);
 
             if (post == null) return null;
-            
+
             return _mapper.Map<PostViewModel>(post);
         }
 
@@ -86,9 +88,9 @@ namespace PandaPress.Service
             throw new System.NotImplementedException();
         }
 
-        public void NewPost(string blogId, PostCreateRequest request, bool publish, string authorDisplayName)
+        public Post NewPost(PostCreateRequest request)
         {
-            throw new System.NotImplementedException();
+            return _dataProvider.CreatePost(request.Title, request.Content, request.Username, request.Publish, request.BlogId);
         }
     }
 }
