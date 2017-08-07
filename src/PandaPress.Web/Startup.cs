@@ -66,10 +66,16 @@ namespace PandaPress.Web
             services.AddCloudscribeMetaWeblog();
             services.AddTransient<IMetaWeblogService, MetaWeblogService>();
             services.AddTransient<IMetaWeblogSecurity, MetaWeblogSecurity>();
-            
+
             #endregion
 
             #endregion
+
+            // uncomment for node debugging
+            //services.AddNodeServices(options => {
+            //    options.LaunchWithDebugging = true;
+            //    options.DebuggingPort = 9229;
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

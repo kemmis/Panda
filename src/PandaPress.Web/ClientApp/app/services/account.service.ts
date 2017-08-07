@@ -1,31 +1,33 @@
 import { LoginResponse } from "../models/login-response";
 import { LoginRequest } from "../models/login-request";
 import { RequestOptions, Http, Headers } from "@angular/http";
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class AccountService {
-    constructor(private _http: Http) { }
-
-    login(request: LoginRequest): Observable<LoginResponse> {
+    constructor(private _http: Http, @Inject('BASE_URL') _originUrl: string) { 
+        this.originUrl = _originUrl;
+    }
+originUrl:any;
+    login(request: LoginRequest, ): Observable<LoginResponse> {
         const body = JSON.stringify(request);
         const headers = new Headers({ 'Content-Type': 'application/json' });
         const options = new RequestOptions({ headers: headers });
 
         return this._http
-            .post("/api/account/login", body, options)
+            .post(`${this.originUrl}api/account/login`, body, options)
             .map(res => res.json());
     }
 
     isLoggedIn():Observable<LoginResponse> {
-        return this._http.get("/api/account/isloggedin/").map(res => {
+        return this._http.get(`${this.originUrl}api/account/isloggedin/`).map(res => {
             return res.json();
         });
     }
 
     logOut(): Observable<boolean> {
-        return this._http.get("/api/account/logout/").map(res => {
+        return this._http.get(`${this.originUrl}api/account/logout/`).map(res => {
             return res.json();
         });
     }

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { Http, RequestOptions, Headers, URLSearchParams } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { Post } from "../models/post";
@@ -7,7 +7,9 @@ import { PostListRequest } from "../models/post-list-request";
 import { PostList } from "../models/post-list";
 @Injectable()
 export class PostService {
-    constructor(private _http: Http) { }
+   
+    constructor(private _http: Http, @Inject('BASE_URL') private originUrl: string) {     
+    }
 
     getPostBySlug(slug: string): Observable<Post> {
         const headers = new Headers();
@@ -21,7 +23,7 @@ export class PostService {
             search: params
         });
 
-        return this._http.get("/api/post/getbyslug/", getOpts).map(res => {
+        return this._http.get(`${this.originUrl}api/post/getbyslug/`, getOpts).map(res => {
             return res.json();
         });
     }
@@ -32,7 +34,7 @@ export class PostService {
         const options = new RequestOptions({ headers: headers });
 
         return this._http
-            .post("/api/post/getlist", body, options)
+            .post(`${this.originUrl}api/post/getlist`, body, options)
             .map(res => res.json() || 0);
     }
 }
