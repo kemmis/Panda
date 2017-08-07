@@ -9,7 +9,7 @@ import { HomePageComponent } from "./components/pages/home/home.component";
 import { PostPageComponent } from "./components/pages/post/post.component";
 import { PostComponent } from "./components/post/post.component";
 import { LoginComponent } from "./components/login/login.component";
-import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule } from "@angular/material";
+import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule } from "@angular/material";
 
 @NgModule({
     declarations: [
@@ -26,6 +26,7 @@ import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule } from "@a
         MdDialogModule,
         MdInputModule,
         MdButtonModule,
+        MdCheckboxModule,
         RouterModule.forRoot([
             { path: '', component: HomePageComponent },
             { path: 'post/:slug', component: PostPageComponent },

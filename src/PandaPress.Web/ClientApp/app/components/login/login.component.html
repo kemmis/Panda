@@ -1,14 +1,19 @@
 <h2 md-dialog-title>Login</h2>
-<md-dialog-content>
-    <md-input-container>
-        <input mdInput placeholder="Username" value="">
-    </md-input-container>
-    <br/>
-    <md-input-container>
-        <input type="password" mdInput placeholder="Password" value="">
-    </md-input-container>
-</md-dialog-content>
-<md-dialog-actions>
-    <button md-raised-button>Login</button>
-    <button md-raised-button>Cancel</button>
-</md-dialog-actions>
+<form #loginForm="ngForm">
+    <md-dialog-content>
+        <md-input-container>
+            <input id="username" name="username" #username="ngModel" mdInput placeholder="Username" [(ngModel)]="model.username" required>
+        </md-input-container>
+        <br/>
+        <md-input-container>
+            <input type="password" id="password" name="password" #password="ngModel" mdInput placeholder="Password" [(ngModel)]="model.password" required>
+        </md-input-container>
+        <br/>
+        <md-checkbox id="rememberMe" name="rememberMe" #rememberMe="ngModel" [(ngModel)]="model.rememberMe">Remember Me</md-checkbox>
+    </md-dialog-content>
+
+    <md-dialog-actions>
+        <button md-raised-button (click)="login()">Login</button>
+        <button md-raised-button>Cancel</button>
+    </md-dialog-actions>
+</form>
