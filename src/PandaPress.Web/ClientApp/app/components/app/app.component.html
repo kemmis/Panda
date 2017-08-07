@@ -1,2 +1,9 @@
-<button md-raised-button (click)="openLogin()">Login</button>
-<router-outlet></router-outlet>
+
+<md-sidenav-container>
+    <md-sidenav #adminNav mode="push" opened="false">Drawer content</md-sidenav>
+    <div class="content">
+        <button md-raised-button (click)="openLogin()">Login</button>
+        <button md-raised-button (click)="adminNav.toggle()">Admin</button>
+        <router-outlet></router-outlet>
+    </div>
+</md-sidenav-container>

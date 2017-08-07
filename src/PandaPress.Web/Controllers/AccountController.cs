@@ -45,5 +45,14 @@ namespace PandaPress.Web.Controllers
             }
             return response;
         }
+
+        [HttpGet]
+        [Route("Logout")]
+        public async Task<bool> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return true;
+        }
     }
 }

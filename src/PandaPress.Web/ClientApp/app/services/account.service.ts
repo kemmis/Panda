@@ -17,4 +17,10 @@ export class AccountService {
             .post("/api/account/login", body, options)
             .map(res => res.json());
     }
+
+    logout(): Observable<boolean> {
+        return this._http.get("/api/account/logout/").map(res => {
+            return res.json();
+        });
+    }
 }
