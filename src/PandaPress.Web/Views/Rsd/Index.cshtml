@@ -1,0 +1,14 @@
+﻿@model PandaPress.Core.Models.View.RsdViewModel
+@{
+    Layout = null;
+}
+<rsd xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://archipelago.phrasewise.com/rsd" version="1.0">
+    <service xmlns="">
+        <engineName>@Model.EngineName @Model.EngineVersion</engineName>
+        <engineLink>@Model.EngineLink</engineLink>
+        <homePageLink>@Model.BlogHomePageUri</homePageLink>
+        <apis>
+            <api name="MetaWeblog" preferred="false" apiLink="@Model.MetaWeblogApiUri" blogID="@Model.BlogId"/>
+        </apis>
+    </service>
+</rsd>
