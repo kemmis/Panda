@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PostService } from "../../services/post.service";
-import { MdDialog, MdSidenav } from "@angular/material";
+import { MdDialog, MdSidenav, MdSnackBar } from "@angular/material";
 import { LoginComponent } from "../login/login.component";
 import { AccountService } from "../../services/account.service";
 import { LoginResponse } from "../../models/login-response";
@@ -9,19 +9,19 @@ import { LoginResponse } from "../../models/login-response";
     selector: 'app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [PostService, MdDialog, AccountService]
+    providers: [PostService, MdDialog, AccountService, MdSnackBar]
 })
 export class AppComponent implements OnInit {
-    
-    constructor(private _dialog: MdDialog, private _accountService: AccountService) { }
+
+    constructor(private _dialog: MdDialog, private _snackBar: MdSnackBar, private _accountService: AccountService) { }
 
     login: LoginResponse = new LoginResponse();
-    @ViewChild("adminNav") adminNav:MdSidenav;
+    @ViewChild("adminNav") adminNav: MdSidenav;
 
-    
+
     ngOnInit(): void {
-        this._accountService.isLoggedIn().subscribe((login: LoginResponse)=>{
-            if(login.succeeded){
+        this._accountService.isLoggedIn().subscribe((login: LoginResponse) => {
+            if (login.succeeded) {
                 this.login = login;
             }
         });
@@ -33,10 +33,13 @@ export class AppComponent implements OnInit {
             this.login = login;
             ref.close();
         });
+        ref.componentInstance.loginFailure.subscribe((login: LoginResponse) => {
+            this._snackBar.open("Login Failed. Please try again.", "", { duration: 1500 })
+        });
     }
 
-    logOut(){
-        this._accountService.logOut().subscribe(res=>{
+    logOut() {
+        this._accountService.logOut().subscribe(res => {
             this.login = new LoginResponse();
             this.adminNav.close();
         });

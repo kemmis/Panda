@@ -11,6 +11,7 @@ import { LoginResponse } from "../../models/login-response";
 export class LoginComponent {
     constructor(private _accountService: AccountService) { }
     @Output() loginSuccess: EventEmitter<LoginResponse> = new EventEmitter();
+    @Output() loginFailure: EventEmitter<LoginResponse> = new EventEmitter();
 
     model: LoginRequest = new LoginRequest();
 
@@ -18,6 +19,9 @@ export class LoginComponent {
         this._accountService.login(this.model).subscribe(res => {
             if (res.succeeded) {
                 this.loginSuccess.emit(res);
+            }
+            else{
+                this.loginFailure.emit(res);
             }
         });
     }
