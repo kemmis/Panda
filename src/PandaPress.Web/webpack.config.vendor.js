@@ -17,6 +17,7 @@ const treeShakableModules = [
 const nonTreeShakableModules = [
     'bootstrap',
     'bootstrap/dist/css/bootstrap.css',
+    "@angular/material/prebuilt-themes/indigo-pink.css",
     'es6-promise',
     'es6-shim',
     'event-source-polyfill',

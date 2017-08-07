@@ -62,9 +62,8 @@ namespace PandaPress.Service
                     {
                         Directory.CreateDirectory(partial);
                     }
-                    catch (Exception ex)
+                    catch
                     {
-                        var x = 100;
                         //Log.LogError($"failed to create folder {partial}", ex);
                     }
                 }
