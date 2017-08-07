@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Web", "TrashPand
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Service", "TrashPanda.Service\PandaPress.Service.csproj", "{61DDC03D-074B-4DCA-A03C-1780358F2A00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Business", "TrashPanda.Business\PandaPress.Business.csproj", "{BC4E6B31-B2FB-44AF-859B-2CAC31377550}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Data", "TrashPanda.Data\PandaPress.Data.csproj", "{7605D7AB-E039-4136-B578-C09EAAB90900}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Core", "TrashPanda.Core\PandaPress.Core.csproj", "{A7352972-56E6-4529-8250-9C0D79D7D513}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Data.SqlServer", "TrashPanda.Data.SqlServer\PandaPress.Data.SqlServer.csproj", "{2A8D361D-02F3-40DA-98D7-EF5115A9D176}"
@@ -29,14 +25,6 @@ Global
 		{61DDC03D-074B-4DCA-A03C-1780358F2A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61DDC03D-074B-4DCA-A03C-1780358F2A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61DDC03D-074B-4DCA-A03C-1780358F2A00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC4E6B31-B2FB-44AF-859B-2CAC31377550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC4E6B31-B2FB-44AF-859B-2CAC31377550}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC4E6B31-B2FB-44AF-859B-2CAC31377550}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC4E6B31-B2FB-44AF-859B-2CAC31377550}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7605D7AB-E039-4136-B578-C09EAAB90900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7605D7AB-E039-4136-B578-C09EAAB90900}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7605D7AB-E039-4136-B578-C09EAAB90900}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7605D7AB-E039-4136-B578-C09EAAB90900}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A7352972-56E6-4529-8250-9C0D79D7D513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7352972-56E6-4529-8250-9C0D79D7D513}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7352972-56E6-4529-8250-9C0D79D7D513}.Release|Any CPU.ActiveCfg = Release|Any CPU

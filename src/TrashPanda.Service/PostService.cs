@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using PandaPress.Core.Contracts;
 using PandaPress.Core.Models.Data;
@@ -12,11 +13,13 @@ namespace PandaPress.Service
     {
         private readonly IPandaPressDataProvider _dataProvider;
         private readonly IMapper _mapper;
+        private readonly IMediaStorageService _mediaStorageService;
 
-        public PostService(IPandaPressDataProvider dataProvider, IMapper mapper)
+        public PostService(IPandaPressDataProvider dataProvider, IMapper mapper, IMediaStorageService mediaStorageService)
         {
-            this._dataProvider = dataProvider;
-            this._mapper = mapper;
+            _dataProvider = dataProvider;
+            _mapper = mapper;
+            _mediaStorageService = mediaStorageService;
         }
 
         public void DeletePost(string blogId, string postId)
@@ -91,6 +94,11 @@ namespace PandaPress.Service
         public Post NewPost(PostCreateRequest request)
         {
             return _dataProvider.CreatePost(request.Title, request.Content, request.Username, request.Publish, request.BlogId);
+        }
+
+        public async Task<string> SaveMedia(byte[] bytes, string name)
+        {
+            return await _mediaStorageService.SaveMedia("/blog-media/", name, bytes).ConfigureAwait(false);
         }
     }
 }

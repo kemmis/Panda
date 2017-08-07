@@ -59,6 +59,7 @@ namespace PandaPress.Web
             services.AddTransient<ScopedDataProviderBaseDependencies>();
             services.AddTransient<IDbContextFactory, PandaPressDbContextFactory>();
             services.AddTransient<DbInitializer>();
+            services.AddTransient<IMediaStorageService, FileSystemMediaStorageService>();
 
             #region MetaWeblog dependencies
 

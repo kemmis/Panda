@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using PandaPress.Core.Models.Data;
 using PandaPress.Core.Models.Request;
 using PandaPress.Core.Models.View;
@@ -20,5 +21,6 @@ namespace PandaPress.Core.Contracts
         Post NewPost(PostCreateRequest request);
         List<Blog> GetBlogsForUser(string username);
         List<Category> GetCategories();
+        Task<string> SaveMedia(byte[] bytes, string name); 
     }
 }

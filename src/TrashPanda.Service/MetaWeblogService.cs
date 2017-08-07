@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,10 +45,7 @@ namespace PandaPress.Service
 
         public async Task<bool> EditPost(string blogId, string postId, string userName, string password, PostStruct post, bool publish)
         {
-            if (!IsAuthenticated(userName, password).Result)
-            {
-                throw new Exception("No Auth");
-            }
+            await Authenticate(userName, password);
 
             var request = _mapper.Map<PostEditRequest>(post);
             request.PostId = int.Parse(postId);
@@ -61,10 +59,7 @@ namespace PandaPress.Service
 
         public async Task<List<CategoryStruct>> GetCategories(string blogId, string userName, string password, CancellationToken cancellationToken)
         {
-            if (!IsAuthenticated(userName, password).Result)
-            {
-                return null;
-            }
+            await Authenticate(userName, password);
             var categories = _postService.GetCategories();
             return _mapper.Map<List<CategoryStruct>>(categories);
         }
@@ -86,13 +81,10 @@ namespace PandaPress.Service
 
         public async Task<PostStruct> GetPost(string blogId, string postId, string userName, string password, CancellationToken cancellationToken)
         {
-            if (!IsAuthenticated(userName, password).Result)
-            {
-                throw new Exception("No Auth");
-            }
+            await Authenticate(userName, password);
 
             var post = _postService.GetPost(postId);
-            
+
             return _mapper.Map<PostStruct>(post);
         }
 
@@ -110,10 +102,7 @@ namespace PandaPress.Service
 
         public async Task<List<BlogInfoStruct>> GetUserBlogs(string key, string userName, string password, CancellationToken cancellationToken)
         {
-            if (!IsAuthenticated(userName, password).Result)
-            {
-                return null;
-            }
+            await Authenticate(userName, password);
 
             var blogs = _postService.GetBlogsForUser(userName);
             return _mapper.Map<List<BlogInfoStruct>>(blogs);
@@ -124,9 +113,11 @@ namespace PandaPress.Service
             throw new NotImplementedException();
         }
 
-        public Task<MediaInfoStruct> NewMediaObject(string blogId, string userName, string password, MediaObjectStruct mediaObject)
+        public async Task<MediaInfoStruct> NewMediaObject(string blogId, string userName, string password, MediaObjectStruct mediaObject)
         {
-            throw new NotImplementedException();
+            var url = await _postService.SaveMedia(mediaObject.bytes, mediaObject.name).ConfigureAwait(false);
+            var result = new MediaInfoStruct { url = url };
+            return result;
         }
 
         public Task<string> NewPage(string blogId, string userName, string password, PageStruct newPage, bool publish)
@@ -136,25 +127,25 @@ namespace PandaPress.Service
 
         public async Task<string> NewPost(string blogId, string userName, string password, PostStruct newPost, bool publish, string authorDisplayName)
         {
-            if (!IsAuthenticated(userName, password).Result)
-            {
-                return null;
-            }
+            await Authenticate(userName, password);
 
             var request = _mapper.Map<PostCreateRequest>(newPost);
             request.Username = userName;
             request.BlogId = int.Parse(blogId);
             request.Publish = publish;
 
-            var post =_postService.NewPost(request);
-            
+            var post = _postService.NewPost(request);
+
             return post.Id.ToString();
         }
 
-        private async Task<bool> IsAuthenticated(string userName, string password)
+        private async Task Authenticate(string userName, string password)
         {
             var result = await _signInManager.PasswordSignInAsync(userName, password, true, false).ConfigureAwait(false);
-            return result.Succeeded;
+            if (!result.Succeeded)
+            {
+                throw new SecurityException();
+            }
         }
     }
 }
