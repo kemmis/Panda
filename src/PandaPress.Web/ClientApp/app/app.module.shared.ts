@@ -10,6 +10,7 @@ import { PostPageComponent } from "./components/pages/post/post.component";
 import { PostComponent } from "./components/post/post.component";
 import { LoginComponent } from "./components/login/login.component";
 import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdSidenavModule, MdSnackBarModule } from "@angular/material";
+import { SettingsComponent } from "./components/settings/settings.component";
 
 @NgModule({
     declarations: [
@@ -17,7 +18,7 @@ import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckbo
         HomePageComponent,
         PostPageComponent,
         PostComponent,
-        LoginComponent
+        SettingsComponent
     ],
     imports: [
         CommonModule,

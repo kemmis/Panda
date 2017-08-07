@@ -22,7 +22,7 @@ namespace PandaPress.Web.Controllers
                 EngineVersion = version,
                 MetaWeblogApiUri = metaWeblogApiUri,
                 BlogHomePageUri = blogUri,
-                BlogId = blogUri,
+                BlogId = "1",
                 EngineLink = "https://github.com/kemmis/PandaPress"
             };
 

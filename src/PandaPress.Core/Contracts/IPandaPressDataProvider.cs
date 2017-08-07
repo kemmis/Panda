@@ -11,7 +11,7 @@ namespace PandaPress.Core.Contracts
         (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex);
         IEnumerable<Blog> GetBlogsForUser(string username);
         IEnumerable<Category> GetCategories();
-        Post CreatePost(string title, string content, string username, bool publish, int blogId);
+        Post CreatePost(string title, string content, string slug, string username, bool publish, int blogId);
         Post GetPostById(int postId);
         void UpdatePost(int postId, string title, string content, bool publish);
     }

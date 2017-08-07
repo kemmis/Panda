@@ -60,6 +60,7 @@ namespace PandaPress.Web
             services.AddTransient<IDbContextFactory, PandaPressDbContextFactory>();
             services.AddTransient<DbInitializer>();
             services.AddTransient<IMediaStorageService, FileSystemMediaStorageService>();
+            services.AddTransient<ISlugService, SlugService>();
 
             #region MetaWeblog dependencies
 

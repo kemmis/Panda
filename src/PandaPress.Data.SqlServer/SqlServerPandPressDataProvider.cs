@@ -51,7 +51,7 @@ namespace PandaPress.Data.SqlServer
             return (posts, totalPosts);
         }
 
-        public Post CreatePost(string title, string content, string username, bool publish, int blogId)
+        public Post CreatePost(string title, string content, string slug, string username, bool publish, int blogId)
         {
             var user = _db.Users.FirstOrDefault(u => String.Equals(u.UserName, username, StringComparison.CurrentCultureIgnoreCase));
             var blog = _db.Blogs.FirstOrDefault(b => b.Id == blogId);
@@ -63,7 +63,8 @@ namespace PandaPress.Data.SqlServer
                 Title = title,
                 Content = content,
                 Published = publish,
-                PublishDate = DateTime.Now
+                PublishDate = DateTime.Now,
+                Slug = slug
             };
 
             _db.Posts.Add(post);

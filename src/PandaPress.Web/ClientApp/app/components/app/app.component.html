@@ -4,7 +4,9 @@
         <br />
         <button md-button>Posts</button>
         <br />
-        <button md-button>Categories</button>        
+        <button md-button>Categories</button>
+        <br />
+        <button md-button (click)="openSettings()">Blog Settings</button>
     </md-sidenav>
     <div class="content">
         <button md-raised-button (click)="openLogin()" *ngIf="!login.succeeded">Login</button>

@@ -14,12 +14,14 @@ namespace PandaPress.Service
         private readonly IPandaPressDataProvider _dataProvider;
         private readonly IMapper _mapper;
         private readonly IMediaStorageService _mediaStorageService;
+        private readonly ISlugService _slugService;
 
-        public PostService(IPandaPressDataProvider dataProvider, IMapper mapper, IMediaStorageService mediaStorageService)
+        public PostService(IPandaPressDataProvider dataProvider, IMapper mapper, IMediaStorageService mediaStorageService, ISlugService slugService)
         {
             _dataProvider = dataProvider;
             _mapper = mapper;
             _mediaStorageService = mediaStorageService;
+            _slugService = slugService;
         }
 
         public void DeletePost(string blogId, string postId)
@@ -93,7 +95,8 @@ namespace PandaPress.Service
 
         public Post NewPost(PostCreateRequest request)
         {
-            return _dataProvider.CreatePost(request.Title, request.Content, request.Username, request.Publish, request.BlogId);
+            var slug = _slugService.CreateSlugFromTitle(request.Title);
+            return _dataProvider.CreatePost(request.Title, request.Content, slug, request.Username, request.Publish, request.BlogId);
         }
 
         public async Task<string> SaveMedia(byte[] bytes, string name)
