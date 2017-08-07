@@ -33,12 +33,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\login\login.component.ts" />
     <None Remove="ClientApp\app\components\post\post.component.ts" />
     <None Remove="ClientApp\app\models\post-list-request.ts" />
     <None Remove="ClientApp\app\models\post-list.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\post\post.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\post-list-request.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\post-list.ts" />

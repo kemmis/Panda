@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Web", "TrashPanda.Web\PandaPress.Web.csproj", "{47A569C5-EE37-444B-BD0B-868AE98E710D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Web", "PandaPress.Web\PandaPress.Web.csproj", "{47A569C5-EE37-444B-BD0B-868AE98E710D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Service", "TrashPanda.Service\PandaPress.Service.csproj", "{61DDC03D-074B-4DCA-A03C-1780358F2A00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Service", "PandaPress.Service\PandaPress.Service.csproj", "{61DDC03D-074B-4DCA-A03C-1780358F2A00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Core", "TrashPanda.Core\PandaPress.Core.csproj", "{A7352972-56E6-4529-8250-9C0D79D7D513}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Core", "PandaPress.Core\PandaPress.Core.csproj", "{A7352972-56E6-4529-8250-9C0D79D7D513}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Data.SqlServer", "TrashPanda.Data.SqlServer\PandaPress.Data.SqlServer.csproj", "{2A8D361D-02F3-40DA-98D7-EF5115A9D176}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandaPress.Data.SqlServer", "PandaPress.Data.SqlServer\PandaPress.Data.SqlServer.csproj", "{2A8D361D-02F3-40DA-98D7-EF5115A9D176}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
