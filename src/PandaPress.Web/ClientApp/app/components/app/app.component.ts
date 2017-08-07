@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PostService } from "../../services/post.service";
-import { MdDialog } from "@angular/material";
+import { MdDialog, MdSidenav } from "@angular/material";
 import { LoginComponent } from "../login/login.component";
 import { AccountService } from "../../services/account.service";
 import { LoginResponse } from "../../models/login-response";
@@ -11,13 +11,34 @@ import { LoginResponse } from "../../models/login-response";
     styleUrls: ['./app.component.css'],
     providers: [PostService, MdDialog, AccountService]
 })
-export class AppComponent {
-    constructor(private _dialog: MdDialog) { }
+export class AppComponent implements OnInit {
+    
+    constructor(private _dialog: MdDialog, private _accountService: AccountService) { }
+
+    login: LoginResponse = new LoginResponse();
+    @ViewChild("adminNav") adminNav:MdSidenav;
+
+    
+    ngOnInit(): void {
+        this._accountService.isLoggedIn().subscribe((login: LoginResponse)=>{
+            if(login.succeeded){
+                this.login = login;
+            }
+        });
+    }
 
     openLogin(): void {
         var ref = this._dialog.open(LoginComponent);
-        ref.componentInstance.loginSuccess.subscribe((res: LoginResponse) => {
+        ref.componentInstance.loginSuccess.subscribe((login: LoginResponse) => {
+            this.login = login;
             ref.close();
+        });
+    }
+
+    logOut(){
+        this._accountService.logOut().subscribe(res=>{
+            this.login = new LoginResponse();
+            this.adminNav.close();
         });
     }
 }

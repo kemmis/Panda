@@ -18,7 +18,13 @@ export class AccountService {
             .map(res => res.json());
     }
 
-    logout(): Observable<boolean> {
+    isLoggedIn():Observable<LoginResponse> {
+        return this._http.get("/api/account/isloggedin/").map(res => {
+            return res.json();
+        });
+    }
+
+    logOut(): Observable<boolean> {
         return this._http.get("/api/account/logout/").map(res => {
             return res.json();
         });

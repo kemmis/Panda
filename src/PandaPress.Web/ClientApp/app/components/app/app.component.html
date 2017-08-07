@@ -1,9 +1,14 @@
-
 <md-sidenav-container>
-    <md-sidenav #adminNav mode="push" opened="false">Drawer content</md-sidenav>
+    <md-sidenav #adminNav mode="over" opened="false">
+        <button md-button (click)="logOut()">Log Out</button>
+        <br />
+        <button md-button>Posts</button>
+        <br />
+        <button md-button>Categories</button>        
+    </md-sidenav>
     <div class="content">
-        <button md-raised-button (click)="openLogin()">Login</button>
-        <button md-raised-button (click)="adminNav.toggle()">Admin</button>
+        <button md-raised-button (click)="openLogin()" *ngIf="!login.succeeded">Login</button>
+        <button md-raised-button (click)="adminNav.toggle()" *ngIf="login.succeeded">Admin</button>
         <router-outlet></router-outlet>
     </div>
 </md-sidenav-container>

@@ -18,11 +18,13 @@ namespace PandaPress.Web.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger _logger;
+        private UserManager<ApplicationUser> _userManager;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger)
+        public AccountController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
         }
 
         [HttpPost]
@@ -36,6 +38,10 @@ namespace PandaPress.Web.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    var user = await _userManager.FindByNameAsync(model.Username);
+                    response.Username = user.UserName;
+                    response.DisplayName = user.DisplayName;
                     response.Succeeded = true;
                 }
                 else
@@ -44,6 +50,29 @@ namespace PandaPress.Web.Controllers
                 }
             }
             return response;
+        }
+
+        [HttpGet]
+        [Route("IsLoggedIn")]
+        public async Task<LoginResultViewModel> IsLoggedIn()
+        {
+            var claimsPrincipal = HttpContext.User;
+            var user = await _userManager.GetUserAsync(claimsPrincipal);
+
+            if (user != null)
+            {
+                return new LoginResultViewModel
+                {
+                    Username = user.UserName,
+                    DisplayName = user.DisplayName,
+                    Succeeded = true
+                };
+            }
+
+            return new LoginResultViewModel
+            {
+                Succeeded = false
+            };
         }
 
         [HttpGet]

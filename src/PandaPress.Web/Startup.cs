@@ -89,6 +89,7 @@ namespace PandaPress.Web
             }
 
             app.UseStaticFiles();
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {
