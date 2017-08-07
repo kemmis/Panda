@@ -9,7 +9,7 @@ namespace PandaPress.Data.SqlServer
         {
             var builder = new DbContextOptionsBuilder<PandaPressDbContext>();
             builder.UseSqlServer(
-                "Server=(localdb)\\mssqllocaldb;Database=PandaPress;Trusted_Connection=True;MultipleActiveResultSets=true");
+                "Server=localhost\\SQLEXPRESS;Database=PandaPress;Trusted_Connection=True;MultipleActiveResultSets=true");
             return new PandaPressDbContext(builder.Options);
         }
     }
