@@ -1,13 +1,17 @@
-<div class="user-info">
-    <i class="fa fa-user-circle"></i>
-    <br />
-    {{login.displayName}}
+<div class="control-panel">
+    <div class="user-info">
+        <i class="fa fa-user-circle"></i>
+        <div class="display-name">{{login.displayName}}</div>
+    </div>
+    <div class="user-actions">
+        <button md-button (click)="logOut()"><i class="fa fa-power-off"></i></button>
+        <button md-button><i class="fa fa-key"></i></button>
+        <button md-button><i class="fa fa-user"></i></button>
+        <button md-button><i class="fa fa-chain"></i></button>
+    </div>
+    <div class="cp-areas">
+        <button md-button (click)="openDashboard()"><i class="fa fa-bar-chart"></i> Dashboard</button>
+        <button md-button><i class="fa fa-folder-open"></i> Content</button>
+        <button md-button (click)="openSettings()"><i class="fa fa-cog"></i> Blog Settings</button>
+    </div>
 </div>
-<div class="user-actions">
-    <button md-button (click)="logOut()"><i class="fa fa-power-off"></i></button>
-    <button md-button><i class="fa fa-key"></i></button>
-    <button md-button><i class="fa fa-user"></i></button>
-    <button md-button><i class="fa fa-chain"></i></button>
-</div>
-
-<button md-button (click)="openSettings()">Blog Settings</button>

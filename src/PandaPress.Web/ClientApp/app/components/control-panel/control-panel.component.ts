@@ -1,13 +1,15 @@
 import { Component, Input } from "@angular/core";
 import { LoginResponse } from "../../models/login-response";
+import { MdDialog } from "@angular/material";
+import { DashboardComponent } from "./dashboard/dashboard.component";
 
 @Component({
     selector: 'control-panel',
     templateUrl: './control-panel.component.html',
-    styleUrls: ['./control-panel.component.css']
+    styleUrls: ['./control-panel.component.less']
 })
 export class ControlPanelComponent {
-
+    constructor(private _dialog: MdDialog) { }
     @Input() login: LoginResponse;
 
     openSettings() {
@@ -16,5 +18,11 @@ export class ControlPanelComponent {
 
     logOut() {
 
+    }
+
+    openDashboard() {
+        this._dialog.open(DashboardComponent, {
+            width: "800px",
+        });
     }
 }

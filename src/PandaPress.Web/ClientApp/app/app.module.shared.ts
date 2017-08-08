@@ -9,9 +9,10 @@ import { HomePageComponent } from "./components/pages/home/home.component";
 import { PostPageComponent } from "./components/pages/post/post.component";
 import { PostComponent } from "./components/post/post.component";
 import { LoginComponent } from "./components/login/login.component";
-import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdSidenavModule, MdSnackBarModule, MdProgressBarModule } from "@angular/material";
+import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdSidenavModule, MdSnackBarModule, MdProgressBarModule, MdCardModule, MdListModule } from "@angular/material";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { ControlPanelComponent } from "./components/control-panel/control-panel.component";
+import { DashboardComponent } from "./components/control-panel/dashboard/dashboard.component";
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { ControlPanelComponent } from "./components/control-panel/control-panel.
         PostComponent,
         LoginComponent,
         SettingsComponent,
-        ControlPanelComponent
+        ControlPanelComponent,
+        DashboardComponent
     ],
     imports: [
         CommonModule,
@@ -34,13 +36,15 @@ import { ControlPanelComponent } from "./components/control-panel/control-panel.
         MdSidenavModule,
         MdSnackBarModule,
         MdProgressBarModule,
+        MdCardModule,
+        MdListModule,
         RouterModule.forRoot([
             { path: '', component: HomePageComponent },
             { path: 'post/:slug', component: PostPageComponent },
             { path: '**', redirectTo: '' }
         ])
     ],
-    entryComponents: [LoginComponent, SettingsComponent]
+    entryComponents: [LoginComponent, SettingsComponent, DashboardComponent]
 })
 export class AppModuleShared {
 }
