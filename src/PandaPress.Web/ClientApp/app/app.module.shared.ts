@@ -18,6 +18,7 @@ import { SettingsComponent } from "./components/settings/settings.component";
         HomePageComponent,
         PostPageComponent,
         PostComponent,
+        LoginComponent, 
         SettingsComponent
     ],
     imports: [
