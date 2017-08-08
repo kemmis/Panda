@@ -119,5 +119,14 @@ namespace PandaPress.Service
             _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName);
             return GetBlogSettings();
         }
+
+        public DashboardDataViewModel GetDashboardData()
+        {
+            return new DashboardDataViewModel
+            {
+                NumDrafts = _dataProvider.GetNumDrafts(),
+                NumPosts = _dataProvider.GetNumPublishedPosts()
+            };
+        }
     }
 }

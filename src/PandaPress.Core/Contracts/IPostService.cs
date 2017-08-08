@@ -24,5 +24,6 @@ namespace PandaPress.Core.Contracts
         Task<string> SaveMedia(byte[] bytes, string name);
         SettingsViewModel GetBlogSettings();
         SettingsViewModel SaveBlogSettings(SettingsViewModel settings);
+        DashboardDataViewModel GetDashboardData();
     }
 }

@@ -5,8 +5,8 @@
             <md-card-title>Stats</md-card-title>
             <md-card-content>
                 <md-list>
-                    <md-list-item> Published Posts </md-list-item>
-                    <md-list-item> Draft Posts </md-list-item>
+                    <md-list-item> Published Posts {{dashboardData.numPosts}}</md-list-item>
+                    <md-list-item> Draft Posts {{dashboardData.numDrafts}} </md-list-item>
                 </md-list>
             </md-card-content>
         </md-card>
@@ -20,3 +20,4 @@
         </md-card>
     </div>
 </div>
+<md-progress-bar *ngIf="loading" mode="indeterminate"></md-progress-bar>

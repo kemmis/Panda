@@ -106,6 +106,26 @@ namespace PandaPress.Data.SqlServer
             }
             return blog;
         }
+
+        public int GetNumPublishedPosts()
+        {
+            var blog = _db.Blogs.Include(b=>b.Posts).FirstOrDefault();
+            if (blog != null)
+            {
+                return blog.Posts.Count(p => p.Published);
+            }
+            return 0;
+        }
+
+        public int GetNumDrafts()
+        {
+            var blog = _db.Blogs.Include(b=>b.Posts).FirstOrDefault();
+            if (blog != null)
+            {
+                return blog.Posts.Count(p => !p.Published);
+            }
+            return 0;
+        }
     }
 }
 
