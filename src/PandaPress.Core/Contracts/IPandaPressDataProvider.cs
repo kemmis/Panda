@@ -15,5 +15,6 @@ namespace PandaPress.Core.Contracts
         Post GetPostById(int postId);
         void UpdatePost(int postId, string title, string content, bool publish);
         Blog GetBlog();
+        Blog UpdateBlog(int blogId, string blogName);
     }
 }

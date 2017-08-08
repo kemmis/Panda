@@ -113,5 +113,11 @@ namespace PandaPress.Service
                 BlogId = blog.Id
             };
         }
+
+        public SettingsViewModel SaveBlogSettings(SettingsViewModel settings)
+        {
+            _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName);
+            return GetBlogSettings();
+        }
     }
 }

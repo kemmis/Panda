@@ -23,5 +23,6 @@ namespace PandaPress.Core.Contracts
         List<Category> GetCategories();
         Task<string> SaveMedia(byte[] bytes, string name);
         SettingsViewModel GetBlogSettings();
+        SettingsViewModel SaveBlogSettings(SettingsViewModel settings);
     }
 }

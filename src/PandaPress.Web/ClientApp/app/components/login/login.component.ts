@@ -24,5 +24,5 @@ export class LoginComponent {
                 this.loginFailure.emit(res);
             }
         });
-    }
+    }   
 }

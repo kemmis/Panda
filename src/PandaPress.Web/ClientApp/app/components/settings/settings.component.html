@@ -1,10 +1,12 @@
 <h2 md-dialog-title>Blog Settings</h2>
+<form #settingsForm="ngForm" ng-disabled="saving">
+    <md-input-container>
+        <input id="blogName" name="blogName" mdInput placeholder="Blog Name" [(ngModel)]="settings.blogName">
+    </md-input-container>
 
-<md-input-container>
-    <input mdInput placeholder="Blog Name" [(ngModel)]="settings.blogName">
-</md-input-container>
-
-<md-dialog-actions>
-    <button md-raised-button>Save</button>
-    <button md-raised-button md-dialog-close>Cancel</button>
-</md-dialog-actions>
+    <md-dialog-actions>
+        <button md-raised-button (click)="save()" >Save</button>
+        <button md-raised-button md-dialog-close>Cancel</button>
+    </md-dialog-actions>
+</form>
+<md-progress-bar *ngIf="saving" mode="indeterminate"></md-progress-bar>
