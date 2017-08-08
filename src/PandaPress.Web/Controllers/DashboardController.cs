@@ -21,6 +21,7 @@ namespace PandaPress.Web.Controllers
         {
             _postService = postService;
         }
+
         [Route("GetData")]
         public DashboardDataViewModel GetData()
         {
