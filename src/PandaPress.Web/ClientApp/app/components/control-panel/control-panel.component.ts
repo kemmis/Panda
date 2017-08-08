@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { LoginResponse } from "../../models/login-response";
 import { MdDialog } from "@angular/material";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -13,12 +13,14 @@ export class ControlPanelComponent {
     constructor(private _dialog: MdDialog) { }
     @Input() login: LoginResponse;
 
+    @Output() logout:EventEmitter<void> = new EventEmitter();
+
     openSettings() {
 
     }
 
     logOut() {
-
+        this.logout.emit();
     }
 
     openDashboard() {

@@ -1,6 +1,6 @@
 <md-sidenav-container>
     <md-sidenav #adminNav mode="over" opened="false">
-        <control-panel [login]="login"></control-panel>       
+        <control-panel [login]="login" (logout)="logOut()"></control-panel>       
     </md-sidenav>
     <div class="content">
         <button md-raised-button (click)="openLogin()" *ngIf="!login.succeeded">Login</button>
