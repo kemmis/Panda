@@ -5,13 +5,12 @@ import { LoginComponent } from "../login/login.component";
 import { AccountService } from "../../services/account.service";
 import { LoginResponse } from "../../models/login-response";
 import { SettingsComponent } from "../settings/settings.component";
-import { SettingsService } from "../../services/settings.service";
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [PostService, MdDialog, AccountService, MdSnackBar, SettingsService]
+    providers: [PostService, MdDialog, AccountService, MdSnackBar]
 })
 export class AppComponent implements OnInit {
 

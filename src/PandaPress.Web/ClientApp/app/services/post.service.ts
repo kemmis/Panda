@@ -5,10 +5,11 @@ import { Post } from "../models/post";
 import 'rxjs/add/operator/map';
 import { PostListRequest } from "../models/post-list-request";
 import { PostList } from "../models/post-list";
+import { BlogSettings } from "../models/blog-settings";
 @Injectable()
 export class PostService {
-   
-    constructor(private _http: Http, @Inject('BASE_URL') private originUrl: string) {     
+
+    constructor(private _http: Http, @Inject('BASE_URL') private originUrl: string) {
     }
 
     getPostBySlug(slug: string): Observable<Post> {
@@ -36,5 +37,11 @@ export class PostService {
         return this._http
             .post(`${this.originUrl}api/post/getlist`, body, options)
             .map(res => res.json() || 0);
+    }
+
+    getSettings(): Observable<BlogSettings> {
+        return this._http.get(`${this.originUrl}api/settings/get/`).map(res => {
+            return res.json();
+        });
     }
 }
