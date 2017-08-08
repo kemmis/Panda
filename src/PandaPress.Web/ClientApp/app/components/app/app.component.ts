@@ -5,12 +5,13 @@ import { LoginComponent } from "../login/login.component";
 import { AccountService } from "../../services/account.service";
 import { LoginResponse } from "../../models/login-response";
 import { SettingsComponent } from "../settings/settings.component";
+import { SettingsService } from "../../services/settings.service";
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [PostService, MdDialog, AccountService, MdSnackBar]
+    providers: [PostService, MdDialog, AccountService, MdSnackBar, SettingsService]
 })
 export class AppComponent implements OnInit {
 
@@ -39,8 +40,8 @@ export class AppComponent implements OnInit {
         });
     }
 
-    openSettings(): void{
-        var ref = this._dialog.open(SettingsComponent);
+    openSettings(): void {
+        var ref = this._dialog.open(SettingsComponent, { width: "400px" });
     }
 
     logOut() {

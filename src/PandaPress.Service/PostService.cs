@@ -103,5 +103,15 @@ namespace PandaPress.Service
         {
             return await _mediaStorageService.SaveMedia("/blog-media/", name, bytes).ConfigureAwait(false);
         }
+
+        public SettingsViewModel GetBlogSettings()
+        {
+            var blog = _dataProvider.GetBlog();
+            return new SettingsViewModel()
+            {
+                BlogName = blog.Name,
+                BlogId = blog.Id
+            };
+        }
     }
 }

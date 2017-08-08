@@ -18,7 +18,7 @@ import { SettingsComponent } from "./components/settings/settings.component";
         HomePageComponent,
         PostPageComponent,
         PostComponent,
-        LoginComponent, 
+        LoginComponent,
         SettingsComponent
     ],
     imports: [
@@ -37,7 +37,7 @@ import { SettingsComponent } from "./components/settings/settings.component";
             { path: '**', redirectTo: '' }
         ])
     ],
-    entryComponents: [LoginComponent]
+    entryComponents: [LoginComponent, SettingsComponent]
 })
 export class AppModuleShared {
 }

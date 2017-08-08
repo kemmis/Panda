@@ -21,6 +21,7 @@ namespace PandaPress.Core.Contracts
         Post NewPost(PostCreateRequest request);
         List<Blog> GetBlogsForUser(string username);
         List<Category> GetCategories();
-        Task<string> SaveMedia(byte[] bytes, string name); 
+        Task<string> SaveMedia(byte[] bytes, string name);
+        SettingsViewModel GetBlogSettings();
     }
 }

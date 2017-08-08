@@ -6,10 +6,10 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class AccountService {
-    constructor(private _http: Http, @Inject('BASE_URL') _originUrl: string) { 
-        this.originUrl = _originUrl;
+    constructor(private _http: Http, @Inject('BASE_URL') private originUrl: string) { 
+        
     }
-originUrl:any;
+
     login(request: LoginRequest, ): Observable<LoginResponse> {
         const body = JSON.stringify(request);
         const headers = new Headers({ 'Content-Type': 'application/json' });

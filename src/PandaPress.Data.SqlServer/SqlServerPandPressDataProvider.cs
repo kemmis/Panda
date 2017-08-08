@@ -90,6 +90,11 @@ namespace PandaPress.Data.SqlServer
 
             await _dbInitializer.EnsureSeededAsync();
         }
+
+        public Blog GetBlog()
+        {
+            return _db.Blogs.FirstOrDefault();
+        }
     }
 }
 
