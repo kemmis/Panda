@@ -126,6 +126,16 @@ namespace PandaPress.Data.SqlServer
             }
             return 0;
         }
+
+        public IEnumerable<Post> GetPosts()
+        {
+            return _db.Posts.ToList();
+        }
+
+        public IEnumerable<Category> GetCategoriesWithPostCategories()
+        {
+            return _db.Categories.Include(c=>c.PostCategories).ToList();
+        }
     }
 }
 

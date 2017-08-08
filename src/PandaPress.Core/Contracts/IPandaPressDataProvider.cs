@@ -18,5 +18,7 @@ namespace PandaPress.Core.Contracts
         Blog UpdateBlog(int blogId, string blogName);
         int GetNumPublishedPosts();
         int GetNumDrafts();
+        IEnumerable<Post> GetPosts();
+        IEnumerable<Category> GetCategoriesWithPostCategories();
     }
 }

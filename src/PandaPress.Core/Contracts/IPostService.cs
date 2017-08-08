@@ -25,5 +25,6 @@ namespace PandaPress.Core.Contracts
         SettingsViewModel GetBlogSettings();
         SettingsViewModel SaveBlogSettings(SettingsViewModel settings);
         DashboardDataViewModel GetDashboardData();
+        ContentViewModel GetContent();
     }
 }

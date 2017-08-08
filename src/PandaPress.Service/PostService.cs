@@ -128,5 +128,28 @@ namespace PandaPress.Service
                 NumPosts = _dataProvider.GetNumPublishedPosts()
             };
         }
+
+        public ContentViewModel GetContent()
+        {
+            var posts = _dataProvider.GetPosts();
+            var categories = _dataProvider.GetCategoriesWithPostCategories();
+
+            return new ContentViewModel
+            {
+                Posts = posts.Select(p => new PostContentViewModel
+                {
+                    Published = p.Published,
+                    Id = p.Id,
+                    Title = p.Title
+                }).ToList(),
+                Categories = categories.Select(c => new CategoryContentViewModel
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    NumPosts = c.PostCategories.Count,
+                    Description = c.Description
+                }).ToList()
+            };
+        }
     }
 }
