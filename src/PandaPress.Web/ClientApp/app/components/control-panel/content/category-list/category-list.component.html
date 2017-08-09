@@ -1,41 +1,35 @@
-<md-card>
-    <md-input-container>
-        <input mdInput placeholder="New Category Title" [(ngModel)]="newCategory.title">
-    </md-input-container>
-    <md-input-container>
-        <input mdInput placeholder="New Category Description" [(ngModel)]="newCategory.description"> 
-    </md-input-container>
-    <button md-raised-button (click)="saveCategory()">Add Category</button>
-</md-card>
-<md-card>
-    <div class="example-container mat-elevation-z8">
-        <md-table #table [dataSource]="getThis()">
+<md-input-container>
+    <input mdInput placeholder="New Category Title" [(ngModel)]="newCategory.title" />
+</md-input-container>
+<md-input-container>
+    <input mdInput placeholder="New Category Description" [(ngModel)]="newCategory.description" />
+</md-input-container>
+<button md-raised-button (click)="saveCategory()">Add Category</button>
 
-            <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+<div class="example-container mat-elevation-z8">
+    <md-table #table [dataSource]="getThis()">
 
-            <!-- ID Column -->
-            <ng-container cdkColumnDef="id">
-                <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
-                <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
-            </ng-container>
+        <!-- ID Column -->
+        <ng-container cdkColumnDef="id">
+            <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+        </ng-container>
 
-            <!-- Progress Column -->
-            <ng-container cdkColumnDef="title">
-                <md-header-cell *cdkHeaderCellDef> Title </md-header-cell>
-                <md-cell *cdkCellDef="let row"> {{row.title}} </md-cell>
-            </ng-container>
+        <!-- Progress Column -->
+        <ng-container cdkColumnDef="title">
+            <md-header-cell *cdkHeaderCellDef> Title </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.title}} </md-cell>
+        </ng-container>
 
-            <!-- Name Column -->
-            <ng-container cdkColumnDef="postCount">
-                <md-header-cell *cdkHeaderCellDef> Posts </md-header-cell>
-                <md-cell *cdkCellDef="let row"> {{row.postCount}} </md-cell>
-            </ng-container>
+        <!-- Name Column -->
+        <ng-container cdkColumnDef="postCount">
+            <md-header-cell *cdkHeaderCellDef> Posts </md-header-cell>
+            <md-cell *cdkCellDef="let row"> {{row.postCount}} </md-cell>
+        </ng-container>
 
-            <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
 
-            <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
 
-        </md-table>
-    </div>
-</md-card>
+    </md-table>
+</div>
