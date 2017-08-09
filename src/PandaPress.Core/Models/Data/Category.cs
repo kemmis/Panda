@@ -9,6 +9,6 @@ namespace PandaPress.Core.Models.Data
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<PostCategory> PostCategories { get; set; }
+        public List<PostCategory> PostCategories { get; set; } = new List<PostCategory>();
     }
 }

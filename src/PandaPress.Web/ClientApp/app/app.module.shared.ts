@@ -17,6 +17,7 @@ import { ContentComponent } from "./components/control-panel/content/content.com
 import { PostContentListComponent } from "./components/control-panel/content/post-list/post-list.component";
 import { CdkTableModule } from "@angular/cdk/table";
 import { PasswordComponent } from "./components/control-panel/password/password.component";
+import { CategoryContentListComponent } from "./components/control-panel/content/category-list/category-list.component";
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { PasswordComponent } from "./components/control-panel/password/password.
         DashboardComponent,
         ContentComponent,
         PostContentListComponent,
-        PasswordComponent
+        PasswordComponent,
+        CategoryContentListComponent
     ],
     imports: [
         CommonModule,

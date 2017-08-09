@@ -26,5 +26,6 @@ namespace PandaPress.Core.Contracts
         SettingsViewModel SaveBlogSettings(SettingsViewModel settings);
         DashboardDataViewModel GetDashboardData();
         ContentViewModel GetContent();
+        CategoryContentViewModel AddCategory(string title, string description);
     }
 }

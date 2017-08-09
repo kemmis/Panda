@@ -20,5 +20,6 @@ namespace PandaPress.Core.Contracts
         int GetNumDrafts();
         IEnumerable<Post> GetPosts();
         IEnumerable<Category> GetCategoriesWithPostCategories();
+        Category AddCategory(string title, string description);
     }
 }

@@ -136,6 +136,18 @@ namespace PandaPress.Data.SqlServer
         {
             return _db.Categories.Include(c=>c.PostCategories).ToList();
         }
+
+        public Category AddCategory(string title, string description)
+        {
+            var newCategory = new Category
+            {
+                Title = title,
+                Description = description
+            };
+            _db.Categories.Add(newCategory);
+            _db.SaveChanges();
+            return newCategory;
+        }
     }
 }
 

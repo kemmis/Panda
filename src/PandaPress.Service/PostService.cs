@@ -151,5 +151,17 @@ namespace PandaPress.Service
                 }).ToList()
             };
         }
+
+        public CategoryContentViewModel AddCategory(string title, string description)
+        {
+            var category = _dataProvider.AddCategory(title, description);
+            return new CategoryContentViewModel
+            {
+                Id = category.Id,
+                Title = category.Title,
+                NumPosts = category.PostCategories.Count,
+                Description = category.Description
+            };
+        }
     }
 }
