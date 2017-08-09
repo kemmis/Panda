@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PandaPress.Core.Models.Data;
+using PandaPress.Core.Models.Request;
 using PandaPress.Core.Models.View;
 
 namespace PandaPress.Web.Controllers
@@ -82,6 +83,22 @@ namespace PandaPress.Web.Controllers
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
             return true;
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<PasswordChangeResult> ChangePassword([FromBody]PasswordChangeRequest request)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword)
+                .ConfigureAwait(false);
+
+            return new PasswordChangeResult
+            {
+                Succeeded = result.Succeeded,
+                Errors = result.Errors.Select(e => e.Description).ToList()
+            };
         }
     }
 }

@@ -3,6 +3,7 @@ import { LoginResponse } from "../../models/login-response";
 import { MdDialog } from "@angular/material";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ContentComponent } from "./content/content.component";
+import { PasswordComponent } from "./password/password.component";
 
 @Component({
     selector: 'control-panel',
@@ -33,5 +34,9 @@ export class ControlPanelComponent {
         this._dialog.open(ContentComponent, {
             width: "800px",
         });
+    }
+
+    changePassword(){
+        this._dialog.open(PasswordComponent);
     }
 }

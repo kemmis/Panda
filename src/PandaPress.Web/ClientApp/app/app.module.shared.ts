@@ -16,6 +16,7 @@ import { DashboardComponent } from "./components/control-panel/dashboard/dashboa
 import { ContentComponent } from "./components/control-panel/content/content.component";
 import { PostContentListComponent } from "./components/control-panel/content/post-list/post-list.component";
 import { CdkTableModule } from "@angular/cdk/table";
+import { PasswordComponent } from "./components/control-panel/password/password.component";
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { CdkTableModule } from "@angular/cdk/table";
         ControlPanelComponent,
         DashboardComponent,
         ContentComponent,
-        PostContentListComponent
+        PostContentListComponent,
+        PasswordComponent
     ],
     imports: [
         CommonModule,
@@ -53,7 +55,7 @@ import { CdkTableModule } from "@angular/cdk/table";
             { path: '**', redirectTo: '' }
         ])
     ],
-    entryComponents: [LoginComponent, SettingsComponent, DashboardComponent, ContentComponent]
+    entryComponents: [LoginComponent, SettingsComponent, DashboardComponent, ContentComponent, PasswordComponent]
 })
 export class AppModuleShared {
 }
