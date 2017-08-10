@@ -9,7 +9,7 @@ import { HomePageComponent } from "./components/pages/home/home.component";
 import { PostPageComponent } from "./components/pages/post/post.component";
 import { PostComponent } from "./components/post/post.component";
 import { LoginComponent } from "./components/login/login.component";
-import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdSidenavModule, MdSnackBarModule, MdProgressBarModule, MdCardModule, MdListModule, MdTabsModule, MdTableModule, MdTooltipModule, MdPaginatorModule } from "@angular/material";
+import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdSidenavModule, MdSnackBarModule, MdProgressBarModule, MdCardModule, MdListModule, MdTabsModule, MdTableModule, MdTooltipModule, MdPaginatorModule, MdGridListModule } from "@angular/material";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { ControlPanelComponent } from "./components/control-panel/control-panel.component";
 import { DashboardComponent } from "./components/control-panel/dashboard/dashboard.component";
@@ -52,6 +52,7 @@ import { CategoryContentListComponent } from "./components/control-panel/content
         CdkTableModule,
         MdTooltipModule,
         MdPaginatorModule,
+        MdGridListModule,
         RouterModule.forRoot([
             { path: '', component: HomePageComponent },
             { path: 'post/:slug', component: PostPageComponent },

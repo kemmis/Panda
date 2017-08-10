@@ -1,11 +1,22 @@
-<md-input-container>
-    <input mdInput placeholder="New Category Title" [(ngModel)]="newCategory.title" />
-</md-input-container>
-<md-input-container>
-    <input mdInput placeholder="New Category Description" [(ngModel)]="newCategory.description" />
-</md-input-container>
-<button md-raised-button (click)="saveCategory()">Add Category</button>
-
+<form #catForm="ngForm">
+    <div class="add-form">
+        <md-grid-list cols="5" gutterSize="16px" rowHeight="60px">
+            <md-grid-tile [colspan]="2">
+                <md-input-container>
+                    <input name="title" mdInput placeholder="New Category Title" [(ngModel)]="newCategory.title" required />
+                </md-input-container>
+            </md-grid-tile>
+            <md-grid-tile [colspan]="2">
+                <md-input-container>
+                    <input name="description" mdInput placeholder="New Category Description" [(ngModel)]="newCategory.description" />
+                </md-input-container>
+            </md-grid-tile>
+            <md-grid-tile [colspan]="1">
+                <button md-raised-button (click)="saveCategory()" [disabled]="!catForm.valid">Add Category</button>
+            </md-grid-tile>
+        </md-grid-list>
+    </div>
+</form>
 <div class="example-container mat-elevation-z8">
     <md-table #table [dataSource]="getThis()">
 
