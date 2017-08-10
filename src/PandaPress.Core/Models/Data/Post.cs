@@ -15,6 +15,6 @@ namespace PandaPress.Core.Models.Data
         public string UserId { get; set; }
         public Blog Blog { get; set; }
         public int BlogId { get; set; }
-        public List<PostCategory> PostCategories { get; set; }
+        public List<PostCategory> PostCategories { get; set; } = new List<PostCategory>();
     }
 }

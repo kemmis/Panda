@@ -51,7 +51,7 @@ namespace PandaPress.Data.SqlServer
             return (posts, totalPosts);
         }
 
-        public Post CreatePost(string title, string content, string slug, string username, bool publish, int blogId)
+        public Post CreatePost(string title, string content, List<string> categories, string slug, string username, bool publish, int blogId)
         {
             var user = _db.Users.FirstOrDefault(u => String.Equals(u.UserName, username, StringComparison.CurrentCultureIgnoreCase));
             var blog = _db.Blogs.FirstOrDefault(b => b.Id == blogId);
@@ -68,19 +68,58 @@ namespace PandaPress.Data.SqlServer
             };
 
             _db.Posts.Add(post);
+
+            foreach (var category in categories)
+            {
+                var catToAdd = _db.Categories.FirstOrDefault(c => String.Equals(c.Title, category, StringComparison.CurrentCultureIgnoreCase));
+                if (catToAdd != null)
+                {
+                    post.PostCategories.Add(new PostCategory
+                    {
+                        Category = catToAdd,
+                        Post = post
+                    });
+                }
+            }
+
             _db.SaveChanges();
 
             return post;
         }
 
-        public void UpdatePost(int postId, string title, string content, bool publish)
+        public void UpdatePost(int postId, string title, string content, List<string> categories, bool publish)
         {
-            var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
+            var post = _db.Posts.Include(p => p.PostCategories).ThenInclude(pc => pc.Category).FirstOrDefault(p => p.Id == postId);
             if (post != null)
             {
                 post.Title = title;
                 post.Content = content;
                 post.Published = publish;
+
+                var catsToRemove = post.PostCategories.Where(pc =>
+                    !categories.Exists(c =>
+                        String.Equals(c, pc.Category.Title, StringComparison.CurrentCultureIgnoreCase))).ToList();
+                var catsToAdd = categories.Where(c => post.PostCategories.All(pc =>
+                    !String.Equals(pc.Category.Title, c, StringComparison.CurrentCultureIgnoreCase))).ToList();
+
+                foreach (var c in catsToRemove)
+                {
+                    post.PostCategories.Remove(c);
+                }
+
+                foreach (var c in catsToAdd)
+                {
+                    var catToAdd = _db.Categories.FirstOrDefault(c2 => String.Equals(c2.Title, c, StringComparison.CurrentCultureIgnoreCase));
+                    if (catToAdd != null)
+                    {
+                        post.PostCategories.Add(new PostCategory
+                        {
+                            Category = catToAdd,
+                            Post = post
+                        });
+                    }
+                }
+
                 _db.SaveChanges();
             }
         }

@@ -11,5 +11,6 @@ namespace PandaPress.Core.Models.Request
         public int PostId { get; set; }
         public string Username { get; set; }
         public bool Publish { get; set; }
+        public List<string> Categories { get; set; }
     }
 }

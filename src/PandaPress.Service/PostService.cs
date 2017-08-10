@@ -31,7 +31,7 @@ namespace PandaPress.Service
 
         public void EditPost(PostEditRequest request)
         {
-            _dataProvider.UpdatePost(request.PostId, request.Title, request.Content, request.Publish);
+            _dataProvider.UpdatePost(request.PostId, request.Title, request.Content, request.Categories, request.Publish);
         }
 
         public List<Blog> GetBlogsForUser(string username)
@@ -96,7 +96,7 @@ namespace PandaPress.Service
         public Post NewPost(PostCreateRequest request)
         {
             var slug = _slugService.CreateSlugFromTitle(request.Title);
-            return _dataProvider.CreatePost(request.Title, request.Content, slug, request.Username, request.Publish, request.BlogId);
+            return _dataProvider.CreatePost(request.Title, request.Content, request.Categories, slug, request.Username, request.Publish, request.BlogId);
         }
 
         public async Task<string> SaveMedia(byte[] bytes, string name)
