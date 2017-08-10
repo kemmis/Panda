@@ -22,5 +22,7 @@ namespace PandaPress.Core.Contracts
         IEnumerable<Category> GetCategoriesWithPostCategories();
         Category AddCategory(string title, string description);
         void DeleteCategory(int categoryId);
+        ApplicationUser GetUserById(string userId);
+        ApplicationUser UpdateUser(string userId, string displayName);
     }
 }

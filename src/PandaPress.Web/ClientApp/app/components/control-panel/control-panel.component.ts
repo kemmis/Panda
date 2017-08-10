@@ -4,6 +4,8 @@ import { MdDialog } from "@angular/material";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ContentComponent } from "./content/content.component";
 import { PasswordComponent } from "./password/password.component";
+import { ProfileComponent } from "./profile/profile.component";
+import { ProfileSettings } from "../../models/profile-settings";
 
 @Component({
     selector: 'control-panel',
@@ -14,7 +16,7 @@ export class ControlPanelComponent {
     constructor(private _dialog: MdDialog) { }
     @Input() login: LoginResponse;
 
-    @Output() logout:EventEmitter<void> = new EventEmitter();
+    @Output() logout: EventEmitter<void> = new EventEmitter();
 
     openSettings() {
 
@@ -30,13 +32,19 @@ export class ControlPanelComponent {
         });
     }
 
-    openContent(){
+    openContent() {
         this._dialog.open(ContentComponent, {
             width: "800px",
         });
     }
 
-    changePassword(){
+    changePassword() {
         this._dialog.open(PasswordComponent);
+    }
+
+    editProfile() {
+        this._dialog.open(ProfileComponent).componentInstance.settingsUpdated.subscribe((settings: ProfileSettings) => {
+            this.login.displayName = settings.displayName;
+        });
     }
 }

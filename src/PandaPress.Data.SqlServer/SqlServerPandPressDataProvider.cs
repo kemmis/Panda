@@ -194,6 +194,22 @@ namespace PandaPress.Data.SqlServer
             _db.Categories.Remove(category);
             _db.SaveChanges();
         }
+
+        public ApplicationUser GetUserById(string userId)
+        {
+            return _db.Users.FirstOrDefault(u => u.Id == userId);
+        }
+
+        public ApplicationUser UpdateUser(string userId, string displayName)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                user.DisplayName = displayName;
+                _db.SaveChanges();
+            }
+            return user;
+        }
     }
 }
 

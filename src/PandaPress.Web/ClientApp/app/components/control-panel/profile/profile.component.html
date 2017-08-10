@@ -1,0 +1,11 @@
+<h3 md-dialog-title>Profile Settings</h3>
+<form #profileForm="ngForm">
+    <md-input-container>
+        <input name="displayName" mdInput placeholder="Display Name" required [(ngModel)]="settings.displayName">
+    </md-input-container>
+    <br/>
+    <md-dialog-actions>
+        <button md-raised-button (click)="save()" [disabled]="!profileForm.valid">Save</button>
+        <button md-raised-button md-dialog-close>Cancel</button>
+    </md-dialog-actions>
+</form>

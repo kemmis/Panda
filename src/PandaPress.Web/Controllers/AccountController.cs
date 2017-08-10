@@ -19,7 +19,7 @@ namespace PandaPress.Web.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger _logger;
-        private UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public AccountController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger, UserManager<ApplicationUser> userManager)
         {

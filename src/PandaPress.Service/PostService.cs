@@ -168,5 +168,17 @@ namespace PandaPress.Service
         {
             _dataProvider.DeleteCategory(categoryId);
         }
+
+        public ProfileSettingsViewModel GetProfileSettings(string userId)
+        {
+            var user = _dataProvider.GetUserById(userId);
+            return _mapper.Map<ProfileSettingsViewModel>(user);
+        }
+
+        public ProfileSettingsViewModel UpdateProfileSettings(string userId, ProfileSettingsUpdateRequest request)
+        {
+            var user = _dataProvider.UpdateUser(userId, request.DisplayName);
+            return _mapper.Map<ProfileSettingsViewModel>(user);
+        }
     }
 }

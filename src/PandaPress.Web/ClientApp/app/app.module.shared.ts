@@ -18,6 +18,7 @@ import { PostContentListComponent } from "./components/control-panel/content/pos
 import { CdkTableModule } from "@angular/cdk/table";
 import { PasswordComponent } from "./components/control-panel/password/password.component";
 import { CategoryContentListComponent } from "./components/control-panel/content/category-list/category-list.component";
+import { ProfileComponent } from "./components/control-panel/profile/profile.component";
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { CategoryContentListComponent } from "./components/control-panel/content
         ContentComponent,
         PostContentListComponent,
         PasswordComponent,
-        CategoryContentListComponent
+        CategoryContentListComponent,
+        ProfileComponent
     ],
     imports: [
         CommonModule,
@@ -59,7 +61,7 @@ import { CategoryContentListComponent } from "./components/control-panel/content
             { path: '**', redirectTo: '' }
         ])
     ],
-    entryComponents: [LoginComponent, SettingsComponent, DashboardComponent, ContentComponent, PasswordComponent]
+    entryComponents: [LoginComponent, SettingsComponent, DashboardComponent, ContentComponent, PasswordComponent, ProfileComponent]
 })
 export class AppModuleShared {
 }

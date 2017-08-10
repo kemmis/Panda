@@ -28,5 +28,8 @@ namespace PandaPress.Core.Contracts
         ContentViewModel GetContent();
         CategoryContentViewModel AddCategory(string title, string description);
         void DeleteCategory(int categoryId);
+        ProfileSettingsViewModel GetProfileSettings(string userId);
+        ProfileSettingsViewModel UpdateProfileSettings(string userId, ProfileSettingsUpdateRequest request);
+
     }
 }

@@ -10,6 +10,7 @@ namespace PandaPress.Core.Models.Mapping
         {
             CreateMap<Post, PostViewModel>()
                 .ForMember(dest => dest.UserDisplayName, opts => opts.MapFrom(src => src.User.DisplayName));
+            CreateMap<ApplicationUser, ProfileSettingsViewModel>();
         }
     }
 }
