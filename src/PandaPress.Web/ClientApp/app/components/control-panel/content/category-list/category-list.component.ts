@@ -1,12 +1,13 @@
 
-import { Component, Input, ViewChild } from "@angular/core";
+import { Component, Input, ViewChild, ElementRef, OnInit } from "@angular/core";
 import { BlogPostContent, BlogCategoryContent } from "../../../../models/blog-content";
 import { DataSource } from "@angular/cdk/table";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { CategoryService } from "../../../../services/category.service";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/merge';
-import { MdPaginator } from "@angular/material";
+import { MdPaginator, MdSnackBar } from "@angular/material";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
     selector: 'category-content-list',
@@ -14,21 +15,32 @@ import { MdPaginator } from "@angular/material";
     styleUrls: ['./category-list.component.less'],
     providers: [CategoryService]
 })
-export class CategoryContentListComponent {
-    constructor(private _categoryService: CategoryService) { }
+export class CategoryContentListComponent implements OnInit {
+
+    constructor(private _categoryService: CategoryService,
+        private _snackBar: MdSnackBar,
+        private _formBuilder: FormBuilder) { }
+
     @Input() set categories(categories: BlogCategoryContent[]) {
         this.cateogriesArray = categories;
         this.dataChange.next(this.cateogriesArray);
     }
 
     @ViewChild("paginator") paginator: MdPaginator;
-
-    newCategory: BlogCategoryContent = new BlogCategoryContent();
+    @ViewChild("title") titleInput: ElementRef;
 
     displayedColumns = ['id', 'title', 'description', 'numPosts', 'delete'];
 
     dataChange: BehaviorSubject<BlogCategoryContent[]> = new BehaviorSubject<BlogCategoryContent[]>([]);
     cateogriesArray: BlogCategoryContent[] = [];
+    form: FormGroup
+
+    ngOnInit(): void {
+        this.form = this._formBuilder.group({
+            title: ['', Validators.required],
+            description: ''
+        });
+    }
 
     get totalNum() {
         if (this.cateogriesArray)
@@ -37,11 +49,18 @@ export class CategoryContentListComponent {
     }
 
     saveCategory() {
-        this._categoryService.addCategory(this.newCategory.title, this.newCategory.description)
+        var newCategory = this.form.value;
+        this._categoryService.addCategory(newCategory.title, newCategory.description)
             .subscribe((category: BlogCategoryContent) => {
                 this.cateogriesArray.push(category);
                 this.dataChange.next(this.cateogriesArray);
-                this.newCategory = new BlogCategoryContent();
+                this.titleInput.nativeElement.focus();
+                this.form.reset();
+                this.form.controls['title'].clearAsyncValidators();
+                this.form.controls['title'].clearValidators();
+                this.form.controls['title'].updateValueAndValidity();                
+                this.form.controls['title'].setValidators(Validators.required);
+                this._snackBar.open(`Category "${category.title}" added!`, "", { duration: 2000 });
             });
     }
 
@@ -68,6 +87,7 @@ export class CategoryContentListComponent {
         this._categoryService.deleteCategory(row.id).subscribe(() => {
             this.cateogriesArray.splice(this.cateogriesArray.indexOf(row), 1);
             this.dataChange.next(this.cateogriesArray);
+            this._snackBar.open(`Category "${row.title}" deleted.`, "", { duration: 2000 });
         });
     }
 }

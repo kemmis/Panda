@@ -1,4 +1,4 @@
-<div class="example-container mat-elevation-z8">
+<div class="post-list mat-elevation-z8">
     <md-table #table [dataSource]="getThis()">
 
         <!--- Note that these columns can be defined in any order.
@@ -13,7 +13,7 @@
         <!-- Progress Column -->
         <ng-container cdkColumnDef="title">
             <md-header-cell *cdkHeaderCellDef> Title </md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.title}}% </md-cell>
+            <md-cell *cdkCellDef="let row"> {{row.title}} </md-cell>
         </ng-container>
 
         <!-- Name Column -->
