@@ -21,7 +21,7 @@ export class CategoryContentListComponent {
         this.dataChange.next(this.cateogriesArray);
     }
 
-    @ViewChild(MdPaginator) paginator: MdPaginator;
+    @ViewChild("paginator") paginator: MdPaginator;
 
     newCategory: BlogCategoryContent = new BlogCategoryContent();
 

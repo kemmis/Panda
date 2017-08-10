@@ -27,4 +27,6 @@
         <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
 
     </md-table>
+    <md-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [length]="totalNum">
+    </md-paginator>
 </div>
