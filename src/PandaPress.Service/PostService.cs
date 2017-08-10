@@ -163,5 +163,10 @@ namespace PandaPress.Service
                 Description = category.Description
             };
         }
+
+        public void DeleteCategory(int categoryId)
+        {
+            _dataProvider.DeleteCategory(categoryId);
+        }
     }
 }

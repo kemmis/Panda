@@ -28,5 +28,12 @@ namespace PandaPress.Web.Controllers
         {
             return _postService.AddCategory(title, description);
         }
+
+        [HttpGet]
+        [Route("Delete")]
+        public void Delete(int categoryId)
+        {
+            _postService.DeleteCategory(categoryId);
+        }
     }
 }

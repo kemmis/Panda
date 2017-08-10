@@ -109,7 +109,7 @@ namespace PandaPress.Data.SqlServer
 
         public int GetNumPublishedPosts()
         {
-            var blog = _db.Blogs.Include(b=>b.Posts).FirstOrDefault();
+            var blog = _db.Blogs.Include(b => b.Posts).FirstOrDefault();
             if (blog != null)
             {
                 return blog.Posts.Count(p => p.Published);
@@ -119,7 +119,7 @@ namespace PandaPress.Data.SqlServer
 
         public int GetNumDrafts()
         {
-            var blog = _db.Blogs.Include(b=>b.Posts).FirstOrDefault();
+            var blog = _db.Blogs.Include(b => b.Posts).FirstOrDefault();
             if (blog != null)
             {
                 return blog.Posts.Count(p => !p.Published);
@@ -134,7 +134,7 @@ namespace PandaPress.Data.SqlServer
 
         public IEnumerable<Category> GetCategoriesWithPostCategories()
         {
-            return _db.Categories.Include(c=>c.PostCategories).ToList();
+            return _db.Categories.Include(c => c.PostCategories).ToList();
         }
 
         public Category AddCategory(string title, string description)
@@ -147,6 +147,13 @@ namespace PandaPress.Data.SqlServer
             _db.Categories.Add(newCategory);
             _db.SaveChanges();
             return newCategory;
+        }
+
+        public void DeleteCategory(int categoryId)
+        {
+            var category = _db.Categories.FirstOrDefault(c => c.Id == categoryId);
+            _db.Categories.Remove(category);
+            _db.SaveChanges();
         }
     }
 }

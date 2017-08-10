@@ -24,4 +24,21 @@ export class CategoryService {
             return res.json();
         });
     }
+
+    deleteCategory(categoryId: string): Observable<void> {
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        const params = new URLSearchParams()
+        params.set("categoryId", categoryId);
+
+        const getOpts = new RequestOptions({
+            headers: headers,
+            search: params
+        });
+
+        return this._http.get(`${this.originUrl}api/category/delete/`, getOpts).map(res => {
+            return;
+        });
+    }
 }

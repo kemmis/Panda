@@ -27,5 +27,6 @@ namespace PandaPress.Core.Contracts
         DashboardDataViewModel GetDashboardData();
         ContentViewModel GetContent();
         CategoryContentViewModel AddCategory(string title, string description);
+        void DeleteCategory(int categoryId);
     }
 }
