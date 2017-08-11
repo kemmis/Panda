@@ -12,7 +12,6 @@ namespace PandaPress.Data.SqlServer
 {
     public class SqlServerPandaPressDataProvider : IPandaPressDataProvider
     {
-
         private readonly PandaPressDbContext _db;
         private readonly DbInitializer _dbInitializer;
 
@@ -48,7 +47,7 @@ namespace PandaPress.Data.SqlServer
         public (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex)
         {
             var totalPosts = _db.Posts.Count(p => p.Published);
-            var posts = _db.Posts.Include(p => p.User).OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
+            var posts = _db.Posts.Include(p => p.User).Include(p=>p.Comments).OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
                 .Take(pageSize).ToList();
             return (posts, totalPosts);
         }

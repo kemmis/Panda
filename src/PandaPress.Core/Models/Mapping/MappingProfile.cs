@@ -23,6 +23,7 @@ namespace PandaPress.Core.Models.Mapping
                 .ForMember(dest => dest.CreatedDateTime, opts => opts.MapFrom(src => src.CreatedDateTime.ToShortDateString()));
             CreateMap<Category, CategoryContentViewModel>()
                 .ForMember(dest => dest.NumPosts, opts => opts.MapFrom(src => src.PostCategories.Count));
+            CreateMap<Blog, HomeViewModel>();
         }
     }
 }

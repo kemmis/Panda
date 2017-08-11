@@ -13,5 +13,6 @@ namespace PandaPress.Core.Models.View
         public string UserDisplayName { get; set; }
         public bool Published { get; set; }
         public List<CommentViewModel> Comments { get; set; }
+        public int CommentCount { get; set; }
     }
 }

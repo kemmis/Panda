@@ -175,5 +175,11 @@ namespace PandaPress.Service
                 _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text);
             return _mapper.Map<CommentViewModel>(comment);
         }
+
+        public HomeViewModel GetHomeData()
+        {
+            var blog = _dataProvider.GetBlog();
+            return _mapper.Map<HomeViewModel>(blog);
+        }
     }
 }

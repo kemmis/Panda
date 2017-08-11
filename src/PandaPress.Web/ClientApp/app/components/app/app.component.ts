@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
     login: LoginResponse = new LoginResponse();
     @ViewChild("adminNav") adminNav: MdSidenav;
 
-
     ngOnInit(): void {
         this._accountService.isLoggedIn().subscribe((login: LoginResponse) => {
             if (login.succeeded) {

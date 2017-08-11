@@ -9,6 +9,8 @@ import { PostComment } from "../../models/post-comment";
 })
 export class PostComponent {
     @Input() post: Post;  
+    @Input() showComments:boolean = false;
+    
     onCommentCreated(comment:PostComment){
         this.post.comments.push(comment);
     }    
