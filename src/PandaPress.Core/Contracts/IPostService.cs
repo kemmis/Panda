@@ -32,5 +32,7 @@ namespace PandaPress.Core.Contracts
         ProfileSettingsViewModel UpdateProfileSettings(string userId, ProfileSettingsUpdateRequest request);
         CommentViewModel SaveComment(CommentCreateRequest request);
         HomeViewModel GetHomeData();
+        void DeletePost(int postId);
+        void UnDeletePost(int postId);
     }
 }

@@ -3,8 +3,10 @@ import { Component, Input, ViewChild } from "@angular/core";
 import { BlogPostContent } from "../../../../models/blog-content";
 import { DataSource } from "@angular/cdk/table";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { MdPaginator } from "@angular/material";
+import { MdPaginator, MdSnackBar } from "@angular/material";
 import { Observable } from "rxjs/Observable";
+import { ContentService } from "../../../../services/content.service";
+import { PostDeletedComponent } from "./post-deleted.component";
 
 @Component({
     selector: 'post-content-list',
@@ -12,13 +14,16 @@ import { Observable } from "rxjs/Observable";
     styleUrls: ['./post-list.component.less']
 })
 export class PostContentListComponent {
+    constructor(private _contentService: ContentService,
+        private _snackBar: MdSnackBar) { }
+
     @Input() set posts(posts: BlogPostContent[]) {
         this.postsArray = posts;
         this.dataChange.next(this.postsArray);
     }
     @ViewChild("paginator") paginator: MdPaginator;
 
-    displayedColumns = ['title', 'published'];
+    displayedColumns = ['title', 'published', 'delete'];
 
     postsArray: BlogPostContent[] = [];
 
@@ -49,4 +54,21 @@ export class PostContentListComponent {
         return this;
     }
     disconnect() { }
+
+    delete(post: BlogPostContent) {
+        this._contentService.deletePost(post.id).subscribe(() => {
+            var postIndex = this.postsArray.indexOf(post)
+            this.postsArray.splice(postIndex, 1);
+            this.dataChange.next(this.postsArray);
+            let snackbar = this._snackBar.openFromComponent(PostDeletedComponent, { data: post });
+            snackbar.instance.postRestored.subscribe((post: BlogPostContent) => {
+                this.postsArray.splice(postIndex, 0, post);
+                this.dataChange.next(this.postsArray);
+                this._snackBar.open("Post Restored Successfully!", "", { duration: 5000 });
+            });
+            snackbar.instance.dismissed.subscribe(()=>{
+                this._snackBar.dismiss();
+            });
+        });
+    }
 }

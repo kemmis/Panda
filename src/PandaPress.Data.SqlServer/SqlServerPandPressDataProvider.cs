@@ -234,6 +234,26 @@ namespace PandaPress.Data.SqlServer
             }
             return null;
         }
+
+        public void DeletePost(int postId)
+        {
+            var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
+            if (post != null)
+            {
+                post.Deleted = true;
+                _db.SaveChanges();
+            }
+        }
+
+        public void UnDeletePost(int postId)
+        {
+            var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
+            if (post != null)
+            {
+                post.Deleted = false;
+                _db.SaveChanges();
+            }
+        }
     }
 }
 

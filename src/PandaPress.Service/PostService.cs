@@ -181,5 +181,15 @@ namespace PandaPress.Service
             var blog = _dataProvider.GetBlog();
             return _mapper.Map<HomeViewModel>(blog);
         }
+
+        public void DeletePost(int postId)
+        {
+            _dataProvider.DeletePost(postId);
+        }
+
+        public void UnDeletePost(int postId)
+        {
+          _dataProvider.UnDeletePost(postId);  
+        }
     }
 }

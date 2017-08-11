@@ -28,5 +28,19 @@ namespace PandaPress.Web.Controllers
         {
             return _postService.GetContent();
         }
+
+        [HttpGet]
+        [Route("DeletePost")]
+        public void DeletePost(int postId)
+        {
+            _postService.DeletePost(postId);
+        }
+
+        [HttpGet]
+        [Route("UnDeletePost")]
+        public void UnDeletePost(int postId)
+        {
+            _postService.UnDeletePost(postId);
+        }
     }
 }

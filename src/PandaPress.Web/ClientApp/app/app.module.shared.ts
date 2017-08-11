@@ -22,6 +22,7 @@ import { SettingsComponent } from "./components/control-panel/settings/settings.
 import { CommentComponent } from "./components/post/comment/comment.component";
 import { CommentListComponent } from "./components/post/comment/comment-list.component";
 import { CommentFormComponent } from "./components/post/comment/comment-form.component";
+import { PostDeletedComponent } from "./components/control-panel/content/post-list/post-deleted.component";
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { CommentFormComponent } from "./components/post/comment/comment-form.com
         ProfileComponent,
         CommentComponent,
         CommentListComponent,
-        CommentFormComponent
+        CommentFormComponent,
+        PostDeletedComponent
     ],
     imports: [
         CommonModule,
@@ -69,7 +71,10 @@ import { CommentFormComponent } from "./components/post/comment/comment-form.com
             { path: '**', redirectTo: '' }
         ])
     ],
-    entryComponents: [LoginComponent, SettingsComponent, DashboardComponent, ContentComponent, PasswordComponent, ProfileComponent]
+    entryComponents: [LoginComponent,
+        SettingsComponent, DashboardComponent,
+        ContentComponent, PasswordComponent,
+        ProfileComponent, PostDeletedComponent]
 })
 export class AppModuleShared {
 }
