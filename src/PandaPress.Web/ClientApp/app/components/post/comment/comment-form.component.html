@@ -1,0 +1,23 @@
+<div class="pp-comment-form">
+    <h3>Add Comment</h3>
+    <form  [formGroup]="form">
+        <div class="pp-comment-form-name">
+            <md-input-container>
+                <input mdInput name="name" placeholder="Name" formControlName="authorName"> 
+            </md-input-container>
+        </div>
+        <div class="pp-comment-form-email">
+            <md-input-container>
+                <input mdInput name="email" placeholder="Email" formControlName="authorEmail">
+            </md-input-container>
+        </div>
+        <div class="pp-comment-form-text">
+            <md-input-container>
+                <textarea mdInput name="text" placeholder="Comment" formControlName="text"></textarea>
+            </md-input-container>
+        </div>
+        <div class="pp-comment-form-save">
+            <button md-raised-button (click)="save()">Save Comment</button>
+        </div>
+    </form>
+</div>

@@ -24,5 +24,6 @@ namespace PandaPress.Core.Contracts
         void DeleteCategory(int categoryId);
         ApplicationUser GetUserById(string userId);
         ApplicationUser UpdateUser(string userId, string displayName);
+        Comment CreateComment(int postId, string authorName, string authorEmail, string text);
     }
 }

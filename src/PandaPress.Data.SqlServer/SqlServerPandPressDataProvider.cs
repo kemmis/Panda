@@ -212,6 +212,27 @@ namespace PandaPress.Data.SqlServer
             }
             return user;
         }
+
+        public Comment CreateComment(int postId, string authorName, string authorEmail, string text)
+        {
+            var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
+            if (post != null)
+            {
+                var comment = new Comment()
+                {
+                   Post =   post,
+                   AuthorEmail = authorEmail,
+                   AuthorName = authorName,
+                   CreatedDateTime = DateTime.UtcNow,
+                   Removed = false,
+                   Text = text
+                };
+                _db.Comments.Add(comment);
+                _db.SaveChanges();
+                return comment;
+            }
+            return null;
+        }
     }
 }
 

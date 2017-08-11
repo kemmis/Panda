@@ -168,5 +168,12 @@ namespace PandaPress.Service
             var user = _dataProvider.UpdateUser(userId, request.DisplayName);
             return _mapper.Map<ProfileSettingsViewModel>(user);
         }
+
+        public CommentViewModel SaveComment(CommentCreateRequest request)
+        {
+            var comment =
+                _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text);
+            return _mapper.Map<CommentViewModel>(comment);
+        }
     }
 }

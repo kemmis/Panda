@@ -19,6 +19,9 @@ import { PasswordComponent } from "./components/control-panel/password/password.
 import { CategoryContentListComponent } from "./components/control-panel/content/category-list/category-list.component";
 import { ProfileComponent } from "./components/control-panel/profile/profile.component";
 import { SettingsComponent } from "./components/control-panel/settings/settings.component";
+import { CommentComponent } from "./components/post/comment/comment.component";
+import { CommentListComponent } from "./components/post/comment/comment-list.component";
+import { CommentFormComponent } from "./components/post/comment/comment-form.component";
 
 @NgModule({
     declarations: [
@@ -34,7 +37,10 @@ import { SettingsComponent } from "./components/control-panel/settings/settings.
         PostContentListComponent,
         PasswordComponent,
         CategoryContentListComponent,
-        ProfileComponent
+        ProfileComponent,
+        CommentComponent,
+        CommentListComponent,
+        CommentFormComponent
     ],
     imports: [
         CommonModule,

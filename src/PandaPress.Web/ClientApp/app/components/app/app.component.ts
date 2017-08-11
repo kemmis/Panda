@@ -4,12 +4,13 @@ import { MdDialog, MdSidenav, MdSnackBar } from "@angular/material";
 import { LoginComponent } from "../login/login.component";
 import { AccountService } from "../../services/account.service";
 import { LoginResponse } from "../../models/login-response";
+import { CommentService } from "../../services/comment.service";
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [PostService, MdDialog, AccountService, MdSnackBar]
+    providers: [PostService, MdDialog, AccountService, MdSnackBar, CommentService]
 })
 export class AppComponent implements OnInit {
 

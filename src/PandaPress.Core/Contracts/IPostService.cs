@@ -30,6 +30,6 @@ namespace PandaPress.Core.Contracts
         void DeleteCategory(int categoryId);
         ProfileSettingsViewModel GetProfileSettings(string userId);
         ProfileSettingsViewModel UpdateProfileSettings(string userId, ProfileSettingsUpdateRequest request);
-
+        CommentViewModel SaveComment(CommentCreateRequest request);
     }
 }
