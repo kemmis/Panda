@@ -1,21 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PostService } from "../../services/post.service";
 import { MdDialog, MdSidenav, MdSnackBar } from "@angular/material";
 import { LoginComponent } from "../login/login.component";
 import { AccountService } from "../../services/account.service";
 import { LoginResponse } from "../../models/login-response";
 import { CommentService } from "../../services/comment.service";
+import { BlogInfo } from "../../models/blog-info";
+import { BlogService } from "../../services/blog.service";
 
 @Component({
     selector: 'app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    providers: [PostService, MdDialog, AccountService, MdSnackBar, CommentService]
+    styleUrls: ['./app.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [PostService, MdDialog, AccountService, MdSnackBar, CommentService, BlogService]
 })
 export class AppComponent implements OnInit {
 
-    constructor(private _dialog: MdDialog, private _snackBar: MdSnackBar, private _accountService: AccountService) { }
+    constructor(private _dialog: MdDialog, private _snackBar: MdSnackBar,
+        private _accountService: AccountService, private _blogService: BlogService) { }
 
+    info: BlogInfo = new BlogInfo();
     login: LoginResponse = new LoginResponse();
     @ViewChild("adminNav") adminNav: MdSidenav;
 
@@ -24,6 +29,10 @@ export class AppComponent implements OnInit {
             if (login.succeeded) {
                 this.login = login;
             }
+        });
+
+        this._blogService.getBlogInfo().subscribe((info:BlogInfo)=>{
+            this.info = info;
         });
     }
 

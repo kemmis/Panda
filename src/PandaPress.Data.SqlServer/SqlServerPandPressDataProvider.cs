@@ -20,7 +20,7 @@ namespace PandaPress.Data.SqlServer
             _db = pandaPressDbContext;
             _dbInitializer = dbInitializer;
         }
-
+                
         public IEnumerable<Blog> GetBlogsForUser(string username)
         {
             return _db.Blogs.Where(b =>
@@ -51,7 +51,7 @@ namespace PandaPress.Data.SqlServer
                 .Take(pageSize).ToList();
             return (posts, totalPosts);
         }
-
+    
         public Post CreatePost(string title, string content, List<string> categories, string slug, string username, bool publish, int blogId)
         {
             var user = _db.Users.FirstOrDefault(u => String.Equals(u.UserName, username, StringComparison.CurrentCultureIgnoreCase));

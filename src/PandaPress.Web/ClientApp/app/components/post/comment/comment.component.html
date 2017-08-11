@@ -1,11 +1,18 @@
-<div class="pp-comment">
-    <div class="pp-comment-author">
-        {{comment.authorName}}
+<div class="pp-comment row">
+    <div class="col-md-2 pp-avatar">
+        <i class="fa fa-user"></i>
     </div>
-    <div class="pp-comment-datetime">
-        {{comment.createdDateTime}}
-    </div>
-    <div class="pp-comment-text">
-        {{comment.text}}
+    <div class="col-md-10">
+        <div>
+            <div class="pp-comment-author">
+                {{comment.authorName}}
+            </div>
+            <div class="pp-comment-datetime">
+                {{comment.createdDateTime}}
+            </div>
+        </div>
+        <div class="pp-comment-text">
+            {{comment.text}}
+        </div>
     </div>
 </div>

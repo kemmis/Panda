@@ -1,0 +1,147 @@
+@primary-color: #424242;
+@secondary-color: #E91E63;
+@tertiary-color: #E3F2FD;
+@primary-text-color: #212121;
+@light-text-color: #fff;
+@gutter: 16px;
+html,
+body {
+    font-family: Roboto, sans-serif;
+    color: @primary-text-color;
+}
+
+html,
+body,
+md-sidenav-container,
+.content {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+md-sidenav {
+    width: 240px;
+}
+
+md-sidenav-container.mat-sidenav-container {
+    background-color: transparent;
+}
+
+.pp-header {
+    background-color: @secondary-color;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+    .pp-header-container {
+        padding: @gutter;
+        color: @light-text-color;
+        .pp-header-title,
+        .pp-description {
+            &,
+            h1,
+            h4 {
+                display: inline-block;
+            }
+        }
+        h1 {
+            font-size: 1.4em;
+            font-weight: 400;
+        }
+        h4 {
+            font-size: 1em;
+            margin-left: @gutter
+        }
+    }
+    button {
+        position: absolute;
+        top: @gutter;
+        right: @gutter;
+    }
+}
+
+.pp-post {
+    .pp-title {
+        background-color: @primary-color;
+        padding: @gutter;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+        &,
+        a {
+            color: @light-text-color;
+        }
+    }
+    .pp-meta-top {
+        background-color: @tertiary-color;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+    }
+    .pp-post-content {
+        padding: 2*@gutter 0;
+    }
+    .pp-post-datetime,
+    .pp-comments-link,
+    .pp-categories {
+        display: inline-block;
+    }
+    .pp-post-datetime {
+        padding: @gutter/2 @gutter/2 @gutter/2 0;
+    }
+    .pp-comments-link {
+        padding: @gutter/2;
+    }
+}
+
+.pp-post-content {
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 32px;
+        max-width: 940px;
+    }
+}
+
+.pp-meta-bottom-container {
+    background-color: @primary-color;
+    color: @light-text-color;
+    padding: @gutter;
+    .pp-post-display-name {
+        color: @light-text-color;
+    }
+    margin-bottom: @gutter;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+}
+
+.pp-comment-container {
+    background-color: @tertiary-color;
+    padding: @gutter;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+    margin-bottom: @gutter;
+    h3 {
+        font-size: 1.2em;
+        color: @secondary-color;
+    }
+    .pp-comment {
+        border-top: 1px solid @secondary-color;
+        margin: 0;
+        padding: @gutter;
+    }
+    .pp-avatar {
+        text-align: center;
+        font-size: 80px;
+    }
+    .pp-comment-author {
+        width: 50%;
+        text-align: left;
+        float: left;
+    }
+    .pp-comment-datetime {
+        width: 50%;
+        text-align: right;
+        float: right;
+    }
+    .pp-comment-text {
+        margin: @gutter 0;
+    }
+}
+
+.pp-comment-form {
+    md-input-container {
+        width: 100%;
+    }
+}

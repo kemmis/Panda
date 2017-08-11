@@ -17,14 +17,16 @@
         <div [innerHtml]="post.content" class="pp-post-content"></div>
     </div>
     <div class="pp-meta-bottom">
-        <div class="container">
+        <div class="container pp-meta-bottom-container">
             <div class="pp-post-display-name">
-                {{post.userDisplayName}}
+                About {{post.userDisplayName}}
+            </div>
+            <div class="pp-post-author-description">
             </div>
         </div>
     </div>
-    <div class="container">
-        <comment-list [comments]="post.comments" *ngIf="showComments"></comment-list>
-        <comment-form [postId]="post.id" (commentCreated)="onCommentCreated($event)" *ngIf="showComments"></comment-form>
+    <div class="container pp-comment-container" *ngIf="showComments">
+        <comment-list [comments]="post.comments"></comment-list>
+        <comment-form [postId]="post.id" (commentCreated)="onCommentCreated($event)"></comment-form>
     </div>
 </div>
