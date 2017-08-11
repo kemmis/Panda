@@ -1,8 +1,10 @@
 import { PostComment } from "./post-comment";
+import { PostCategory } from "./post-category";
 
 export class Post {
-    constructor(){
+    constructor() {
         this.comments = new Array();
+        this.categories = new Array();
     }
     title: string;
     content: string;
@@ -12,4 +14,5 @@ export class Post {
     commentCount: number;
     id: string;
     publishDate: string;
+    categories: PostCategory[];
 }

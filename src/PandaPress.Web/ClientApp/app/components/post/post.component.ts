@@ -8,10 +8,9 @@ import { PostComment } from "../../models/post-comment";
     templateUrl: './post.component.html'
 })
 export class PostComponent {
-    @Input() post: Post;  
-    @Input() showComments:boolean = false;
-    
-    onCommentCreated(comment:PostComment){
+    @Input() post: Post;
+    @Input() showComments: boolean = false;
+    onCommentCreated(comment: PostComment) {
         this.post.comments.push(comment);
-    }    
-}
+    }
+}   

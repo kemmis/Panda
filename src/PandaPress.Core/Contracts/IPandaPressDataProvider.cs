@@ -8,6 +8,7 @@ namespace PandaPress.Core.Contracts
     {
         Task Init();
         Post GetPostBySlug(string slug);
+        Category GetCategoryBySlug(string slug);
         (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex);
         IEnumerable<Blog> GetBlogsForUser(string username);
         IEnumerable<Category> GetCategories();
@@ -20,7 +21,7 @@ namespace PandaPress.Core.Contracts
         int GetNumDrafts();
         IEnumerable<Post> GetPosts();
         IEnumerable<Category> GetCategoriesWithPostCategories();
-        Category AddCategory(string title, string description);
+        Category AddCategory(string title, string description, string slug);
         void DeleteCategory(int categoryId);
         ApplicationUser GetUserById(string userId);
         ApplicationUser UpdateUser(string userId, string displayName);

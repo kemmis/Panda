@@ -4,7 +4,9 @@ using System.Text;
 
 namespace PandaPress.Core.Models.View
 {
-    public class CatengoryViewModel
+    public class CategoryViewModel
     {
+        public string Title { get; set; }
+        public string Slug { get; set; }
     }
 }

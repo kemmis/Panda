@@ -20,7 +20,7 @@ namespace PandaPress.Data.SqlServer
             _db = pandaPressDbContext;
             _dbInitializer = dbInitializer;
         }
-                
+
         public IEnumerable<Blog> GetBlogsForUser(string username)
         {
             return _db.Blogs.Where(b =>
@@ -35,7 +35,8 @@ namespace PandaPress.Data.SqlServer
         public Post GetPostBySlug(string slug)
         {
             return _db.Posts.Include(p => p.User)
-                .Include(p=>p.Comments)
+                .Include(p => p.Comments)
+                .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
                 .FirstOrDefault(p => p.Slug == slug);
         }
 
@@ -47,11 +48,14 @@ namespace PandaPress.Data.SqlServer
         public (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex)
         {
             var totalPosts = _db.Posts.Count(p => p.Published);
-            var posts = _db.Posts.Include(p => p.User).Include(p=>p.Comments).OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
+            var posts = _db.Posts.Include(p => p.User)
+                .Include(p => p.Comments)
+                .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
+                .OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
                 .Take(pageSize).ToList();
             return (posts, totalPosts);
         }
-    
+
         public Post CreatePost(string title, string content, List<string> categories, string slug, string username, bool publish, int blogId)
         {
             var user = _db.Users.FirstOrDefault(u => String.Equals(u.UserName, username, StringComparison.CurrentCultureIgnoreCase));
@@ -179,12 +183,13 @@ namespace PandaPress.Data.SqlServer
             return _db.Categories.Include(c => c.PostCategories).ToList();
         }
 
-        public Category AddCategory(string title, string description)
+        public Category AddCategory(string title, string description, string slug)
         {
             var newCategory = new Category
             {
                 Title = title,
-                Description = description
+                Description = description,
+                Slug = slug
             };
             _db.Categories.Add(newCategory);
             _db.SaveChanges();
@@ -221,12 +226,12 @@ namespace PandaPress.Data.SqlServer
             {
                 var comment = new Comment()
                 {
-                   Post =   post,
-                   AuthorEmail = authorEmail,
-                   AuthorName = authorName,
-                   CreatedDateTime = DateTime.UtcNow,
-                   Removed = false,
-                   Text = text
+                    Post = post,
+                    AuthorEmail = authorEmail,
+                    AuthorName = authorName,
+                    CreatedDateTime = DateTime.UtcNow,
+                    Removed = false,
+                    Text = text
                 };
                 _db.Comments.Add(comment);
                 _db.SaveChanges();
@@ -253,6 +258,12 @@ namespace PandaPress.Data.SqlServer
                 post.Deleted = false;
                 _db.SaveChanges();
             }
+        }
+
+        public Category GetCategoryBySlug(string slug)
+        {
+            return _db.Categories.FirstOrDefault(c =>
+                String.Equals(c.Slug, slug, StringComparison.CurrentCultureIgnoreCase));
         }
     }
 }

@@ -10,7 +10,9 @@
         <div class="container">
             <div class="pp-post-datetime">{{post.publishDate}}</div>
             <div class="pp-comments-link">Comments [{{post.comments.length}}]</div>
-            <div class="pp-categories"></div>
+            <div class="pp-categories">
+                <category-list [post]="post"></category-list>
+            </div>
         </div>
     </div>
     <div class="container">

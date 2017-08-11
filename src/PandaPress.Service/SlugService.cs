@@ -15,7 +15,26 @@ namespace PandaPress.Service
             _dataProvider = dataProvider;
         }
 
-        public string CreateSlugFromTitle(string title)
+        public string CreateSlugFromCategoryTitle(string title)
+        {
+            var baseSlug = title.GenerateSlug();
+            var currentSlug = baseSlug;
+
+            var categoryWithSlug = _dataProvider.GetCategoryBySlug(currentSlug);
+
+            var i = 1;
+
+            while (categoryWithSlug != null)
+            {
+                currentSlug = $"{baseSlug}-{i}";
+                categoryWithSlug = _dataProvider.GetCategoryBySlug(currentSlug);
+                i++;
+            }
+
+            return currentSlug;
+        }
+
+        public string CreateSlugFromPostTitle(string title)
         {
             var baseSlug = title.GenerateSlug();
             var currentSlug = baseSlug;

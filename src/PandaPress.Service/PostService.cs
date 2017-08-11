@@ -95,7 +95,7 @@ namespace PandaPress.Service
 
         public Post NewPost(PostCreateRequest request)
         {
-            var slug = _slugService.CreateSlugFromTitle(request.Title);
+            var slug = _slugService.CreateSlugFromPostTitle(request.Title);
             return _dataProvider.CreatePost(request.Title, request.Content, request.Categories, slug, request.Username, request.Publish, request.BlogId);
         }
 
@@ -142,13 +142,16 @@ namespace PandaPress.Service
 
         public CategoryContentViewModel AddCategory(string title, string description)
         {
-            var category = _dataProvider.AddCategory(title, description);
+            var slug = _slugService.CreateSlugFromPostTitle(title);
+            var category = _dataProvider.AddCategory(title, description, slug);
+
             return new CategoryContentViewModel
             {
                 Id = category.Id,
                 Title = category.Title,
                 NumPosts = category.PostCategories.Count,
-                Description = category.Description
+                Description = category.Description,
+                Slug = category.Slug
             };
         }
 
@@ -189,7 +192,7 @@ namespace PandaPress.Service
 
         public void UnDeletePost(int postId)
         {
-          _dataProvider.UnDeletePost(postId);  
+            _dataProvider.UnDeletePost(postId);
         }
     }
 }

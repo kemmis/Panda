@@ -6,16 +6,18 @@
     <div class="pp-header">
         <div class="container pp-header-container">
             <div class="pp-header-title">
-                <h1>{{info.name}}</h1>
+                <a routerLink="" routerLinkActive="active">
+                    <h1>{{info.name}}</h1>
+                </a>
             </div>
             <div class="pp-description">
                 <h4>{{info.description}}</h4>
-            </div>           
+            </div>
         </div>
         <button md-raised-button (click)="openLogin()" *ngIf="!login.succeeded">Login</button>
         <button md-raised-button (click)="adminNav.toggle()" *ngIf="login.succeeded">Admin</button>
     </div>
-    
+
     <router-outlet></router-outlet>
 
 </md-sidenav-container>

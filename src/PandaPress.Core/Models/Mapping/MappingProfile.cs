@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using PandaPress.Core.Models.Data;
 using PandaPress.Core.Models.View;
 
@@ -10,7 +11,9 @@ namespace PandaPress.Core.Models.Mapping
         {
             CreateMap<Post, PostViewModel>()
                 .ForMember(dest => dest.PublishDate, opts => opts.MapFrom(src => src.PublishDate.ToShortDateString()))
-                .ForMember(dest => dest.UserDisplayName, opts => opts.MapFrom(src => src.User.DisplayName));
+                .ForMember(dest => dest.UserDisplayName, opts => opts.MapFrom(src => src.User.DisplayName))
+                .ForMember(dest => dest.Categories,
+                    opts => opts.MapFrom(src => src.PostCategories.Select(pc => pc.Category)));
             CreateMap<ApplicationUser, ProfileSettingsViewModel>();
             CreateMap<Blog, SettingsViewModel>()
                 .ForMember(dest => dest.BlogName, opts => opts.MapFrom(src => src.Name))
@@ -24,6 +27,8 @@ namespace PandaPress.Core.Models.Mapping
             CreateMap<Category, CategoryContentViewModel>()
                 .ForMember(dest => dest.NumPosts, opts => opts.MapFrom(src => src.PostCategories.Count));
             CreateMap<Blog, HomeViewModel>();
+            CreateMap<Category, CategoryViewModel>();
+
         }
     }
 }

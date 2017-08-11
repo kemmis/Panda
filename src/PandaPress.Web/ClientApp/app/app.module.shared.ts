@@ -23,6 +23,7 @@ import { CommentComponent } from "./components/post/comment/comment.component";
 import { CommentListComponent } from "./components/post/comment/comment-list.component";
 import { CommentFormComponent } from "./components/post/comment/comment-form.component";
 import { PostDeletedComponent } from "./components/control-panel/content/post-list/post-deleted.component";
+import { CategoryListComponent } from "./components/post/category-list/category-list.component";
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { PostDeletedComponent } from "./components/control-panel/content/post-li
         CommentComponent,
         CommentListComponent,
         CommentFormComponent,
-        PostDeletedComponent
+        PostDeletedComponent,
+        CategoryListComponent
     ],
     imports: [
         CommonModule,

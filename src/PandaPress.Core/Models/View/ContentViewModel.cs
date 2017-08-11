@@ -24,5 +24,6 @@ namespace PandaPress.Core.Models.View
         public string Title { get; set; }
         public string Description { get; set; }
         public int NumPosts { get; set; }
+        public string Slug { get; set; }
     }
 }

@@ -14,5 +14,6 @@ namespace PandaPress.Core.Models.View
         public bool Published { get; set; }
         public List<CommentViewModel> Comments { get; set; }
         public int CommentCount { get; set; }
+        public List<CategoryViewModel> Categories { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace PandaPress.Core.Contracts
 {
     public interface ISlugService
     {
-        string CreateSlugFromTitle(string title);
+        string CreateSlugFromPostTitle(string title);
+        string CreateSlugFromCategoryTitle(string title);
     }
 }
