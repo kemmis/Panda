@@ -28,5 +28,6 @@ namespace PandaPress.Core.Contracts
         Comment CreateComment(int postId, string authorName, string authorEmail, string text);
         void DeletePost(int postId);
         void UnDeletePost(int postId);
+        (IEnumerable<Post> posts, int totalPosts) GetPostsByCategorySlug(int pageSize, int pageIndex, string slug);
     }
 }

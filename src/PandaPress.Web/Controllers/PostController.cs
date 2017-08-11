@@ -16,16 +16,25 @@ namespace PandaPress.Web.Controllers
             this.postService = postService;
         }
 
+        [HttpGet]
         [Route("GetBySlug")]
         public PostViewModel GetBySlug(string slug)
         {
             return postService.GetPostBySlug(slug);
         }
 
+        [HttpPost]
         [Route("GetList")]
         public PostListViewModel GetList([FromBody]PostListRequest request)
         {
             return postService.GetPostList(request);
+        }
+
+        [HttpPost]
+        [Route("GetCategoryList")]
+        public PostListViewModel GetCategoryList([FromBody]PostListRequest request)
+        {
+            return postService.GetPostCategoryList(request);
         }
     }
 }

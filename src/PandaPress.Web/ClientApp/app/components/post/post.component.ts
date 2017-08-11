@@ -13,4 +13,4 @@ export class PostComponent {
     onCommentCreated(comment: PostComment) {
         this.post.comments.push(comment);
     }
-}   
+}       

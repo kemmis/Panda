@@ -34,5 +34,6 @@ namespace PandaPress.Core.Contracts
         HomeViewModel GetHomeData();
         void DeletePost(int postId);
         void UnDeletePost(int postId);
+        PostListViewModel GetPostCategoryList(PostListRequest request);
     }
 }

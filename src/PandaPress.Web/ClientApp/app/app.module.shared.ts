@@ -24,6 +24,7 @@ import { CommentListComponent } from "./components/post/comment/comment-list.com
 import { CommentFormComponent } from "./components/post/comment/comment-form.component";
 import { PostDeletedComponent } from "./components/control-panel/content/post-list/post-deleted.component";
 import { CategoryListComponent } from "./components/post/category-list/category-list.component";
+import { CategoryPageComponent } from "./components/pages/category/category.component";
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import { CategoryListComponent } from "./components/post/category-list/category-
         CommentListComponent,
         CommentFormComponent,
         PostDeletedComponent,
-        CategoryListComponent
+        CategoryListComponent,
+        CategoryPageComponent
     ],
     imports: [
         CommonModule,
@@ -70,6 +72,7 @@ import { CategoryListComponent } from "./components/post/category-list/category-
         RouterModule.forRoot([
             { path: '', component: HomePageComponent },
             { path: 'post/:slug', component: PostPageComponent },
+            { path: 'category/:slug', component: CategoryPageComponent },
             { path: '**', redirectTo: '' }
         ])
     ],

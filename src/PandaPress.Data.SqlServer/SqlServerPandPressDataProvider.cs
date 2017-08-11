@@ -56,6 +56,18 @@ namespace PandaPress.Data.SqlServer
             return (posts, totalPosts);
         }
 
+        public (IEnumerable<Post> posts, int totalPosts) GetPostsByCategorySlug(int pageSize, int pageIndex, string slug)
+        {
+            var query = _db.Posts.Where(p => p.PostCategories.Any(pc => pc.Category.Slug.ToLower() == slug));
+            var totalPosts = query.Count(p => p.Published);
+            var posts = query.Include(p => p.User)
+                .Include(p => p.Comments)
+                .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
+                .OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
+                .Take(pageSize).ToList();
+            return (posts, totalPosts);
+        }
+
         public Post CreatePost(string title, string content, List<string> categories, string slug, string username, bool publish, int blogId)
         {
             var user = _db.Users.FirstOrDefault(u => String.Equals(u.UserName, username, StringComparison.CurrentCultureIgnoreCase));

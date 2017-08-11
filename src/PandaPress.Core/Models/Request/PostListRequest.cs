@@ -8,5 +8,6 @@ namespace PandaPress.Core.Models.Request
     {
         public int PageSize { get; set; }
         public int PageIndex { get; set; }
+        public string CategorySlug { get; set; }
     }
 }

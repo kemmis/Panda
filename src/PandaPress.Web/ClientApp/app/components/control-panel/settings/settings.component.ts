@@ -35,5 +35,5 @@ export class SettingsComponent implements OnInit {
             this._dialog.close();
             this._snackBar.open("Settings Saved!", "", { duration: 2000 });
         });
-    }   
+    }       
 }

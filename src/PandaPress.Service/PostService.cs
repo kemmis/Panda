@@ -78,6 +78,18 @@ namespace PandaPress.Service
             };
         }
 
+        public PostListViewModel GetPostCategoryList(PostListRequest request)
+        {
+            var posts = _dataProvider.GetPostsByCategorySlug(request.PageSize, request.PageIndex, request.CategorySlug);
+            return new PostListViewModel
+            {
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Posts = _mapper.Map<List<PostViewModel>>(posts.posts),
+                TotalPosts = posts.totalPosts
+            };
+        }
+
         public IEnumerable<PostViewModel> GetRecentPosts(string blogId)
         {
             throw new System.NotImplementedException();

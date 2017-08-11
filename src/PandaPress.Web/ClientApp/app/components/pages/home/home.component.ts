@@ -12,13 +12,14 @@ export class HomePageComponent implements OnInit {
     constructor(private _postService: PostService) {
 
     }
-    
+
     list: PostList = new PostList();
 
     ngOnInit(): void {
         let request: PostListRequest = {
             pageIndex: 0,
-            pageSize: 5
+            pageSize: 5,
+            categorySlug: ""
         };
 
         this._postService.getList(request).subscribe(response => {
