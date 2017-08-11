@@ -16,7 +16,9 @@
         <button md-raised-button (click)="save()">Save</button>
         <button md-raised-button md-dialog-close>Cancel</button>
     </md-dialog-actions>
-    <div class="progress-container">
-        <md-progress-bar *ngIf="saving" mode="indeterminate"></md-progress-bar>
-    </div>
+
 </form>
+
+<div class="progress-container" *ngIf="saving">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+</div>

@@ -130,21 +130,13 @@ namespace PandaPress.Service
             var posts = _dataProvider.GetPosts();
             var categories = _dataProvider.GetCategoriesWithPostCategories();
 
+            var postList = _mapper.Map<List<PostContentViewModel>>(posts);
+            var catList = _mapper.Map<List<CategoryContentViewModel>>(categories);
+
             return new ContentViewModel
             {
-                Posts = posts.Select(p => new PostContentViewModel
-                {
-                    Published = p.Published,
-                    Id = p.Id,
-                    Title = p.Title
-                }).ToList(),
-                Categories = categories.Select(c => new CategoryContentViewModel
-                {
-                    Id = c.Id,
-                    Title = c.Title,
-                    NumPosts = c.PostCategories.Count,
-                    Description = c.Description
-                }).ToList()
+                Categories = catList,
+                Posts = postList
             };
         }
 

@@ -16,6 +16,10 @@ namespace PandaPress.Core.Models.Mapping
                 .ForMember(dest => dest.BlogId, opts => opts.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Description, opts => opts.MapFrom(src => src.Description))
                 .ForMember(dest => dest.PostsPerPage, opts => opts.MapFrom(src => src.PostsPerPage));
+            CreateMap<Post, PostContentViewModel>()
+                .ForMember(dest => dest.PublishDate, opts => opts.MapFrom(src => src.PublishDate.ToShortDateString()));
+            CreateMap<Category, CategoryContentViewModel>()
+                .ForMember(dest => dest.NumPosts, opts => opts.MapFrom(src => src.PostCategories.Count));
         }
     }
 }

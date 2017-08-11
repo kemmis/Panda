@@ -15,6 +15,7 @@ namespace PandaPress.Core.Models.View
         public int Id { get; set; }
         public string Title { get; set; }
         public bool Published { get; set; }
+        public string PublishDate { get; set; }
     }
 
     public class CategoryContentViewModel
