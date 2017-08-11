@@ -34,7 +34,8 @@ namespace PandaPress.Data.SqlServer
 
         public Post GetPostBySlug(string slug)
         {
-            return _db.Posts.Include(p => p.User)
+            return _db.Posts.Where(p => !p.Deleted)
+                .Include(p => p.User)
                 .Include(p => p.Comments)
                 .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
                 .FirstOrDefault(p => p.Slug == slug);
@@ -42,13 +43,17 @@ namespace PandaPress.Data.SqlServer
 
         public Post GetPostById(int postId)
         {
-            return _db.Posts.Include(p => p.User).FirstOrDefault(p => p.Id == postId);
+            return _db.Posts.Where(p => !p.Deleted)
+                .Include(p => p.User)
+                .FirstOrDefault(p => p.Id == postId);
         }
 
         public (IEnumerable<Post> posts, int totalPosts) GetPosts(int pageSize, int pageIndex)
         {
-            var totalPosts = _db.Posts.Count(p => p.Published);
-            var posts = _db.Posts.Include(p => p.User)
+            var totalPosts = _db.Posts.Where(p => !p.Deleted).Count(p => p.Published);
+
+            var posts = _db.Posts.Where(p => !p.Deleted)
+                .Include(p => p.User)
                 .Include(p => p.Comments)
                 .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
                 .OrderByDescending(p => p.PublishDate).Skip(pageIndex * pageSize)
@@ -58,7 +63,9 @@ namespace PandaPress.Data.SqlServer
 
         public (IEnumerable<Post> posts, int totalPosts) GetPostsByCategorySlug(int pageSize, int pageIndex, string slug)
         {
-            var query = _db.Posts.Where(p => p.PostCategories.Any(pc => pc.Category.Slug.ToLower() == slug));
+            var query = _db.Posts.Where(p => !p.Deleted)
+                .Where(p => p.PostCategories.Any(pc => pc.Category.Slug.ToLower() == slug));
+
             var totalPosts = query.Count(p => p.Published);
             var posts = query.Include(p => p.User)
                 .Include(p => p.Comments)
@@ -170,7 +177,7 @@ namespace PandaPress.Data.SqlServer
             var blog = _db.Blogs.Include(b => b.Posts).FirstOrDefault();
             if (blog != null)
             {
-                return blog.Posts.Count(p => p.Published);
+                return blog.Posts.Where(p => !p.Deleted).Count(p => p.Published);
             }
             return 0;
         }
@@ -180,14 +187,14 @@ namespace PandaPress.Data.SqlServer
             var blog = _db.Blogs.Include(b => b.Posts).FirstOrDefault();
             if (blog != null)
             {
-                return blog.Posts.Count(p => !p.Published);
+                return blog.Posts.Where(p => !p.Deleted).Count(p => !p.Published);
             }
             return 0;
         }
 
         public IEnumerable<Post> GetPosts()
         {
-            return _db.Posts.ToList();
+            return _db.Posts.Where(p => !p.Deleted).ToList();
         }
 
         public IEnumerable<Category> GetCategoriesWithPostCategories()
