@@ -6,6 +6,7 @@ import { ContentComponent } from "./content/content.component";
 import { PasswordComponent } from "./password/password.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { ProfileSettings } from "../../models/profile-settings";
+import { SettingsComponent } from "./settings/settings.component";
 
 @Component({
     selector: 'control-panel',
@@ -19,7 +20,9 @@ export class ControlPanelComponent {
     @Output() logout: EventEmitter<void> = new EventEmitter();
 
     openSettings() {
-
+        this._dialog.open(SettingsComponent, {
+            width: "400px"
+        });
     }
 
     logOut() {

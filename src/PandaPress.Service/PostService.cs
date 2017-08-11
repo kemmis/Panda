@@ -107,16 +107,12 @@ namespace PandaPress.Service
         public SettingsViewModel GetBlogSettings()
         {
             var blog = _dataProvider.GetBlog();
-            return new SettingsViewModel()
-            {
-                BlogName = blog.Name,
-                BlogId = blog.Id
-            };
+            return _mapper.Map<SettingsViewModel>(blog);
         }
 
         public SettingsViewModel SaveBlogSettings(SettingsViewModel settings)
         {
-            _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName);
+            _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName, settings.Description, settings.PostsPerPage);
             return GetBlogSettings();
         }
 

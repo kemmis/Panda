@@ -29,7 +29,7 @@ export class CategoryContentListComponent implements OnInit {
     @ViewChild("paginator") paginator: MdPaginator;
     @ViewChild("title") titleInput: ElementRef;
 
-    displayedColumns = ['id', 'title', 'description', 'numPosts', 'delete'];
+    displayedColumns = ['title', 'description', 'numPosts', 'delete'];
 
     dataChange: BehaviorSubject<BlogCategoryContent[]> = new BehaviorSubject<BlogCategoryContent[]>([]);
     cateogriesArray: BlogCategoryContent[] = [];

@@ -18,7 +18,7 @@ export class PostContentListComponent {
     }
     @ViewChild("paginator") paginator: MdPaginator;
 
-    displayedColumns = ['id', 'title', 'published'];
+    displayedColumns = ['title', 'published'];
 
     postsArray: BlogPostContent[] = [];
 

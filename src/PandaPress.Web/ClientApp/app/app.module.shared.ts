@@ -9,8 +9,7 @@ import { HomePageComponent } from "./components/pages/home/home.component";
 import { PostPageComponent } from "./components/pages/post/post.component";
 import { PostComponent } from "./components/post/post.component";
 import { LoginComponent } from "./components/login/login.component";
-import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdSidenavModule, MdSnackBarModule, MdProgressBarModule, MdCardModule, MdListModule, MdTabsModule, MdTableModule, MdTooltipModule, MdPaginatorModule, MdGridListModule } from "@angular/material";
-import { SettingsComponent } from "./components/settings/settings.component";
+import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdSidenavModule, MdSnackBarModule, MdProgressBarModule, MdCardModule, MdListModule, MdTabsModule, MdTableModule, MdTooltipModule, MdPaginatorModule, MdGridListModule, MdSelectModule } from "@angular/material";
 import { ControlPanelComponent } from "./components/control-panel/control-panel.component";
 import { DashboardComponent } from "./components/control-panel/dashboard/dashboard.component";
 import { ContentComponent } from "./components/control-panel/content/content.component";
@@ -19,6 +18,7 @@ import { CdkTableModule } from "@angular/cdk/table";
 import { PasswordComponent } from "./components/control-panel/password/password.component";
 import { CategoryContentListComponent } from "./components/control-panel/content/category-list/category-list.component";
 import { ProfileComponent } from "./components/control-panel/profile/profile.component";
+import { SettingsComponent } from "./components/control-panel/settings/settings.component";
 
 @NgModule({
     declarations: [
@@ -56,6 +56,7 @@ import { ProfileComponent } from "./components/control-panel/profile/profile.com
         MdTooltipModule,
         MdPaginatorModule,
         MdGridListModule,
+        MdSelectModule,
         RouterModule.forRoot([
             { path: '', component: HomePageComponent },
             { path: 'post/:slug', component: PostPageComponent },

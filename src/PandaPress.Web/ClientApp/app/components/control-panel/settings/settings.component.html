@@ -1,0 +1,22 @@
+<h2 md-dialog-title>Blog Settings</h2>
+<form #settingsForm="ngForm" ng-disabled="saving">
+    <md-input-container>
+        <input id="blogName" name="blogName" mdInput placeholder="Blog Name" [(ngModel)]="settings.blogName">
+    </md-input-container>
+    <br />
+    <md-input-container>
+        <input id="description" name="description" mdInput placeholder="Description" [(ngModel)]="settings.description">
+    </md-input-container>
+    <br />
+    <md-select name="postsPerPage" placeholder="Posts Per Page" [(ngModel)]="settings.postsPerPage">
+        <md-option *ngFor="let size of pageSizes" [value]="size">{{ size }}</md-option>
+    </md-select>
+    <br />
+    <md-dialog-actions>
+        <button md-raised-button (click)="save()">Save</button>
+        <button md-raised-button md-dialog-close>Cancel</button>
+    </md-dialog-actions>
+    <div class="progress-container">
+        <md-progress-bar *ngIf="saving" mode="indeterminate"></md-progress-bar>
+    </div>
+</form>

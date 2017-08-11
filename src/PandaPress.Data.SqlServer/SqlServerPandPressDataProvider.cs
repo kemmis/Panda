@@ -135,12 +135,14 @@ namespace PandaPress.Data.SqlServer
             return _db.Blogs.FirstOrDefault();
         }
 
-        public Blog UpdateBlog(int blogId, string blogName)
+        public Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage)
         {
             var blog = _db.Blogs.FirstOrDefault(b => b.Id == blogId);
             if (blog != null)
             {
                 blog.Name = blogName;
+                blog.Description = description;
+                blog.PostsPerPage = postsPerPage;
                 _db.SaveChanges();
             }
             return blog;

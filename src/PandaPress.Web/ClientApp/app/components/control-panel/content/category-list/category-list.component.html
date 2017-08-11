@@ -21,11 +21,6 @@
     <div class="example-container mat-elevation-z8">
         <md-table #table [dataSource]="getThis()">
 
-            <ng-container cdkColumnDef="id">
-                <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
-                <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
-            </ng-container>
-
             <ng-container cdkColumnDef="title">
                 <md-header-cell *cdkHeaderCellDef> Title </md-header-cell>
                 <md-cell *cdkCellDef="let row"> {{row.title}} </md-cell>

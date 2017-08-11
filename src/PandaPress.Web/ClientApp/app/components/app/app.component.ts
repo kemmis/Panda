@@ -4,7 +4,6 @@ import { MdDialog, MdSidenav, MdSnackBar } from "@angular/material";
 import { LoginComponent } from "../login/login.component";
 import { AccountService } from "../../services/account.service";
 import { LoginResponse } from "../../models/login-response";
-import { SettingsComponent } from "../settings/settings.component";
 
 @Component({
     selector: 'app',
@@ -37,10 +36,6 @@ export class AppComponent implements OnInit {
         ref.componentInstance.loginFailure.subscribe((login: LoginResponse) => {
             this._snackBar.open("Login Failed. Please try again.", "", { duration: 1500 })
         });
-    }
-
-    openSettings(): void {
-        var ref = this._dialog.open(SettingsComponent, { width: "400px" });
     }
 
     logOut() {

@@ -57,7 +57,9 @@ namespace PandaPress.Data.SqlServer.Seed
 
             var defaultBlog = new Blog
             {
-                Name = "Default Blog"
+                Name = "Panda Blog",
+                Description = "A Blogging System From The Future",
+                PostsPerPage = 5
             };
 
             var blogUser = new BlogApplicationUser
@@ -69,7 +71,7 @@ namespace PandaPress.Data.SqlServer.Seed
             defaultBlog.BlogApplicationUsers.Add(blogUser);
 
             await context.Blogs.AddAsync(defaultBlog);
-            
+
             var posts = new Post[]
             {
                 new Post
@@ -83,7 +85,7 @@ namespace PandaPress.Data.SqlServer.Seed
                     UserId = adminUser.Id
                 }
             };
-            
+
             await context.Posts.AddRangeAsync(posts);
 
             await context.SaveChangesAsync();

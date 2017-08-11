@@ -15,7 +15,7 @@ namespace PandaPress.Core.Contracts
         Post GetPostById(int postId);
         void UpdatePost(int postId, string title, string content, List<string> categories, bool publish);
         Blog GetBlog();
-        Blog UpdateBlog(int blogId, string blogName);
+        Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage);
         int GetNumPublishedPosts();
         int GetNumDrafts();
         IEnumerable<Post> GetPosts();
