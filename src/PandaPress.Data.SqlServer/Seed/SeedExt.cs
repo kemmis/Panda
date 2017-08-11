@@ -49,7 +49,9 @@ namespace PandaPress.Data.SqlServer.Seed
                 DisplayName = "Administrator"
             };
 
-            var result = await userManager.CreateAsync(adminUser, "PandaPassword123!");
+            userManager.PasswordValidators.Clear();
+
+            var result = await userManager.CreateAsync(adminUser, "admin");
             await userManager.AddToRoleAsync(adminUser, PandaPressRoles.Administrator);
             await userManager.AddToRoleAsync(adminUser, PandaPressRoles.Blogger);
 
