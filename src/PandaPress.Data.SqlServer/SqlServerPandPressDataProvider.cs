@@ -35,7 +35,9 @@ namespace PandaPress.Data.SqlServer
 
         public Post GetPostBySlug(string slug)
         {
-            return _db.Posts.Include(p => p.User).FirstOrDefault(p => p.Slug == slug);
+            return _db.Posts.Include(p => p.User)
+                .Include(p=>p.Comments)
+                .FirstOrDefault(p => p.Slug == slug);
         }
 
         public Post GetPostById(int postId)
