@@ -16,6 +16,13 @@
             <md-cell *cdkCellDef="let row"> {{row.published ? row.publishDate : ""}} </md-cell>
         </ng-container>     
 
+        <ng-container cdkColumnDef="edit">
+                <md-header-cell *cdkHeaderCellDef> Edit </md-header-cell>
+                <md-cell *cdkCellDef="let row">
+                    <button md-button (click)="edit(row)"><i class="fa fa-edit"></i></button>
+                </md-cell>
+            </ng-container>
+            
         <ng-container cdkColumnDef="delete">
             <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
             <md-cell *cdkCellDef="let row">

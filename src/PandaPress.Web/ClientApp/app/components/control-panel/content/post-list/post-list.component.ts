@@ -1,5 +1,5 @@
 
-import { Component, Input, ViewChild } from "@angular/core";
+import { Component, Input, ViewChild, EventEmitter, Output } from "@angular/core";
 import { BlogPostContent } from "../../../../models/blog-content";
 import { DataSource } from "@angular/cdk/table";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
@@ -23,7 +23,9 @@ export class PostContentListComponent {
     }
     @ViewChild("paginator") paginator: MdPaginator;
 
-    displayedColumns = ['title', 'published', 'delete'];
+    @Output() editPost = new EventEmitter<string>();
+
+    displayedColumns = ['title', 'published', 'edit', 'delete'];
 
     postsArray: BlogPostContent[] = [];
 
@@ -66,9 +68,13 @@ export class PostContentListComponent {
                 this.dataChange.next(this.postsArray);
                 this._snackBar.open("Post Restored Successfully!", "", { duration: 5000 });
             });
-            snackbar.instance.dismissed.subscribe(()=>{
+            snackbar.instance.dismissed.subscribe(() => {
                 this._snackBar.dismiss();
             });
         });
+    }
+
+    edit(post: BlogPostContent) {
+        this.editPost.emit(post.id);
     }
 }

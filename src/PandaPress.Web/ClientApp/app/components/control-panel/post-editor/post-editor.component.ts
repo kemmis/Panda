@@ -32,8 +32,8 @@ export class PostEditorComponent implements AfterViewInit {
             this.allCategories = _.map(categories, (c) => { return c.title; });
         });
 
-        if (this.data.postId > 0) {
-            this._postEditService.getPostById("1").subscribe((post: EditPost) => {
+        if (this.data.postId != "0") {
+            this._postEditService.getPostById(this.data.postId).subscribe((post: EditPost) => {
                 this.post = post;
                 this.tmce.content = this.post.content;
             });

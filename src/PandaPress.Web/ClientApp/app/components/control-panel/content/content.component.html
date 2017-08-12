@@ -1,6 +1,6 @@
 <md-tab-group>
   <md-tab label="Posts">
-    <post-content-list [posts]="content.posts"></post-content-list>
+    <post-content-list [posts]="content.posts" (editPost)="onEditPost($event)"></post-content-list>
   </md-tab>
   <md-tab label="Categories">
     <category-content-list [categories]="content.categories"></category-content-list>

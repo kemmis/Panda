@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { ContentService } from "../../../services/content.service";
 import { BlogContent } from "../../../models/blog-content";
 
@@ -10,11 +10,15 @@ import { BlogContent } from "../../../models/blog-content";
 })
 export class ContentComponent implements OnInit {
     constructor(private _contentService: ContentService) { }
-    content:BlogContent = new BlogContent();
-
+    content: BlogContent = new BlogContent();
+    @Output() editPost = new EventEmitter<string>();
     ngOnInit(): void {
-        this._contentService.getContent().subscribe((content:BlogContent)=>{
+        this._contentService.getContent().subscribe((content: BlogContent) => {
             this.content = content;
         });
+    }
+
+    onEditPost(postId: string) {
+        this.editPost.emit(postId);
     }
 }

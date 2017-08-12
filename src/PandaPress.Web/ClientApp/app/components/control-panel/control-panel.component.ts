@@ -41,7 +41,9 @@ export class ControlPanelComponent {
     openContent() {
         this._dialog.open(ContentComponent, {
             width: "800px",
-        });
+        }).componentInstance.editPost.subscribe((postId: string) => {
+            this.openEditorFor(postId);
+        }); 
     }
 
     changePassword() {
@@ -57,10 +59,14 @@ export class ControlPanelComponent {
     }
 
     openPostEditor() {
+        this.openEditorFor("0");
+    }
+
+    openEditorFor(postId: string) { 
         var editorDialog = this._dialog.open(PostEditorComponent, {
             width: window.innerWidth - 200 + "px",
             height: window.innerHeight - 200 + "px",
-            data: { postId: 0 }
+            data: { postId: postId }
         });
         editorDialog.componentInstance.navigate.subscribe((slug: string) => {
             editorDialog.close();
