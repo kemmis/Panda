@@ -22,7 +22,6 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
             var slug = params['slug'];
             let request: PostListRequest = {
                 pageIndex: 0,
-                pageSize: 5,
                 categorySlug: slug
             };
             this._postService.getCategoryListBySlug(request).subscribe((list: PostList) => {

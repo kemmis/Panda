@@ -27,6 +27,7 @@ import { CategoryListComponent } from "./components/post/category-list/category-
 import { CategoryPageComponent } from "./components/pages/category/category.component";
 import { PostEditorComponent } from "./components/control-panel/post-editor/post-editor.component";
 import { TinyMceComponent } from "./components/control-panel/post-editor/tiny-mce-component";
+import { PagerComponent } from "./components/pages/home/pager/pager.component";
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import { TinyMceComponent } from "./components/control-panel/post-editor/tiny-mc
         CategoryListComponent,
         CategoryPageComponent,
         PostEditorComponent,
-        TinyMceComponent
+        TinyMceComponent,
+        PagerComponent
     ],
     imports: [
         CommonModule,
@@ -75,6 +77,7 @@ import { TinyMceComponent } from "./components/control-panel/post-editor/tiny-mc
         MdSelectModule,
         RouterModule.forRoot([
             { path: '', component: HomePageComponent },
+            { path: 'page/:index', component: HomePageComponent },
             { path: 'post/:slug', component: PostPageComponent },
             { path: 'category/:slug', component: CategoryPageComponent },
             { path: '**', redirectTo: '' }

@@ -4,6 +4,6 @@ export class BlogSettings {
     description: string;
     postsPerPage: string;
 
-    static pageSizeOptions: number[] = [1, 5, 10, 25, 100];
+    static pageSizeOptions: number[] = [1, 2, 3, 4, 5, 10, 25, 100];
 }
 

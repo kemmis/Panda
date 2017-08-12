@@ -74,10 +74,11 @@ namespace PandaPress.Service
 
         public PostListViewModel GetPostList(PostListRequest request)
         {
-            var posts = _dataProvider.GetPosts(request.PageSize, request.PageIndex);
+            var blog = _dataProvider.GetBlog();
+            var posts = _dataProvider.GetPosts(blog.PostsPerPage, request.PageIndex);
             return new PostListViewModel
             {
-                PageSize = request.PageSize,
+                PageSize = blog.PostsPerPage,
                 PageIndex = request.PageIndex,
                 Posts = _mapper.Map<List<PostViewModel>>(posts.posts),
                 TotalPosts = posts.totalPosts
@@ -86,10 +87,11 @@ namespace PandaPress.Service
 
         public PostListViewModel GetPostCategoryList(PostListRequest request)
         {
-            var posts = _dataProvider.GetPostsByCategorySlug(request.PageSize, request.PageIndex, request.CategorySlug);
+            var blog = _dataProvider.GetBlog();
+            var posts = _dataProvider.GetPostsByCategorySlug(blog.PostsPerPage, request.PageIndex, request.CategorySlug);
             return new PostListViewModel
             {
-                PageSize = request.PageSize,
+                PageSize = blog.PostsPerPage,
                 PageIndex = request.PageIndex,
                 Posts = _mapper.Map<List<PostViewModel>>(posts.posts),
                 TotalPosts = posts.totalPosts

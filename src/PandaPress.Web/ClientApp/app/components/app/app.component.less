@@ -23,7 +23,7 @@ md-sidenav-container,
 md-sidenav {
     width: 240px;
 }
-    
+
 md-sidenav-container.mat-sidenav-container {
     background-color: transparent;
 }
@@ -90,7 +90,7 @@ md-sidenav-container.mat-sidenav-container {
     .pp-categories {
         padding: @gutter/4 @gutter;
     }
-    .pp-comments-link{
+    .pp-comments-link {
         background-color: #81D4FA;
     }
 }
@@ -151,4 +151,23 @@ md-sidenav-container.mat-sidenav-container {
     md-input-container {
         width: 100%;
     }
+}
+
+.pp-pager-container {
+    padding: 0;
+    margin-top: 2 * @gutter;
+}
+
+.pp-pager-left,
+.pp-pager-right {
+    background-color: @secondary-color;
+    color: @light-text-color;
+}
+
+.pp-pager-left {
+    float: left;
+}
+
+.pp-pager-right {
+    float: right;
 }
