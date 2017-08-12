@@ -180,7 +180,7 @@ namespace PandaPress.Service
 
         public ProfileSettingsViewModel UpdateProfileSettings(string userId, ProfileSettingsUpdateRequest request)
         {
-            var user = _dataProvider.UpdateUser(userId, request.DisplayName);
+            var user = _dataProvider.UpdateUser(userId, request.DisplayName, request.About);
             return _mapper.Map<ProfileSettingsViewModel>(user);
         }
 

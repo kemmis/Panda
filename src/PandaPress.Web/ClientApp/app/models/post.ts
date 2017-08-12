@@ -9,6 +9,7 @@ export class Post {
     title: string;
     content: string;
     userDisplayName: string;
+    userAbout: string;
     slug: string;
     comments: PostComment[];
     commentCount: number;

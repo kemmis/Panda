@@ -227,12 +227,13 @@ namespace PandaPress.Data.SqlServer
             return _db.Users.FirstOrDefault(u => u.Id == userId);
         }
 
-        public ApplicationUser UpdateUser(string userId, string displayName)
+        public ApplicationUser UpdateUser(string userId, string displayName, string about)
         {
             var user = _db.Users.FirstOrDefault(u => u.Id == userId);
             if (user != null)
             {
                 user.DisplayName = displayName;
+                user.About = about;
                 _db.SaveChanges();
             }
             return user;

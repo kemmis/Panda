@@ -46,7 +46,9 @@ export class ControlPanelComponent {
     }
 
     editProfile() {
-        this._dialog.open(ProfileComponent).componentInstance.settingsUpdated.subscribe((settings: ProfileSettings) => {
+        this._dialog.open(ProfileComponent, {
+            width: "400px"
+        }).componentInstance.settingsUpdated.subscribe((settings: ProfileSettings) => {
             this.login.displayName = settings.displayName;
         });
     }

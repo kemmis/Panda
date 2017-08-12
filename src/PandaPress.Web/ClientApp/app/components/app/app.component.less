@@ -8,6 +8,7 @@ html,
 body {
     font-family: Roboto, sans-serif;
     color: @primary-text-color;
+    background-color: #FAFAFA;
 }
 
 html,
@@ -83,10 +84,14 @@ md-sidenav-container.mat-sidenav-container {
         display: inline-block;
     }
     .pp-post-datetime {
-        padding: @gutter/2 @gutter/2 @gutter/2 0;
+        padding: @gutter/4 @gutter @gutter/4 0;
     }
-    .pp-comments-link {
-        padding: @gutter/2;
+    .pp-comments-link,
+    .pp-categories {
+        padding: @gutter/4 @gutter;
+    }
+    .pp-comments-link{
+        background-color: #81D4FA;
     }
 }
 
