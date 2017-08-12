@@ -1,4 +1,5 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
     "module": "es2015",
     "moduleResolution": "node",
@@ -10,7 +11,10 @@
     "skipLibCheck": true, // Workaround for https://github.com/angular/angular/issues/17863. Remove this if you upgrade to a fixed version of Angular.
     "strict": true,
     "lib": [ "es6", "dom" ],
-    "types": [ "webpack-env" ]
+    "types": [ "webpack-env" ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
   "exclude": [ "bin", "node_modules" ],
   "atom": { "rewriteTsconfig": false }

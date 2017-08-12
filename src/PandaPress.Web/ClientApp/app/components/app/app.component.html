@@ -1,6 +1,6 @@
 <md-sidenav-container>
     <md-sidenav #adminNav mode="over" opened="false">
-        <control-panel [login]="login" (logout)="logOut()"></control-panel>
+        <control-panel [login]="login" (logout)="logOut()" (closeSidenav)="closeSidenav()"></control-panel>
     </md-sidenav>
 
     <div class="pp-header">

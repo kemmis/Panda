@@ -22,6 +22,15 @@ namespace PandaPress.Web.Controllers
             _blogService = blogService;
         }
 
+
+        [HttpGet]
+        [Route("GetAll")]
+        public List<CategoryContentViewModel> GetAll()
+        {
+            return _blogService.GetAllCategories();
+        }
+
+
         [HttpGet]
         [Route("Add")]
         public CategoryContentViewModel Add(string title, string description)

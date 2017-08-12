@@ -5,12 +5,13 @@
     </div>
     <div class="user-actions">
         <button md-button (click)="logOut()" mdTooltip="Log Out"><i class="fa fa-power-off"></i></button>
-        <button md-button mdTooltip="Change Password" (click)="changePassword()"    ><i class="fa fa-key"></i></button>
+        <button md-button mdTooltip="Change Password" (click)="changePassword()"><i class="fa fa-key"></i></button>
         <button md-button mdTooltip="Profile" (click)="editProfile()"><i class="fa fa-user"></i></button>
     </div>
     <div class="cp-areas">
         <button md-button (click)="openDashboard()"><i class="fa fa-bar-chart"></i> Dashboard</button>
         <button md-button (click)="openContent()"><i class="fa fa-folder-open"></i> Content</button>
         <button md-button (click)="openSettings()"><i class="fa fa-cog"></i> Blog Settings</button>
+        <button md-button (click)="openPostEditor()"><i class="fa fa-plus"></i> New Post</button>
     </div>
 </div>

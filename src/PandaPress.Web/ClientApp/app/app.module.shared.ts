@@ -25,6 +25,8 @@ import { CommentFormComponent } from "./components/post/comment/comment-form.com
 import { PostDeletedComponent } from "./components/control-panel/content/post-list/post-deleted.component";
 import { CategoryListComponent } from "./components/post/category-list/category-list.component";
 import { CategoryPageComponent } from "./components/pages/category/category.component";
+import { PostEditorComponent } from "./components/control-panel/post-editor/post-editor.component";
+import { TinyMceComponent } from "./components/control-panel/post-editor/tiny-mce-component";
 
 @NgModule({
     declarations: [
@@ -46,7 +48,9 @@ import { CategoryPageComponent } from "./components/pages/category/category.comp
         CommentFormComponent,
         PostDeletedComponent,
         CategoryListComponent,
-        CategoryPageComponent
+        CategoryPageComponent,
+        PostEditorComponent,
+        TinyMceComponent
     ],
     imports: [
         CommonModule,
@@ -77,9 +81,13 @@ import { CategoryPageComponent } from "./components/pages/category/category.comp
         ])
     ],
     entryComponents: [LoginComponent,
-        SettingsComponent, DashboardComponent,
-        ContentComponent, PasswordComponent,
-        ProfileComponent, PostDeletedComponent]
+        SettingsComponent,
+        DashboardComponent,
+        ContentComponent,
+        PasswordComponent,
+        ProfileComponent,
+        PostDeletedComponent,
+        PostEditorComponent]
 })
 export class AppModuleShared {
 }

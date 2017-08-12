@@ -35,5 +35,8 @@ namespace PandaPress.Core.Contracts
         void DeletePost(int postId);
         void UnDeletePost(int postId);
         PostListViewModel GetPostCategoryList(PostListRequest request);
+        List<CategoryContentViewModel> GetAllCategories();
+        EditPostViewModel GetPostToEdit(int postId);
+        EditPostViewModel SavePost(EditPostViewModel post, string username);
     }
 }

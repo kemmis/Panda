@@ -13,16 +13,12 @@ const treeShakableModules = [
     '@angular/platform-browser-dynamic',
     '@angular/router',
     'zone.js',
-];
+];  
 const nonTreeShakableModules = [
-    // 'jquery',
-    // 'popper.js',
-    // 'bootstrap',
-    // 'bootstrap/dist/css/bootstrap.css',
     "@angular/material/prebuilt-themes/indigo-pink.css",
     'es6-promise',
     'es6-shim',
-    'event-source-polyfill',
+    'event-source-polyfill',    
 ];
 const allModules = treeShakableModules.concat(nonTreeShakableModules);
 

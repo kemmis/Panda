@@ -29,6 +29,9 @@ namespace PandaPress.Core.Models.Mapping
                 .ForMember(dest => dest.NumPosts, opts => opts.MapFrom(src => src.PostCategories.Count));
             CreateMap<Blog, HomeViewModel>();
             CreateMap<Category, CategoryViewModel>();
+            CreateMap<Post, EditPostViewModel>()
+                .ForMember(dest => dest.Categories,
+                    opts => opts.MapFrom(src => src.PostCategories.Select(pc => pc.Category.Title)));
 
         }
     }

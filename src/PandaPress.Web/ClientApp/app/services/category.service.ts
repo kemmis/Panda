@@ -7,6 +7,13 @@ import { BlogCategoryContent } from "../models/blog-content";
 export class CategoryService {
     constructor(private _http: Http, @Inject('BASE_URL') private originUrl: string) {
     }
+
+    getCategories():Observable<BlogCategoryContent[]>{
+        return this._http.get(`${this.originUrl}api/category/getall/`).map(res => {
+            return res.json();
+        });
+    }
+
     addCategory(title: string, description: string): Observable<BlogCategoryContent> {
         const headers = new Headers();
         headers.append("Content-Type", "application/json");

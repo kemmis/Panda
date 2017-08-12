@@ -60,9 +60,9 @@ namespace PandaPress.Data.SqlServer.Seed
 
             var defaultBlog = new Blog
             {
-                Name = "Panda Blog",
-                Description = "A Blogging System From The Future",
-                PostsPerPage = 5
+                Name = "Panda Press",
+                Description = "&lt;A Blogging System From The Future /&gt;",
+                PostsPerPage = 5    
             };
 
             var blogUser = new BlogApplicationUser

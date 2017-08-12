@@ -50,6 +50,12 @@ namespace PandaPress.Service
             return _dataProvider.GetCategories().ToList();
         }
 
+        public List<CategoryContentViewModel> GetAllCategories()
+        {
+            var categories = _dataProvider.GetCategories().ToList();
+            return _mapper.Map<List<CategoryContentViewModel>>(categories);
+        }
+
         public PostViewModel GetPost(string postId)
         {
             var post = _dataProvider.GetPostById(int.Parse(postId));
@@ -205,6 +211,30 @@ namespace PandaPress.Service
         public void UnDeletePost(int postId)
         {
             _dataProvider.UnDeletePost(postId);
+        }
+
+        public EditPostViewModel GetPostToEdit(int postId)
+        {
+            var post = _dataProvider.GetPostById(postId);
+            return _mapper.Map<EditPostViewModel>(post);
+        }
+
+        public EditPostViewModel SavePost(EditPostViewModel post, string username)
+        {
+            if (post.Id == 0)
+            {
+                var slug = _slugService.CreateSlugFromPostTitle(post.Title);
+                var blog = _dataProvider.GetBlog();
+                // create new post
+                var newPost = _dataProvider.CreatePost(post.Title, post.Content, post.Categories, slug, username, post.Published, blog.Id);
+                return _mapper.Map<EditPostViewModel>(newPost);
+            }
+            else
+            {
+                // update existing post
+                _dataProvider.UpdatePost(post.Id, post.Title, post.Content, post.Categories, post.Published);
+                return post;
+            }
         }
     }
 }

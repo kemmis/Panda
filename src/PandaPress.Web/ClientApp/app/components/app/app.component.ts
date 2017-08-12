@@ -53,4 +53,8 @@ export class AppComponent implements OnInit {
             this.adminNav.close();
         });
     }
+
+    closeSidenav(){
+        this.adminNav.close();
+    }
 }

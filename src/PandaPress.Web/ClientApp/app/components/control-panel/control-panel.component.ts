@@ -7,6 +7,8 @@ import { PasswordComponent } from "./password/password.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { ProfileSettings } from "../../models/profile-settings";
 import { SettingsComponent } from "./settings/settings.component";
+import { PostEditorComponent } from "./post-editor/post-editor.component";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'control-panel',
@@ -14,10 +16,11 @@ import { SettingsComponent } from "./settings/settings.component";
     styleUrls: ['./control-panel.component.less']
 })
 export class ControlPanelComponent {
-    constructor(private _dialog: MdDialog) { }
+    constructor(private _dialog: MdDialog, private router: Router) { }
     @Input() login: LoginResponse;
 
     @Output() logout: EventEmitter<void> = new EventEmitter();
+    @Output() closeSidenav = new EventEmitter();
 
     openSettings() {
         this._dialog.open(SettingsComponent, {
@@ -50,6 +53,19 @@ export class ControlPanelComponent {
             width: "400px"
         }).componentInstance.settingsUpdated.subscribe((settings: ProfileSettings) => {
             this.login.displayName = settings.displayName;
+        });
+    }
+
+    openPostEditor() {
+        var editorDialog = this._dialog.open(PostEditorComponent, {
+            width: window.innerWidth - 200 + "px",
+            height: window.innerHeight - 200 + "px",
+            data: { postId: 0 }
+        });
+        editorDialog.componentInstance.navigate.subscribe((slug: string) => {
+            editorDialog.close();
+            this.closeSidenav.emit();
+            this.router.navigate(['/post', slug]);
         });
     }
 }
