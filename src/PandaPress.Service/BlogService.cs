@@ -78,6 +78,7 @@ namespace PandaPress.Service
             var posts = _dataProvider.GetPosts(blog.PostsPerPage, request.PageIndex);
             return new PostListViewModel
             {
+                PageTitle = blog.Name + " - " + blog.Description,
                 PageSize = blog.PostsPerPage,
                 PageIndex = request.PageIndex,
                 Posts = _mapper.Map<List<PostViewModel>>(posts.posts),
@@ -91,6 +92,7 @@ namespace PandaPress.Service
             var posts = _dataProvider.GetPostsByCategorySlug(blog.PostsPerPage, request.PageIndex, request.CategorySlug);
             return new PostListViewModel
             {
+                PageTitle = blog.Name + " - " + blog.Description,
                 PageSize = blog.PostsPerPage,
                 PageIndex = request.PageIndex,
                 Posts = _mapper.Map<List<PostViewModel>>(posts.posts),

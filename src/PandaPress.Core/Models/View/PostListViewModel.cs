@@ -10,5 +10,6 @@ namespace PandaPress.Core.Models.View
         public int TotalPosts { get; set; }
         public int PageSize { get; set; }
         public int PageIndex { get; set; }
+        public string PageTitle { get; set; }
     }
 }

@@ -4,6 +4,7 @@ import { PostList } from "../../../models/post-list";
 import { PostListRequest } from "../../../models/post-list-request";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'category-page',
@@ -11,7 +12,7 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class CategoryPageComponent implements OnInit, OnDestroy {
 
-    constructor(private route: ActivatedRoute, private _postService: PostService) {
+    constructor(private route: ActivatedRoute, private _postService: PostService, private _titleService: Title) {
     }
 
     private paramSub: Subscription;
@@ -30,6 +31,7 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
             };
             this._postService.getCategoryListBySlug(request).subscribe((list: PostList) => {
                 this.list = list;
+                this._titleService.setTitle(list.pageTitle);
             });
         });
     }

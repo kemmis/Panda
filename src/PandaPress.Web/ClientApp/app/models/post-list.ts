@@ -5,4 +5,5 @@ export class PostList {
     totalPosts: number;
     pageSize: number;
     pageIndex: number;
+    pageTitle: string;
 }
