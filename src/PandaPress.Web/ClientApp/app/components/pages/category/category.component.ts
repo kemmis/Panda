@@ -16,13 +16,17 @@ export class CategoryPageComponent implements OnInit, OnDestroy {
 
     private paramSub: Subscription;
     list: PostList = new PostList();
-
+    slug: string;
+    get navPath(): string {
+        return "/category/" + this.slug + "/";
+    }
     ngOnInit(): void {
         this.paramSub = this.route.params.subscribe(params => {
-            var slug = params['slug'];
+            this.slug = params['slug'];
+            var index = params['index'];
             let request: PostListRequest = {
-                pageIndex: 0,
-                categorySlug: slug
+                pageIndex: index || 0,
+                categorySlug: this.slug
             };
             this._postService.getCategoryListBySlug(request).subscribe((list: PostList) => {
                 this.list = list;

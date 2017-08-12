@@ -80,6 +80,7 @@ import { PagerComponent } from "./components/pages/home/pager/pager.component";
             { path: 'page/:index', component: HomePageComponent },
             { path: 'post/:slug', component: PostPageComponent },
             { path: 'category/:slug', component: CategoryPageComponent },
+            { path: 'category/:slug/:index', component: CategoryPageComponent },
             { path: '**', redirectTo: '' }
         ])
     ],

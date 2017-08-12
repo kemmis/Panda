@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 export class PagerComponent {
     constructor(private _router: Router) { }
     @Input() pageList: PostList;
+    @Input() navPath: string;
 
     get showNext() {
         return this.pageList.totalPosts > (this.pageList.pageIndex + 1) * this.pageList.pageSize;
@@ -19,10 +20,10 @@ export class PagerComponent {
     }
 
     nextPage() {
-        this._router.navigate(['/page', this.pageList.pageIndex + 1]);
+        this._router.navigate([this.navPath, this.pageList.pageIndex + 1]);
     }
 
     prevPage() {
-        this._router.navigate(['/page', this.pageList.pageIndex - 1]);
+        this._router.navigate([this.navPath, this.pageList.pageIndex - 1]);
     }
 }

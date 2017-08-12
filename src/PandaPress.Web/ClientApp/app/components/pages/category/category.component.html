@@ -1,3 +1,4 @@
 <div *ngFor="let p of list.posts">
     <post [post]="p"></post>
 </div>
+<pager [pageList]="list" [navPath]="navPath"></pager>
