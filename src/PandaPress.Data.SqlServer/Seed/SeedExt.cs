@@ -23,8 +23,6 @@ namespace PandaPress.Data.SqlServer.Seed
 
         public async Task EnsureSeededAsync()
         {
-            _context.Database.EnsureCreated();
-
             // Look for any posts.
             if (_context.Posts.Any())
             {
@@ -61,7 +59,7 @@ namespace PandaPress.Data.SqlServer.Seed
             var defaultBlog = new Blog
             {
                 Name = "Panda Press",
-                Description = "&lt;A Blogging System From The Future /&gt;",
+                Description = "<A Blogging System From The Future />",
                 PostsPerPage = 5    
             };
 

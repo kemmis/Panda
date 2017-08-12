@@ -149,7 +149,7 @@ namespace PandaPress.Data.SqlServer
         }
         public async Task Init()
         {
-            //_db.Database.Migrate(); // run migrations
+            await _db.Database.MigrateAsync(); // run migrations
 
             await _dbInitializer.EnsureSeededAsync();
         }
