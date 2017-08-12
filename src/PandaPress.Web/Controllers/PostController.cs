@@ -9,32 +9,32 @@ namespace PandaPress.Web.Controllers
     [Route("api/Post")]
     public class PostController : Controller
     {
-        private readonly IPostService postService;
+        private readonly IBlogService _blogService;
 
-        public PostController(IPostService postService)
+        public PostController(IBlogService blogService)
         {
-            this.postService = postService;
+            this._blogService = blogService;
         }
 
         [HttpGet]
         [Route("GetBySlug")]
         public PostViewModel GetBySlug(string slug)
         {
-            return postService.GetPostBySlug(slug);
+            return _blogService.GetPostBySlug(slug);
         }
 
         [HttpPost]
         [Route("GetList")]
         public PostListViewModel GetList([FromBody]PostListRequest request)
         {
-            return postService.GetPostList(request);
+            return _blogService.GetPostList(request);
         }
 
         [HttpPost]
         [Route("GetCategoryList")]
         public PostListViewModel GetCategoryList([FromBody]PostListRequest request)
         {
-            return postService.GetPostCategoryList(request);
+            return _blogService.GetPostCategoryList(request);
         }
     }
 }

@@ -6,7 +6,7 @@ using PandaPress.Core.Models.View;
 
 namespace PandaPress.Core.Contracts
 {
-    public interface IPostService
+    public interface IBlogService
     {
         PostViewModel GetPostBySlug(string slug);
         PostListViewModel GetPostList(PostListRequest request);

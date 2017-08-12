@@ -16,13 +16,13 @@ namespace PandaPress.Service
 {
     public class MetaWeblogService : IMetaWeblogService
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMapper _mapper;
 
-        public MetaWeblogService(IPostService postService, SignInManager<ApplicationUser> signInManager, IMapper mapper)
+        public MetaWeblogService(IBlogService blogService, SignInManager<ApplicationUser> signInManager, IMapper mapper)
         {
-            _postService = postService;
+            _blogService = blogService;
             _signInManager = signInManager;
             _mapper = mapper;
         }
@@ -34,7 +34,7 @@ namespace PandaPress.Service
 
         public Task<bool> DeletePost(string blogId, string postId, string userName, string password)
         {
-            _postService.DeletePost(blogId, postId);
+            _blogService.DeletePost(blogId, postId);
             return Task.FromResult(true);
         }
 
@@ -52,7 +52,7 @@ namespace PandaPress.Service
             request.Username = userName;
             request.Publish = publish;
 
-            _postService.EditPost(request);
+            _blogService.EditPost(request);
 
             return true;
         }
@@ -60,7 +60,7 @@ namespace PandaPress.Service
         public async Task<List<CategoryStruct>> GetCategories(string blogId, string userName, string password, CancellationToken cancellationToken)
         {
             await Authenticate(userName, password);
-            var categories = _postService.GetCategories();
+            var categories = _blogService.GetCategories();
             return _mapper.Map<List<CategoryStruct>>(categories);
         }
 
@@ -83,14 +83,14 @@ namespace PandaPress.Service
         {
             await Authenticate(userName, password);
 
-            var post = _postService.GetPost(postId);
+            var post = _blogService.GetPost(postId);
 
             return _mapper.Map<PostStruct>(post);
         }
 
         public Task<List<PostStruct>> GetRecentPosts(string blogId, string userName, string password, int numberOfPosts, CancellationToken cancellationToken)
         {
-            var posts = _postService.GetPostList(new PostListRequest
+            var posts = _blogService.GetPostList(new PostListRequest
             {
                 PageSize = numberOfPosts,
                 PageIndex = 0
@@ -104,7 +104,7 @@ namespace PandaPress.Service
         {
             await Authenticate(userName, password);
 
-            var blogs = _postService.GetBlogsForUser(userName);
+            var blogs = _blogService.GetBlogsForUser(userName);
             return _mapper.Map<List<BlogInfoStruct>>(blogs);
         }
 
@@ -115,7 +115,7 @@ namespace PandaPress.Service
 
         public async Task<MediaInfoStruct> NewMediaObject(string blogId, string userName, string password, MediaObjectStruct mediaObject)
         {
-            var url = await _postService.SaveMedia(mediaObject.bytes, mediaObject.name).ConfigureAwait(false);
+            var url = await _blogService.SaveMedia(mediaObject.bytes, mediaObject.name).ConfigureAwait(false);
             var result = new MediaInfoStruct { url = url };
             return result;
         }
@@ -134,7 +134,7 @@ namespace PandaPress.Service
             request.BlogId = int.Parse(blogId);
             request.Publish = publish;
 
-            var post = _postService.NewPost(request);
+            var post = _blogService.NewPost(request);
 
             return post.Id.ToString();
         }

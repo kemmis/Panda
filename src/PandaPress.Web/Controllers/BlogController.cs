@@ -14,18 +14,18 @@ namespace PandaPress.Web.Controllers
     [Route("api/Blog")]
     public class BlogController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
 
-        public BlogController(IPostService postService)
+        public BlogController(IBlogService blogService)
         {
-            _postService = postService;
+            _blogService = blogService;
         }
 
         [Route("GetInfo")]
         [HttpGet]
         public HomeViewModel GetInfo()
         {
-            return _postService.GetHomeData();
+            return _blogService.GetHomeData();
         }
     }
 }

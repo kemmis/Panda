@@ -15,25 +15,25 @@ namespace PandaPress.Web.Controllers
     [Route("api/Category")]
     public class CategoryController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
 
-        public CategoryController(IPostService postService)
+        public CategoryController(IBlogService blogService)
         {
-            _postService = postService;
+            _blogService = blogService;
         }
 
         [HttpGet]
         [Route("Add")]
         public CategoryContentViewModel Add(string title, string description)
         {
-            return _postService.AddCategory(title, description);
+            return _blogService.AddCategory(title, description);
         }
 
         [HttpGet]
         [Route("Delete")]
         public void Delete(int categoryId)
         {
-            _postService.DeleteCategory(categoryId);
+            _blogService.DeleteCategory(categoryId);
         }
     }
 }

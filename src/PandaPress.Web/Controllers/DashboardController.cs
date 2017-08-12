@@ -15,17 +15,17 @@ namespace PandaPress.Web.Controllers
     [Route("api/Dashboard")]
     public class DashboardController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
 
-        public DashboardController(IPostService postService)
+        public DashboardController(IBlogService blogService)
         {
-            _postService = postService;
+            _blogService = blogService;
         }
 
         [Route("GetData")]
         public DashboardDataViewModel GetData()
         {
-            return _postService.GetDashboardData();
+            return _blogService.GetDashboardData();
         }
     }
 }

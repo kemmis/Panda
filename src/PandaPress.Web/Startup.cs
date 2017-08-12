@@ -52,7 +52,7 @@ namespace PandaPress.Web
 
             #region register dependencies
 
-            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IPandaPressDataProvider, SqlServerPandaPressDataProvider>();
             services.AddTransient<IAmbientDbContextLocator, AmbientDbContextLocator>();
             services.AddTransient<IDbContextScopeFactory, DbContextScopeFactory>();

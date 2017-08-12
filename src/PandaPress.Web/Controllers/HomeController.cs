@@ -6,16 +6,16 @@ namespace PandaPress.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
 
-        public HomeController(IPostService postService)
+        public HomeController(IBlogService blogService)
         {
-            _postService = postService;
+            _blogService = blogService;
         }
 
         public IActionResult Index()
         {
-            var model = _postService.GetHomeData();
+            var model = _blogService.GetHomeData();
             return View(model);
         }
 

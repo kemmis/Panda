@@ -10,23 +10,23 @@ namespace PandaPress.Data.SqlServer.Seed
 {
     public class DbInitializer
     {
-        private PandaPressDbContext context;
-        private UserManager<ApplicationUser> userManager;
-        private RoleManager<IdentityRole> roleManager;
+        private readonly PandaPressDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public DbInitializer(PandaPressDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            this.context = context;
-            this.userManager = userManager;
-            this.roleManager = roleManager;
+            this._context = context;
+            this._userManager = userManager;
+            this._roleManager = roleManager;
         }
 
         public async Task EnsureSeededAsync()
         {
-            context.Database.EnsureCreated();
+            _context.Database.EnsureCreated();
 
             // Look for any posts.
-            if (context.Posts.Any())
+            if (_context.Posts.Any())
             {
                 return;   // DB has been seeded
             }
@@ -38,7 +38,7 @@ namespace PandaPress.Data.SqlServer.Seed
 
             foreach (var roleName in roleNames)
             {
-                await roleManager.CreateAsync(new IdentityRole(roleName));
+                await _roleManager.CreateAsync(new IdentityRole(roleName));
             }
 
             var adminUser = new ApplicationUser
@@ -46,14 +46,15 @@ namespace PandaPress.Data.SqlServer.Seed
                 Email = "admin@pandapress.com",
                 UserName = "admin",
                 SecurityStamp = "pand-om-nom-nom-on-bamboo",
-                DisplayName = "Administrator"
+                DisplayName = "Administrator",
+                About = "Your fancy 'about me' description goes here. You can edit this via the user profile section in the admin panel."
             };
 
-            userManager.PasswordValidators.Clear();
+            _userManager.PasswordValidators.Clear(); // remove password requirements so we can add a super unsafe password 'admin'
 
-            var result = await userManager.CreateAsync(adminUser, "admin");
-            await userManager.AddToRoleAsync(adminUser, PandaPressRoles.Administrator);
-            await userManager.AddToRoleAsync(adminUser, PandaPressRoles.Blogger);
+            var result = await _userManager.CreateAsync(adminUser, "admin");
+            await _userManager.AddToRoleAsync(adminUser, PandaPressRoles.Administrator);
+            await _userManager.AddToRoleAsync(adminUser, PandaPressRoles.Blogger);
 
             #endregion
 
@@ -72,7 +73,7 @@ namespace PandaPress.Data.SqlServer.Seed
 
             defaultBlog.BlogApplicationUsers.Add(blogUser);
 
-            await context.Blogs.AddAsync(defaultBlog);
+            await _context.Blogs.AddAsync(defaultBlog);
 
             var posts = new Post[]
             {
@@ -88,9 +89,9 @@ namespace PandaPress.Data.SqlServer.Seed
                 }
             };
 
-            await context.Posts.AddRangeAsync(posts);
+            await _context.Posts.AddRangeAsync(posts);
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

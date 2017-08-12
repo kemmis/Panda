@@ -14,18 +14,18 @@ namespace PandaPress.Web.Controllers
     [Route("api/Comment")]
     public class CommentController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
 
-        public CommentController(IPostService postService)
+        public CommentController(IBlogService blogService)
         {
-            _postService = postService;
+            _blogService = blogService;
         }
 
         [Route("Save")]
         [HttpPost]
         public CommentViewModel Save([FromBody]CommentCreateRequest request)
         {
-            return _postService.SaveComment(request);
+            return _blogService.SaveComment(request);
         }
     }
 }

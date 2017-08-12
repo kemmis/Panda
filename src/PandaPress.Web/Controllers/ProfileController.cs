@@ -18,12 +18,12 @@ namespace PandaPress.Web.Controllers
     [Route("api/Profile")]
     public class ProfileController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProfileController(IPostService postService, UserManager<ApplicationUser> userManager)
+        public ProfileController(IBlogService blogService, UserManager<ApplicationUser> userManager)
         {
-            _postService = postService;
+            _blogService = blogService;
             _userManager = userManager;
         }
 
@@ -32,7 +32,7 @@ namespace PandaPress.Web.Controllers
         public async Task<ProfileSettingsViewModel> GetProfileSettings()
         {
             var user = await _userManager.GetUserAsync(User).ConfigureAwait(false);
-            return _postService.GetProfileSettings(user.Id);
+            return _blogService.GetProfileSettings(user.Id);
         }
 
         [Route("SaveProfileSettings")]
@@ -40,7 +40,7 @@ namespace PandaPress.Web.Controllers
         public async Task<ProfileSettingsViewModel> SaveProfileSettings([FromBody]ProfileSettingsUpdateRequest request)
         {
             var user = await _userManager.GetUserAsync(User).ConfigureAwait(false);
-            return _postService.UpdateProfileSettings(user.Id, request);
+            return _blogService.UpdateProfileSettings(user.Id, request);
         }
     }
 }

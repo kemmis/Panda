@@ -9,14 +9,14 @@ using PandaPress.Core.Models.View;
 
 namespace PandaPress.Service
 {
-    public class PostService : IPostService
+    public class BlogService : IBlogService
     {
         private readonly IPandaPressDataProvider _dataProvider;
         private readonly IMapper _mapper;
         private readonly IMediaStorageService _mediaStorageService;
         private readonly ISlugService _slugService;
 
-        public PostService(IPandaPressDataProvider dataProvider, IMapper mapper, IMediaStorageService mediaStorageService, ISlugService slugService)
+        public BlogService(IPandaPressDataProvider dataProvider, IMapper mapper, IMediaStorageService mediaStorageService, ISlugService slugService)
         {
             _dataProvider = dataProvider;
             _mapper = mapper;

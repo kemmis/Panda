@@ -15,32 +15,32 @@ namespace PandaPress.Web.Controllers
     [Route("api/Content")]
     public class ContentController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
 
-        public ContentController(IPostService postService)
+        public ContentController(IBlogService blogService)
         {
-            _postService = postService;
+            _blogService = blogService;
         }
 
         [HttpGet]
         [Route("GetContent")]
         public ContentViewModel GetContent()
         {
-            return _postService.GetContent();
+            return _blogService.GetContent();
         }
 
         [HttpGet]
         [Route("DeletePost")]
         public void DeletePost(int postId)
         {
-            _postService.DeletePost(postId);
+            _blogService.DeletePost(postId);
         }
 
         [HttpGet]
         [Route("UnDeletePost")]
         public void UnDeletePost(int postId)
         {
-            _postService.UnDeletePost(postId);
+            _blogService.UnDeletePost(postId);
         }
     }
 }

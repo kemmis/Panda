@@ -15,24 +15,24 @@ namespace PandaPress.Web.Controllers
     [Route("api/Settings")]
     public class SettingsController : Controller
     {
-        private readonly IPostService _postService;
+        private readonly IBlogService _blogService;
 
-        public SettingsController(IPostService postService)
+        public SettingsController(IBlogService blogService)
         {
-            _postService = postService;
+            _blogService = blogService;
         }
 
         [Route("Get")]
         [HttpGet]
         public SettingsViewModel Get()
         {
-            return _postService.GetBlogSettings();
+            return _blogService.GetBlogSettings();
         }
         [Route("Save")]
         [HttpPost]
         public SettingsViewModel Save([FromBody]SettingsViewModel settings)
         {
-            return _postService.SaveBlogSettings(settings);
+            return _blogService.SaveBlogSettings(settings);
         }
     }
 }
