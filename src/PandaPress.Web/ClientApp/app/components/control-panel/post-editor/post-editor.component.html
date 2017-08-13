@@ -7,10 +7,10 @@
             <tiny-mce #tmce elementId="tmce"></tiny-mce>
         </div>
         <div class="col-md-3 pe-actions">
-            <button md-raised-button (click)="publish('Post Saved!')" *ngIf="!post.published" [disabled]="!form.valid"><i class="fa fa-arrow-circle-o-up"></i> Publish</button>
+            <button md-raised-button (click)="publish()" *ngIf="!post.published" [disabled]="!form.valid"><i class="fa fa-arrow-circle-o-up"></i> Publish</button>
             <button md-raised-button (click)="goToPost()" *ngIf="post.published"><i class="fa fa-link"></i> Go to Post</button>
             <button md-raised-button (click)="unpublish()" *ngIf="post.published" [disabled]="!form.valid"><i class="fa fa-undo"></i> Unpublish</button>
-            <button md-raised-button (click)="save()" [disabled]="!form.valid"><i class="fa fa-save"></i> Save</button>
+            <button md-raised-button (click)="save('Post Saved!')" [disabled]="!form.valid"><i class="fa fa-save"></i> Save</button>
             <button md-raised-button md-dialog-close><i class="fa fa-close"></i> Cancel</button>
 
             <md-select placeholder="Categories" multiple="true" [(ngModel)]="post.categories" name="categories" >
