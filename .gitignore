@@ -186,7 +186,6 @@ orleans.codegen.cs
 node_modules
 dist
 bower_components
-yarn.lock
 blog-media
 
 # RIA/Silverlight projects
