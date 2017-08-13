@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -252,6 +253,23 @@ namespace PandaPress.Service
                 // update existing post
                 _dataProvider.UpdatePost(post.Id, post.Title, post.Content, post.Categories, post.Published);
                 return post;
+            }
+        }
+
+        public async Task<MediaViewModel> UploadMedia(IFormFile file)
+        {
+            var subFolder = DateTime.Now.ToString("yyyy/MM/dd");
+            using (var ms = new MemoryStream())
+            {
+                await file.CopyToAsync(ms);
+                var bytes = ms.ToArray();
+                var location = await _mediaStorageService.SaveMedia($"/blog-media/{subFolder}/", file.FileName, bytes)
+                    .ConfigureAwait(false);
+
+                return new MediaViewModel
+                {
+                    Location = location
+                };
             }
         }
     }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, AfterViewInit, EventEmitter, Input, Output, ElementRef } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, EventEmitter, Input, Output, ElementRef, Inject } from '@angular/core';
 declare var $: any;
 
 @Component({
@@ -6,14 +6,14 @@ declare var $: any;
     template: `<textarea id="{{elementId}}"></textarea>`
 })
 export class TinyMceComponent implements AfterViewInit, OnDestroy {
-    constructor(private _elementRef: ElementRef) { }
+    constructor(private _elementRef: ElementRef, @Inject('BASE_URL') private originUrl: string) { }
     @Input() elementId: String;
     editor: any;
 
     get content(): string {
         return this.editor.getContent();
     }
-    set content(content:string){
+    set content(content: string) {
         this.editor.setContent(content);
     }
 
@@ -28,6 +28,10 @@ export class TinyMceComponent implements AfterViewInit, OnDestroy {
             selector: '#' + this.elementId,
             height: tinyHeight,
             skin_url: '../tinymce/skins/lightgray',
+            plugins:['image','paste'],
+            automatic_uploads: true,
+            images_upload_url:`${this.originUrl}api/upload/`,
+            paste_data_images: true,
             setup: (editor: any) => {
                 this.editor = editor;
             },

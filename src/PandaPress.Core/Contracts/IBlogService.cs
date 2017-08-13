@@ -40,5 +40,6 @@ namespace PandaPress.Core.Contracts
         EditPostViewModel GetPostToEdit(int postId);
         EditPostViewModel SavePost(EditPostViewModel post, string username);
         Task<ProfileSettingsViewModel> SaveProfilePicture(string userId, IFormFile file);
+        Task<MediaViewModel> UploadMedia(IFormFile file);
     }
 }
