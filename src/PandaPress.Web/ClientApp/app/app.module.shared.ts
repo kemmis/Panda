@@ -28,6 +28,7 @@ import { CategoryPageComponent } from "./components/pages/category/category.comp
 import { PostEditorComponent } from "./components/control-panel/post-editor/post-editor.component";
 import { TinyMceComponent } from "./components/control-panel/post-editor/tiny-mce-component";
 import { PagerComponent } from "./components/pages/home/pager/pager.component";
+import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
 
 @NgModule({
     declarations: [
@@ -52,7 +53,8 @@ import { PagerComponent } from "./components/pages/home/pager/pager.component";
         CategoryPageComponent,
         PostEditorComponent,
         TinyMceComponent,
-        PagerComponent
+        PagerComponent,
+        NotFoundComponent
     ],
     imports: [
         CommonModule,
@@ -81,7 +83,7 @@ import { PagerComponent } from "./components/pages/home/pager/pager.component";
             { path: 'post/:slug', component: PostPageComponent },
             { path: 'category/:slug', component: CategoryPageComponent },
             { path: 'category/:slug/:index', component: CategoryPageComponent },
-            { path: '**', redirectTo: '' }
+            { path: '**', component: NotFoundComponent }
         ])
     ],
     entryComponents: [LoginComponent,
