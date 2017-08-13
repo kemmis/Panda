@@ -295,6 +295,16 @@ namespace PandaPress.Data.SqlServer
                 _db.SaveChanges();
             }
         }
+
+        public void RemoveProfilePhoto(string userId)
+        {
+            var user = GetUserById(userId);
+            if (user != null)
+            {
+                user.ProfilePicture = "";
+                _db.SaveChanges();
+            }
+        }
     }
 }
 

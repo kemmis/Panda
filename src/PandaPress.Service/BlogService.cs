@@ -209,6 +209,13 @@ namespace PandaPress.Service
             return _mapper.Map<ProfileSettingsViewModel>(user);
         }
 
+        public ProfileSettingsViewModel RemoveProfilePhoto(string userId)
+        {
+            _dataProvider.RemoveProfilePhoto(userId);
+            var user = _dataProvider.GetUserById(userId);
+            return _mapper.Map<ProfileSettingsViewModel>(user);
+        }
+
         public CommentViewModel SaveComment(CommentCreateRequest request)
         {
             var comment =

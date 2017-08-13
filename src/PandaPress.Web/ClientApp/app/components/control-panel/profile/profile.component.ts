@@ -43,4 +43,10 @@ export class ProfileComponent implements OnInit {
             });
         }
     }
+
+    removePhoto() {
+        this._profileService.removePhoto().subscribe((settings: ProfileSettings) => {
+            this.settings.profilePicture = settings.profilePicture;
+        });
+    }
 }

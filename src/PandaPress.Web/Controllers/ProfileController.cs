@@ -50,5 +50,13 @@ namespace PandaPress.Web.Controllers
             var user = await _userManager.GetUserAsync(User).ConfigureAwait(false);
             return await _blogService.SaveProfilePicture(user.Id, file).ConfigureAwait(false);
         }
+
+        [Route("RemovePhoto")]
+        [HttpGet]
+        public async Task<ProfileSettingsViewModel> RemovePhoto()
+        {
+            var user = await _userManager.GetUserAsync(User).ConfigureAwait(false);
+            return _blogService.RemoveProfilePhoto(user.Id);    
+        }
     }
 }

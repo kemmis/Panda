@@ -38,4 +38,10 @@ export class ProfileService {
             .post(`${this.originUrl}api/profile/savephoto/`, formData, options)
             .map(res => res.json());
     }
+
+    removePhoto(): Observable<ProfileSettings> {
+        return this._http.get(`${this.originUrl}api/profile/removephoto/`).map(res => {
+            return res.json();
+        });
+    }
 }
