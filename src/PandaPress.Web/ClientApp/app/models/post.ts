@@ -10,6 +10,7 @@ export class Post {
     content: string;
     userDisplayName: string;
     userAbout: string;
+    profilePicture: string;
     slug: string;
     comments: PostComment[];
     commentCount: number;

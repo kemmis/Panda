@@ -52,7 +52,7 @@ export class ControlPanelComponent {
 
     editProfile() {
         this._dialog.open(ProfileComponent, {
-            width: "400px"
+            width: "700px"
         }).componentInstance.settingsUpdated.subscribe((settings: ProfileSettings) => {
             this.login.displayName = settings.displayName;
         });

@@ -285,6 +285,16 @@ namespace PandaPress.Data.SqlServer
             return _db.Categories.FirstOrDefault(c =>
                 String.Equals(c.Slug, slug, StringComparison.CurrentCultureIgnoreCase));
         }
+
+        public void SaveProfilePicture(string userId, string profilePicture)
+        {
+            var user = GetUserById(userId);
+            if (user != null)
+            {
+                user.ProfilePicture = profilePicture;
+                _db.SaveChanges();
+            }
+        }
     }
 }
 

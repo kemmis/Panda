@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using PandaPress.Core.Contracts;
 using PandaPress.Core.Models.Data;
 using PandaPress.Core.Models.Request;
@@ -124,6 +126,18 @@ namespace PandaPress.Service
         public async Task<string> SaveMedia(byte[] bytes, string name)
         {
             return await _mediaStorageService.SaveMedia("/blog-media/", name, bytes).ConfigureAwait(false);
+        }
+
+        public async Task<ProfileSettingsViewModel> SaveProfilePicture(string userId, IFormFile file)
+        {
+            using (var ms = new MemoryStream())
+            {
+                await file.CopyToAsync(ms);
+                var bytes = ms.ToArray();
+                var path = await _mediaStorageService.SaveMedia("/blog-media/profile/", file.FileName, bytes);
+                _dataProvider.SaveProfilePicture(userId, path);
+                return GetProfileSettings(userId);
+            }
         }
 
         public SettingsViewModel GetBlogSettings()

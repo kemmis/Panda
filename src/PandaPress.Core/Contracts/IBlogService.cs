@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using PandaPress.Core.Models.Data;
 using PandaPress.Core.Models.Request;
 using PandaPress.Core.Models.View;
@@ -38,5 +39,6 @@ namespace PandaPress.Core.Contracts
         List<CategoryContentViewModel> GetAllCategories();
         EditPostViewModel GetPostToEdit(int postId);
         EditPostViewModel SavePost(EditPostViewModel post, string username);
+        Task<ProfileSettingsViewModel> SaveProfilePicture(string userId, IFormFile file);
     }
 }

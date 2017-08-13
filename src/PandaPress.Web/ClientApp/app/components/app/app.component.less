@@ -108,11 +108,20 @@ md-sidenav-container.mat-sidenav-container {
     background-color: @primary-color;
     color: @light-text-color;
     padding: @gutter;
-    .pp-post-display-name {
-        color: @light-text-color;
-    }
     margin-bottom: @gutter;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+    .pp-post-display-name {
+        font-size: 1.2em;
+        color: @light-text-color;
+    }
+    .col-2 {
+        padding: 0;
+    }
+    .pp-post-profile-picture {
+        img {
+            max-width: 100%;
+        }
+    }
 }
 
 .pp-comment-container {

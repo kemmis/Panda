@@ -8,5 +8,6 @@ namespace PandaPress.Core.Models.View
     {
         public string DisplayName { get; set; }
         public string About { get; set; }
+        public string ProfilePicture { get; set; }
     }
 }

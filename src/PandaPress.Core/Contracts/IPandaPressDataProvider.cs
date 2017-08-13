@@ -29,5 +29,6 @@ namespace PandaPress.Core.Contracts
         void DeletePost(int postId);
         void UnDeletePost(int postId);
         (IEnumerable<Post> posts, int totalPosts) GetPostsByCategorySlug(int pageSize, int pageIndex, string slug);
+        void SaveProfilePicture(string userId, string profilePicture);
     }
 }

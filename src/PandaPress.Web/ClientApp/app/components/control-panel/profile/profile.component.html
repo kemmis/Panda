@@ -1,15 +1,24 @@
-<h3 md-dialog-title>Profile Settings</h3>
-<form #profileForm="ngForm">
-    <md-input-container>
-        <input name="displayName" mdInput placeholder="Display Name" required [(ngModel)]="settings.displayName">
-    </md-input-container>
-    <br />
-    <md-input-container>
-        <textarea name="about" mdInput placeholder="About" [(ngModel)]="settings.about"></textarea>
-    </md-input-container>
-    <br/>
-    <md-dialog-actions>
-        <button md-raised-button (click)="save()" [disabled]="!profileForm.valid">Save</button>
-        <button md-raised-button md-dialog-close>Cancel</button>
-    </md-dialog-actions>
-</form>
+<div class="row">
+    <div class="col-5">
+        <h3 md-dialog-title>Profile Picture</h3>
+        <img src="{{settings.profilePicture}}" class="profile-pic" />
+        <input type="file" name="file" id="file" #file accept=".jpg,.gif,.png" (change)="uploadPhoto($event)" />
+    </div>
+    <div class="col-7">
+        <h3 md-dialog-title>Profile Settings</h3>
+        <form #profileForm="ngForm">
+            <md-input-container>
+                <input name="displayName" mdInput placeholder="Display Name" required [(ngModel)]="settings.displayName">
+            </md-input-container>
+            <br />
+            <md-input-container>
+                <textarea name="about" mdInput placeholder="About" [(ngModel)]="settings.about"></textarea>
+            </md-input-container>
+            <br/>
+            <md-dialog-actions>
+                <button md-raised-button (click)="save()" [disabled]="!profileForm.valid">Save</button>
+                <button md-raised-button md-dialog-close>Cancel</button>
+            </md-dialog-actions>
+        </form>
+    </div>
+</div>

@@ -14,7 +14,8 @@ namespace PandaPress.Core.Models.Mapping
                 .ForMember(dest => dest.UserDisplayName, opts => opts.MapFrom(src => src.User.DisplayName))
                 .ForMember(dest => dest.Categories,
                     opts => opts.MapFrom(src => src.PostCategories.Select(pc => pc.Category)))
-                .ForMember(dest => dest.UserAbout, opts => opts.MapFrom(src => src.User.About));
+                .ForMember(dest => dest.UserAbout, opts => opts.MapFrom(src => src.User.About))
+                .ForMember(dest => dest.ProfilePicture, opts => opts.MapFrom(src => src.User.ProfilePicture));
             CreateMap<ApplicationUser, ProfileSettingsViewModel>();
             CreateMap<Blog, SettingsViewModel>()
                 .ForMember(dest => dest.BlogName, opts => opts.MapFrom(src => src.Name))

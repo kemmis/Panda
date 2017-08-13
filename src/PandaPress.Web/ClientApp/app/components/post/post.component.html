@@ -20,11 +20,22 @@
     </div>
     <div class="pp-meta-bottom">
         <div class="container pp-meta-bottom-container">
-            <div class="pp-post-display-name">
-                About {{post.userDisplayName}}
-            </div>
-            <div class="pp-post-author-description">
-                {{post.userAbout}}
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="pp-post-profile-picture" *ngIf="post.profilePicture">
+                            <img src="{{post.profilePicture}}" />
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="pp-post-display-name">
+                            About {{post.userDisplayName}}
+                        </div>
+                        <div class="pp-post-author-description">
+                            {{post.userAbout}}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

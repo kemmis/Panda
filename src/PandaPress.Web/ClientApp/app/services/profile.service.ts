@@ -24,4 +24,18 @@ export class ProfileService {
             .map(res => res.json());
     }
 
+    savePhoto(file: File): Observable<ProfileSettings> {
+        let formData: FormData = new FormData();
+        formData.append('file', file, file.name);
+
+        let headers = new Headers();
+        headers.append('Accept', 'application/json');
+        headers.append('enctype', 'multipart/form-data');
+        
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http
+            .post(`${this.originUrl}api/profile/savephoto/`, formData, options)
+            .map(res => res.json());
+    }
 }

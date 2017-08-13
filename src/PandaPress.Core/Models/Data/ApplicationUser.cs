@@ -9,6 +9,7 @@ namespace PandaPress.Core.Models.Data
     {
         public string DisplayName { get; set; }
         public string About { get; set; }
+        public string ProfilePicture { get; set; }
         public List<Post> Posts { get; set; }
         public List<BlogApplicationUser> BlogApplicationUsers { get; set; }
 
