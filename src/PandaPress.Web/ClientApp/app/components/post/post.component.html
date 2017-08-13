@@ -9,7 +9,7 @@
     <div class="pp-meta-top">
         <div class="container">
             <div class="pp-post-datetime">{{post.publishDate}}</div>
-            <div class="pp-comments-link">Comments [{{post.comments.length}}]</div>
+            <div class="pp-comments-link"><a [routerLink]="['/post', post.slug]" fragment="comments">Comments [{{post.comments.length}}]</a></div>
             <div class="pp-categories">
                 <category-list [post]="post"></category-list>
             </div>
