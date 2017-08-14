@@ -155,10 +155,13 @@ namespace Panda.Service
 
         public DashboardDataViewModel GetDashboardData()
         {
+            var recentComments = _dataProvider.GetRecentComments();
+
             return new DashboardDataViewModel
             {
                 NumDrafts = _dataProvider.GetNumDrafts(),
-                NumPosts = _dataProvider.GetNumPublishedPosts()
+                NumPosts = _dataProvider.GetNumPublishedPosts(),
+                RecentComments = _mapper.Map<List<DashboardDataCommentViewModel>>(recentComments)
             };
         }
 

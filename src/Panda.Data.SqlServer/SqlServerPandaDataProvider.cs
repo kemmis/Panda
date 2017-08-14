@@ -191,6 +191,12 @@ namespace Panda.Data.SqlServer
             return 0;
         }
 
+        public List<Comment> GetRecentComments()
+        {
+            return _db.Comments.OrderByDescending(c => c.CreatedDateTime)
+                .Take(10).Include(c => c.Post).ToList();
+        }
+
         public IEnumerable<Post> GetPosts()
         {
             return _db.Posts.Where(p => !p.Deleted).ToList();

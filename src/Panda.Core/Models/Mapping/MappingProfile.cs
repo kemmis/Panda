@@ -33,6 +33,11 @@ namespace Panda.Core.Models.Mapping
             CreateMap<Post, EditPostViewModel>()
                 .ForMember(dest => dest.Categories,
                     opts => opts.MapFrom(src => src.PostCategories.Select(pc => pc.Category.Title)));
+            CreateMap<Comment, DashboardDataCommentViewModel>()
+                .ForMember(dest => dest.PostId, opts => opts.MapFrom(src => src.PostId))
+                .ForMember(dest => dest.PostTitle, opts => opts.MapFrom(src => src.Post.Title))
+                .ForMember(dest => dest.PostSlug, opts => opts.MapFrom(src => src.Post.Slug))
+                .ForMember(dest => dest.CreatedDateTime, opts => opts.MapFrom(src => src.CreatedDateTime.ToShortDateString()));
 
         }
     }

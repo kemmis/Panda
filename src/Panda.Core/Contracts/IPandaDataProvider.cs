@@ -31,5 +31,6 @@ namespace Panda.Core.Contracts
         (IEnumerable<Post> posts, int totalPosts) GetPostsByCategorySlug(int pageSize, int pageIndex, string slug);
         void SaveProfilePicture(string userId, string profilePicture);
         void RemoveProfilePhoto(string userId);
+        List<Comment> GetRecentComments();
     }
 }

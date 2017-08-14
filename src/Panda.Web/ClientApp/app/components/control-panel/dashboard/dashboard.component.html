@@ -14,8 +14,18 @@
     <div class="col-md-6">
         <md-card>
             <md-card-title>Latest Comments</md-card-title>
-            <md-card-content>
-                Comments coming soon!
+            <md-card-content class="db-recent-comments">
+                <div class="db-recent-comment" *ngFor="let c of dashboardData.recentComments">
+                    <div class="db-recent-comment-date">
+                        {{c.createdDateTime}}
+                    </div>
+                    <div class="db-recent-comment-meta">
+                        Comment on post <a href="javascript:void(0)" (click)="navigateToPost(c.postSlug)">{{c.postTitle}}</a> by <a href="mailto:{{c.authorEmail}}">{{c.authorName}}</a>
+                    </div>
+                    <div class="db-recent-comment-text">
+                        {{c.text}}
+                    </div>
+                </div>
             </md-card-content>
         </md-card>
     </div>

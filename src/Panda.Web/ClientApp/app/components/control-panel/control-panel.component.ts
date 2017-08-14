@@ -33,9 +33,14 @@ export class ControlPanelComponent {
     }
 
     openDashboard() {
-        this._dialog.open(DashboardComponent, {
+        var dashboardDialog = this._dialog.open(DashboardComponent, {
             width: "800px",
         });
+        dashboardDialog.componentInstance.navigate.subscribe((slug: string) => {
+            dashboardDialog.close();
+            this.closeSidenav.emit();
+            this.router.navigate(['/post', slug]);
+        });;
     }
 
     openContent() {
@@ -43,7 +48,7 @@ export class ControlPanelComponent {
             width: "800px",
         }).componentInstance.editPost.subscribe((postId: string) => {
             this.openEditorFor(postId);
-        }); 
+        });
     }
 
     changePassword() {
@@ -62,7 +67,7 @@ export class ControlPanelComponent {
         this.openEditorFor("0");
     }
 
-    openEditorFor(postId: string) { 
+    openEditorFor(postId: string) {
         var editorDialog = this._dialog.open(PostEditorComponent, {
             width: window.innerWidth - 200 + "px",
             height: window.innerHeight - 200 + "px",
