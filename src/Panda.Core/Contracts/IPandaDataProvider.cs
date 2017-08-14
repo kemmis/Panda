@@ -16,7 +16,10 @@ namespace Panda.Core.Contracts
         Post GetPostById(int postId);
         void UpdatePost(int postId, string title, string content, List<string> categories, bool publish);
         Blog GetBlog();
-        Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage);
+
+        Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername,
+            string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl,
+            bool sendCommentEmail);
         int GetNumPublishedPosts();
         int GetNumDrafts();
         IEnumerable<Post> GetPosts();

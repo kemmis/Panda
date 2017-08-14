@@ -158,7 +158,8 @@ namespace Panda.Data.SqlServer
             return _db.Blogs.FirstOrDefault();
         }
 
-        public Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage)
+        public Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername, 
+            string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl, bool sendCommentEmail)
         {
             var blog = _db.Blogs.FirstOrDefault(b => b.Id == blogId);
             if (blog != null)
@@ -166,6 +167,14 @@ namespace Panda.Data.SqlServer
                 blog.Name = blogName;
                 blog.Description = description;
                 blog.PostsPerPage = postsPerPage;
+                blog.SmtpUsername = smtpUsername;
+                blog.SmtpPassword = smtpPassword;
+                blog.SmtpHost = smtpHost;
+                blog.SmtpPort = smtpPort;
+                blog.EmailPrefix = emailPrefix;
+                blog.SmtpUseSsl = smtpUseSsl;
+                blog.SendCommentEmail = sendCommentEmail;
+
                 _db.SaveChanges();
             }
             return blog;

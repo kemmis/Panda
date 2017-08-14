@@ -59,7 +59,14 @@ namespace Panda.Data.SqlServer.Seed
             {
                 Name = "Panda",
                 Description = "<A Blogging System From The Future />",
-                PostsPerPage = 5    
+                PostsPerPage = 5,
+                SendCommentEmail = false,
+                SmtpHost = "",
+                SmtpPort = "25",
+                SmtpPassword = "",
+                SmtpUseSsl = false,
+                EmailPrefix = "Blog",
+                SmtpUsername = ""
             };
 
             var blogUser = new BlogApplicationUser

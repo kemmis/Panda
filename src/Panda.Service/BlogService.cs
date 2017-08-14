@@ -149,7 +149,9 @@ namespace Panda.Service
 
         public SettingsViewModel SaveBlogSettings(SettingsViewModel settings)
         {
-            _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName, settings.Description, settings.PostsPerPage);
+            _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName, settings.Description, settings.PostsPerPage, 
+                settings.SmtpUsername, settings.SmtpPassword, settings.SmtpHost, settings.SmtpPort, 
+                settings.EmailPrefix, settings.SmtpUseSsl, settings.SendCommentEmail);
             return GetBlogSettings();
         }
 

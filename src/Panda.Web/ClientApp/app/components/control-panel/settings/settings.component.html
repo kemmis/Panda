@@ -1,24 +1,47 @@
-<h2 md-dialog-title>Blog Settings</h2>
-<form #settingsForm="ngForm" ng-disabled="saving">
-    <md-input-container>
-        <input id="blogName" name="blogName" mdInput placeholder="Blog Name" [(ngModel)]="settings.blogName">
-    </md-input-container>
-    <br />
-    <md-input-container>
-        <input id="description" name="description" mdInput placeholder="Description" [(ngModel)]="settings.description">
-    </md-input-container>
-    <br />
-    <md-select name="postsPerPage" placeholder="Posts Per Page" [(ngModel)]="settings.postsPerPage">
-        <md-option *ngFor="let size of pageSizes" [value]="size">{{ size }}</md-option>
-    </md-select>
+<div id="pp-settings">
+    <h2 md-dialog-title>Blog Settings</h2>
+    <form #settingsForm="ngForm" ng-disabled="saving">
+        <md-tab-group>
+            <md-tab label="General">
+                <md-input-container>
+                    <input id="blogName" name="blogName" mdInput placeholder="Blog Name" [(ngModel)]="settings.blogName">
+                </md-input-container>
+                <br />
+                <md-input-container>
+                    <input id="description" name="description" mdInput placeholder="Description" [(ngModel)]="settings.description">
+                </md-input-container>
+                <br />
+                <md-select name="postsPerPage" placeholder="Posts Per Page" [(ngModel)]="settings.postsPerPage">
+                    <md-option *ngFor="let size of pageSizes" [value]="size">{{ size }}</md-option>
+                </md-select>
+            </md-tab>
+            <md-tab label="E-mail">
+                <md-checkbox name="sendCommentEmail" [(ngModel)]="settings.sendCommentEmail">Send commenmt e-mail</md-checkbox>
+                <md-input-container>
+                    <input name="smtpUsername" mdInput placeholder="SMTP Username" [(ngModel)]="settings.smtpUsername">
+                </md-input-container>
+                <md-input-container>
+                    <input name="smtpPassword" mdInput placeholder="SMTP Password" [(ngModel)]="settings.smtpPassword">
+                </md-input-container>
+                <md-input-container>
+                    <input name="smtpHost" mdInput placeholder="SMTP Host Name" [(ngModel)]="settings.smtpHost">
+                </md-input-container>
+                <md-input-container>
+                    <input name="smtpPort" mdInput placeholder="SMTP Port Number" [(ngModel)]="settings.smtpPort">
+                </md-input-container>
+                <md-input-container>
+                    <input name="emailPrefix" mdInput placeholder="E-mail Subject Prefix" [(ngModel)]="settings.emailPrefix">
+                </md-input-container>
+                <md-checkbox name="smtpUseSsl" [(ngModel)]="settings.smtpUseSsl">Use SSL</md-checkbox>
+            </md-tab>
+        </md-tab-group>
+    </form>
     <br />
     <md-dialog-actions>
         <button md-raised-button (click)="save()">Save</button>
         <button md-raised-button md-dialog-close>Cancel</button>
     </md-dialog-actions>
-
-</form>
-
+</div>
 <div class="progress-container" *ngIf="saving">
     <md-progress-bar mode="indeterminate"></md-progress-bar>
 </div>
