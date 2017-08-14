@@ -42,5 +42,6 @@ namespace Panda.Core.Contracts
         Task<ProfileSettingsViewModel> SaveProfilePicture(string userId, IFormFile file);
         Task<MediaViewModel> UploadMedia(IFormFile file);
         ProfileSettingsViewModel RemoveProfilePhoto(string userId);
+        Task<bool> SendTestEmail(SettingsViewModel settings, string userId);
     }
 }

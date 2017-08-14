@@ -16,7 +16,7 @@
                 </md-select>
             </md-tab>
             <md-tab label="E-mail">
-                <md-checkbox name="sendCommentEmail" [(ngModel)]="settings.sendCommentEmail">Send commenmt e-mail</md-checkbox>
+                <md-checkbox name="sendCommentEmail" [(ngModel)]="settings.sendCommentEmail">Send comment e-mail</md-checkbox>
                 <md-input-container>
                     <input name="smtpUsername" mdInput placeholder="SMTP Username" [(ngModel)]="settings.smtpUsername">
                 </md-input-container>
@@ -33,6 +33,8 @@
                     <input name="emailPrefix" mdInput placeholder="E-mail Subject Prefix" [(ngModel)]="settings.emailPrefix">
                 </md-input-container>
                 <md-checkbox name="smtpUseSsl" [(ngModel)]="settings.smtpUseSsl">Use SSL</md-checkbox>
+                <br/>
+                <button md-raised-button class="pp-send-email-btn" (click)="sendTestEmail()" [disabled]="saving">Send Test Email</button>
             </md-tab>
         </md-tab-group>
     </form>

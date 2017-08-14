@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
@@ -149,8 +151,8 @@ namespace Panda.Service
 
         public SettingsViewModel SaveBlogSettings(SettingsViewModel settings)
         {
-            _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName, settings.Description, settings.PostsPerPage, 
-                settings.SmtpUsername, settings.SmtpPassword, settings.SmtpHost, settings.SmtpPort, 
+            _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName, settings.Description, settings.PostsPerPage,
+                settings.SmtpUsername, settings.SmtpPassword, settings.SmtpHost, settings.SmtpPort,
                 settings.EmailPrefix, settings.SmtpUseSsl, settings.SendCommentEmail);
             return GetBlogSettings();
         }
@@ -210,7 +212,7 @@ namespace Panda.Service
 
         public ProfileSettingsViewModel UpdateProfileSettings(string userId, ProfileSettingsUpdateRequest request)
         {
-            var user = _dataProvider.UpdateUser(userId, request.DisplayName, request.About);
+            var user = _dataProvider.UpdateUser(userId, request.DisplayName, request.About, request.Email);
             return _mapper.Map<ProfileSettingsViewModel>(user);
         }
 
@@ -283,6 +285,32 @@ namespace Panda.Service
                     Location = location
                 };
             }
+        }
+
+        public async Task<bool> SendTestEmail(SettingsViewModel settings, string userId)
+        {
+            var response = true;
+            try
+            {
+                var user = _dataProvider.GetUserById(userId);
+
+                var client = new SmtpClient
+                {
+                    Credentials = new NetworkCredential(settings.SmtpUsername, settings.SmtpPassword),
+                    EnableSsl = settings.SmtpUseSsl,
+                    Host = settings.SmtpHost,
+                    Port = int.Parse(settings.SmtpPort),
+                    Timeout = 10000
+                };
+
+                await client.SendMailAsync(user.Email, user.Email, "Test message from Panda!",
+                    "Congrats! Your email settings are working!");
+            }
+            catch
+            {
+                response = false;
+            }
+            return response;
         }
     }
 }

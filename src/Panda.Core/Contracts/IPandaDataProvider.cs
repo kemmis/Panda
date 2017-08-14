@@ -27,7 +27,7 @@ namespace Panda.Core.Contracts
         Category AddCategory(string title, string description, string slug);
         void DeleteCategory(int categoryId);
         ApplicationUser GetUserById(string userId);
-        ApplicationUser UpdateUser(string userId, string displayName, string about);
+        ApplicationUser UpdateUser(string userId, string displayName, string about, string email);
         Comment CreateComment(int postId, string authorName, string authorEmail, string text);
         void DeletePost(int postId);
         void UnDeletePost(int postId);

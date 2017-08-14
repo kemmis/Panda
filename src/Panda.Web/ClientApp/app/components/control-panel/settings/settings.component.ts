@@ -35,5 +35,18 @@ export class SettingsComponent implements OnInit {
             this._dialog.close();
             this._snackBar.open("Settings Saved!", "", { duration: 2000 });
         });
-    }       
+    }
+
+    sendTestEmail() {
+        this.saving = true;
+        this._postService.sendTestEmail(this.settings).subscribe((success: boolean) => {
+            this.saving = false;
+            if (success) {
+                this._snackBar.open("Test email sent successfully!", "", { duration: 3000 });
+            }
+            else {
+                this._snackBar.open("Test email failed. Please check your settings.", "", { duration: 5000 });
+            }
+        });
+    }
 }

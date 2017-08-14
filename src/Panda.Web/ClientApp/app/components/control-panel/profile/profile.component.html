@@ -11,11 +11,15 @@
             <md-input-container>
                 <input name="displayName" mdInput placeholder="Display Name" required [(ngModel)]="settings.displayName">
             </md-input-container>
+            <br/>
+            <md-input-container>
+                <input name="email" mdInput placeholder="Email Address" required [(ngModel)]="settings.email">
+            </md-input-container>
             <br />
             <md-input-container>
                 <textarea name="about" mdInput placeholder="About" [(ngModel)]="settings.about"></textarea>
-            </md-input-container>
-            <br/>
+            </md-input-container>           
+            <br>
             <md-dialog-actions>
                 <button md-raised-button (click)="save()" [disabled]="!profileForm.valid">Save</button>
                 <button md-raised-button md-dialog-close>Cancel</button>
