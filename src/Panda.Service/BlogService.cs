@@ -11,6 +11,7 @@ using Panda.Core.Contracts;
 using Panda.Core.Models.Data;
 using Panda.Core.Models.Request;
 using Panda.Core.Models.View;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace Panda.Service
 {
@@ -21,16 +22,18 @@ namespace Panda.Service
         private readonly IMediaStorageService _mediaStorageService;
         private readonly ISlugService _slugService;
         private readonly IEmailService _emailService;
+        private readonly IDataProtector _protector;
 
         public BlogService(IPandaDataProvider dataProvider, IMapper mapper, 
             IMediaStorageService mediaStorageService, ISlugService slugService, 
-            IEmailService emailService)
+            IEmailService emailService, IDataProtectionProvider dataProtectionProvider)
         {
             _dataProvider = dataProvider;
             _mapper = mapper;
             _mediaStorageService = mediaStorageService;
             _slugService = slugService;
             _emailService = emailService;
+            _protector = dataProtectionProvider.CreateProtector("Panda.BlogService");
         }
 
         public void DeletePost(string blogId, string postId)
@@ -150,13 +153,19 @@ namespace Panda.Service
         public SettingsViewModel GetBlogSettings()
         {
             var blog = _dataProvider.GetBlog();
+            if (!string.IsNullOrWhiteSpace(blog.SmtpPassword))
+            {
+                blog.SmtpPassword = _protector.Unprotect(blog.SmtpPassword);
+            }
             return _mapper.Map<SettingsViewModel>(blog);
         }
 
         public SettingsViewModel SaveBlogSettings(SettingsViewModel settings)
         {
+            var encryptedSmtpPassword = _protector.Protect(settings.SmtpPassword);
+
             _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName, settings.Description, settings.PostsPerPage,
-                settings.SmtpUsername, settings.SmtpPassword, settings.SmtpHost, settings.SmtpPort,
+                settings.SmtpUsername, encryptedSmtpPassword, settings.SmtpHost, settings.SmtpPort,
                 settings.EmailPrefix, settings.SmtpUseSsl, settings.SendCommentEmail);
             return GetBlogSettings();
         }

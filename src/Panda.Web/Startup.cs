@@ -29,6 +29,7 @@ namespace Panda.Web
         {
             services.AddMvc();
             services.AddAutoMapper();
+            services.AddDataProtection();
 
             #region EF / SqlServer
 
