@@ -55,6 +55,7 @@ namespace Panda.Web
             services.AddTransient<DbInitializer>();
             services.AddTransient<IMediaStorageService, FileSystemMediaStorageService>();
             services.AddTransient<ISlugService, SlugService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             #region MetaWeblog dependencies
 
