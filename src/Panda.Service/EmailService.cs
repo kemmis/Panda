@@ -7,16 +7,19 @@ using System.Threading.Tasks;
 using Panda.Core.Models.View;
 using Panda.Core.Contracts;
 using Panda.Core.Models.Request;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace Panda.Service
 {
     public class EmailService : IEmailService
     {
         private readonly IPandaDataProvider _dataProvider;
+        private readonly IDataProtector _protector;
 
-        public EmailService(IPandaDataProvider dataProvider)
+        public EmailService(IPandaDataProvider dataProvider, IDataProtectionProvider dataProtectionProvider)
         {
             _dataProvider = dataProvider;
+            _protector = dataProtectionProvider.CreateProtector("Panda.BlogService");
         }
 
         public async Task<bool> SendTestEmail(SettingsViewModel settings, string userId)
@@ -64,6 +67,11 @@ namespace Panda.Service
             var post = _dataProvider.GetPostById(request.PostId);
             var user = _dataProvider.GetUserById(post.UserId);
             var blog = _dataProvider.GetBlog();
+
+            if (!string.IsNullOrWhiteSpace(blog.SmtpPassword))
+            {
+                blog.SmtpPassword = _protector.Unprotect(blog.SmtpPassword);
+            }
 
             var response = true;
             try
