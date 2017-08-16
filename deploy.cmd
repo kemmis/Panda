@@ -64,18 +64,9 @@ SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 :: Deployment
 :: ----------
 
-:: Install Yarn
+:: 0. Install Yarn
 echo Verifying Yarn Install.
 call :ExecuteCmd npm install yarn -g
-
-:: Install Yarn packages
-echo Installing Yarn Packages.
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd yarn install --production
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
 
 echo Handling ASP.NET Core Web Application deployment.
 
