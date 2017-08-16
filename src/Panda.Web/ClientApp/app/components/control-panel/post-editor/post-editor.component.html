@@ -13,7 +13,7 @@
             <button md-raised-button (click)="save('Post Saved!')" [disabled]="!form.valid"><i class="fa fa-save"></i> Save</button>
             <button md-raised-button md-dialog-close><i class="fa fa-close"></i> Cancel</button>
 
-            <md-select placeholder="Categories" multiple="true" [(ngModel)]="post.categories" name="categories" >
+            <md-select placeholder="Categories" multiple="true" [(ngModel)]="post.categories" name="categories">
                 <md-option *ngFor="let c of allCategories" [value]="c">
                     {{c}}
                 </md-option>
@@ -22,3 +22,7 @@
 
     </div>
 </form>
+
+<div class="progress-container" *ngIf="saving">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+</div>
