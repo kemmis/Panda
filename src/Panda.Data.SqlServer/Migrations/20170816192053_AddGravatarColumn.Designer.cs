@@ -11,9 +11,10 @@ using System;
 namespace Panda.Data.SqlServer.Migrations
 {
     [DbContext(typeof(PandaDbContext))]
-    partial class PandaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170816192053_AddGravatarColumn")]
+    partial class AddGravatarColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

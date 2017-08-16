@@ -4,4 +4,5 @@ export class PostComment {
     createdDateTime: string;
     id: string;
     removed: boolean;
+    gravatar: string;
 }

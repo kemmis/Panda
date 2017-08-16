@@ -254,7 +254,7 @@ namespace Panda.Data.SqlServer
             return user;
         }
 
-        public Comment CreateComment(int postId, string authorName, string authorEmail, string text)
+        public Comment CreateComment(int postId, string authorName, string authorEmail, string text, string gravatarHash)
         {
             var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
             if (post != null)
@@ -266,7 +266,8 @@ namespace Panda.Data.SqlServer
                     AuthorName = authorName,
                     CreatedDateTime = DateTime.UtcNow,
                     Removed = false,
-                    Text = text
+                    Text = text,
+                    Gravatar = gravatarHash
                 };
                 _db.Comments.Add(comment);
                 _db.SaveChanges();
