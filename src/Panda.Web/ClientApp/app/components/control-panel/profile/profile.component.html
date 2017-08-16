@@ -18,7 +18,7 @@
             <br />
             <md-input-container>
                 <textarea name="about" mdInput placeholder="About" [(ngModel)]="settings.about"></textarea>
-            </md-input-container>           
+            </md-input-container>              
             <br>
             <md-dialog-actions>
                 <button md-raised-button (click)="save()" [disabled]="!profileForm.valid">Save</button>
@@ -26,4 +26,8 @@
             </md-dialog-actions>
         </form>
     </div>
+</div>
+
+<div class="progress-container" *ngIf="saving">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
 </div>

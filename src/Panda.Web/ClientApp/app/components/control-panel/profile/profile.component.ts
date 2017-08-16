@@ -25,19 +25,24 @@ export class ProfileComponent implements OnInit {
     @ViewChild("file") file: any;
 
     settings = new ProfileSettings();
+    saving:boolean = false;
 
     save() {
+        this.saving = true;
         this._profileService.saveProfileSettings(this.settings).subscribe((settings: ProfileSettings) => {
+            this.saving = false;
             this.settingsUpdated.emit(settings);
             this._dialog.close();
             this._snackBar.open("Profile settings saved.", "", { duration: 2000 });
         });
     }
 
-    uploadPhoto(event: any) {
+    uploadPhoto(event: any) {       
         let fileList: FileList = event.target.files;
         if (fileList.length > 0) {
+            this.saving = true;
             this._profileService.savePhoto(fileList[0]).subscribe((settings: ProfileSettings) => {
+                this.saving = false;
                 this.settings.profilePicture = settings.profilePicture;
                 this.file.nativeElement.value = "";
             });
@@ -45,7 +50,9 @@ export class ProfileComponent implements OnInit {
     }
 
     removePhoto() {
+        this.saving = true;
         this._profileService.removePhoto().subscribe((settings: ProfileSettings) => {
+            this.saving = false;
             this.settings.profilePicture = settings.profilePicture;
         });
     }
