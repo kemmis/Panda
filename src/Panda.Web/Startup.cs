@@ -57,6 +57,7 @@ namespace Panda.Web
             services.AddTransient<IMediaStorageService, FileSystemMediaStorageService>();
             services.AddTransient<ISlugService, SlugService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IGravatarService, GravatarService>();
 
             #region MetaWeblog dependencies
 

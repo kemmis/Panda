@@ -23,10 +23,12 @@ namespace Panda.Service
         private readonly ISlugService _slugService;
         private readonly IEmailService _emailService;
         private readonly IDataProtector _protector;
+        private readonly IGravatarService _gravatarService;
 
-        public BlogService(IPandaDataProvider dataProvider, IMapper mapper, 
-            IMediaStorageService mediaStorageService, ISlugService slugService, 
-            IEmailService emailService, IDataProtectionProvider dataProtectionProvider)
+        public BlogService(IPandaDataProvider dataProvider, IMapper mapper,
+            IMediaStorageService mediaStorageService, ISlugService slugService,
+            IEmailService emailService, IDataProtectionProvider dataProtectionProvider,
+            IGravatarService gravatarService)
         {
             _dataProvider = dataProvider;
             _mapper = mapper;
@@ -34,6 +36,7 @@ namespace Panda.Service
             _slugService = slugService;
             _emailService = emailService;
             _protector = dataProtectionProvider.CreateProtector("Panda.BlogService");
+            _gravatarService = gravatarService;
         }
 
         public void DeletePost(string blogId, string postId)
@@ -239,8 +242,10 @@ namespace Panda.Service
         public CommentViewModel SaveComment(CommentCreateRequest request)
         {
             var blog = _dataProvider.GetBlog();
+            var gravatarHash = _gravatarService.GetGravatarHash(request.AuthorEmail);
+            request.Text = request.Text.Replace("\n", "<br />");
             var comment =
-                _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text);
+                _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text, gravatarHash);
 
             if (blog.SendCommentEmail)
             {
@@ -306,6 +311,6 @@ namespace Panda.Service
                 };
             }
         }
-       
+
     }
 }

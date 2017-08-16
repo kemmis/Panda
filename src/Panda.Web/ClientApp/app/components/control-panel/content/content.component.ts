@@ -12,8 +12,13 @@ export class ContentComponent implements OnInit {
     constructor(private _contentService: ContentService) { }
     content: BlogContent = new BlogContent();
     @Output() editPost = new EventEmitter<string>();
+
+    loading:boolean = false;
+
     ngOnInit(): void {
+        this.loading = true;
         this._contentService.getContent().subscribe((content: BlogContent) => {
+            this.loading = false;
             this.content = content;
         });
     }

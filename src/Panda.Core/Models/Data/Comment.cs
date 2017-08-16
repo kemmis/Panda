@@ -11,7 +11,7 @@ namespace Panda.Core.Models.Data
         public DateTime CreatedDateTime { get; set; }
         public string AuthorName { get; set; }
         public string AuthorEmail { get; set; }
-
+        public string Gravatar { get; set; }
         public Post Post { get; set; }
     }
 }

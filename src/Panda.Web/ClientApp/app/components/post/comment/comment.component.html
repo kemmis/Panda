@@ -1,6 +1,6 @@
 <div class="pp-comment row">
     <div class="col-md-2 pp-avatar">
-        <i class="fa fa-user"></i>
+        <img src="https://www.gravatar.com/avatar/{{comment.gravatar}}?s=100" />
     </div>
     <div class="col-md-10">
         <div>
@@ -11,8 +11,7 @@
                 {{comment.createdDateTime}}
             </div>
         </div>
-        <div class="pp-comment-text">
-            {{comment.text}}
+        <div class="pp-comment-text"  [innerHtml]="comment.text">
         </div>
     </div>
 </div>

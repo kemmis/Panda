@@ -18,9 +18,11 @@ export class CommentFormComponent implements OnInit {
     saving: boolean = false;
 
     ngOnInit(): void {
+        var authorName = localStorage.getItem("comment-authorName");
+        var authorEmail = localStorage.getItem("comment-authorEmail");
         this.form = this._formBuilder.group({
-            authorName: ['', Validators.required],
-            authorEmail: ['', Validators.required],
+            authorName: [authorName, Validators.required],
+            authorEmail: [authorEmail, Validators.required],
             text: ['', Validators.required]
         });
     }
@@ -29,9 +31,11 @@ export class CommentFormComponent implements OnInit {
         var newComment = this.form.value;
         newComment.postId = this.postId;
         this.saving = true;
+        localStorage.setItem("comment-authorName", newComment.authorName);
+        localStorage.setItem("comment-authorEmail", newComment.authorEmail);
         this._commentService.saveComment(newComment).subscribe((comment: PostComment) => {
             this.saving = false;
-            this.form.reset();
+            this.form.patchValue({ text: "" });
             this.commentCreated.emit(comment);
         });
     }

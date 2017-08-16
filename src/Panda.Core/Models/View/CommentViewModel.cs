@@ -7,5 +7,6 @@
         public string CreatedDateTime { get; set; }
         public int Id { get; set; }
         public bool Removed { get; set; }
+        public string Gravatar { get; set; }
     }
 }

@@ -255,6 +255,8 @@ namespace Panda.Data.SqlServer.Migrations
 
                     b.Property<DateTime>("CreatedDateTime");
 
+                    b.Property<string>("Gravatar");
+
                     b.Property<int>("PostId");
 
                     b.Property<bool>("Removed");
