@@ -51,7 +51,7 @@ namespace Panda.Data.SqlServer
         {
             var totalPosts = _db.Posts.Where(p => !p.Deleted).Count(p => p.Published);
 
-            var posts = _db.Posts.Where(p => !p.Deleted)
+            var posts = _db.Posts.Where(p => !p.Deleted && p.Published)
                 .Include(p => p.User)
                 .Include(p => p.Comments)
                 .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
@@ -62,10 +62,10 @@ namespace Panda.Data.SqlServer
 
         public (IEnumerable<Post> posts, int totalPosts) GetPostsByCategorySlug(int pageSize, int pageIndex, string slug)
         {
-            var query = _db.Posts.Where(p => !p.Deleted)
+            var query = _db.Posts.Where(p => !p.Deleted && p.Published)
                 .Where(p => p.PostCategories.Any(pc => pc.Category.Slug.ToLower() == slug));
 
-            var totalPosts = query.Count(p => p.Published);
+            var totalPosts = query.Count();
             var posts = query.Include(p => p.User)
                 .Include(p => p.Comments)
                 .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
