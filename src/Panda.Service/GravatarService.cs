@@ -12,7 +12,7 @@ namespace Panda.Service
             using (System.Security.Cryptography.MD5 md5 =
                 System.Security.Cryptography.MD5.Create())
             {
-                byte[] retVal = md5.ComputeHash(Encoding.Unicode.GetBytes(email.Trim().ToLower()));
+                byte[] retVal = md5.ComputeHash(Encoding.UTF8.GetBytes(email.Trim().ToLower()));
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < retVal.Length; i++)
                 {
