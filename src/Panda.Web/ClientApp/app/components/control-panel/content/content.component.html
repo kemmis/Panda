@@ -6,3 +6,7 @@
     <category-content-list [categories]="content.categories"></category-content-list>
   </md-tab>
 </md-tab-group>
+
+<div class="progress-container" *ngIf="loading">
+  <md-progress-bar mode="indeterminate"></md-progress-bar>
+</div>
