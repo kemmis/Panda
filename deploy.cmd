@@ -66,7 +66,7 @@ SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
 
 :: Install Yarn
 echo Verifying Yarn Install.
-call :ExecuteCmd !NPM_CMD! install yarn -g
+call :ExecuteCmd npm install yarn -g
 
 :: Install Yarn packages
 echo Installing Yarn Packages.
