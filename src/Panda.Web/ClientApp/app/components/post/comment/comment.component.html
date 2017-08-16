@@ -11,8 +11,7 @@
                 {{comment.createdDateTime}}
             </div>
         </div>
-        <div class="pp-comment-text">
-            {{comment.text}}
+        <div class="pp-comment-text"  [innerHtml]="comment.text">
         </div>
     </div>
 </div>

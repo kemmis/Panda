@@ -243,6 +243,7 @@ namespace Panda.Service
         {
             var blog = _dataProvider.GetBlog();
             var gravatarHash = _gravatarService.GetGravatarHash(request.AuthorEmail);
+            request.Text = request.Text.Replace("\n", "<br />");
             var comment =
                 _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text, gravatarHash);
 
