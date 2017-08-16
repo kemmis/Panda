@@ -14,9 +14,12 @@ export class PasswordComponent {
         private _dialog: MdDialogRef<PasswordComponent>,
         private _snackBar: MdSnackBar) { }
 
+    saving:boolean = false;
     changeRequest: PasswordChangeRequest = new PasswordChangeRequest();
     save() {
+        this.saving = true;
         this._accountService.changePassword(this.changeRequest).subscribe((result: PasswordChangeResult) => {
+            this.saving = false;
             if (result.succeeded) {
                 this._dialog.close();
                 this._snackBar.open("Password Changed.", "", { duration: 2000 });
