@@ -28,9 +28,9 @@ export class TinyMceComponent implements AfterViewInit, OnDestroy {
             selector: '#' + this.elementId,
             height: tinyHeight,
             skin_url: '../tinymce/skins/lightgray',
-            plugins:['image','paste'],
+            plugins: ['image', 'paste', 'code', 'lists', 'link'],
             automatic_uploads: true,
-            images_upload_url:`${this.originUrl}api/upload/`,
+            images_upload_url: `${this.originUrl}api/upload/`,
             paste_data_images: true,
             setup: (editor: any) => {
                 this.editor = editor;
