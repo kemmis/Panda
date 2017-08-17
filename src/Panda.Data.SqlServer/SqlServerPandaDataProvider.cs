@@ -43,7 +43,7 @@ namespace Panda.Data.SqlServer
         public Post GetPostById(int postId)
         {
             return _db.Posts.Where(p => !p.Deleted)
-                .Include(p => p.User)
+                .Include(p => p.User).Include(p=>p.PostCategories).ThenInclude(pc=>pc.Category)
                 .FirstOrDefault(p => p.Id == postId);
         }
 
