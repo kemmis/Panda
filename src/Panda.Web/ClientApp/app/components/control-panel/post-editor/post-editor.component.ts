@@ -24,12 +24,12 @@ export class PostEditorComponent implements AfterViewInit {
     @ViewChild("tmce") tmce: TinyMceComponent;
 
     post: EditPost = new EditPost();
-    saving:boolean = false;
+    saving: boolean = false;
     allCategories: string[] = [];
 
     ngAfterViewInit(): void {
         this._categoryService.getCategories().subscribe((categories: BlogCategoryContent[]) => {
-            this.allCategories = _.map(categories, (c) => { return c.title; });
+            this.allCategories = _.map(categories, (c: BlogCategoryContent) => { return c.title; });
         });
 
         if (this.data.postId != "0") {
@@ -57,7 +57,7 @@ export class PostEditorComponent implements AfterViewInit {
         });
     }
 
-    publish() {       
+    publish() {
         this.post.published = true;
         this.save("Post Published!");
     }

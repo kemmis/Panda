@@ -15,8 +15,13 @@ If you're hosting on Azure, we recommend auto deploying your blog files from Git
 5. (Optional) If you happen to be deploying from a branch other than master, then you'll want to add the `SCM_USE_LIBGIT2SHARP_REPOSITORY` setting with a value of `0` (zero). This avoids a bug that currently exists with libgit2sharp. 
 6. Under "Deployment Options" in the Azure portal, configure the deployment source to use  your new fork of Panda on GitHub.
 
+### Problems & Solutions
 
+#### *Module not found: Error: Can't resolve './$$_gendir/app/app.module.ngfactory'* when running webpack
+There's a conflict with more recent versions of the `enhanced-resolve` package dependency. One solution is to 'pin' the version of `enhanced-resolve` to version `3.3.0`. More information [here](https://github.com/angular/angular-cli/issues/4551#issuecomment-322047088). As of this writing, `enhanced-resolve` should be pinned to this version in both the npm-shrinkwrap.json file and the yarn.lock file.
 
+#### Azure deploy fails with message *Thread was being aborted*.
+This happens when the deploy commands take too long to execute. You can resolve this by setting the `SCM_COMMAND_IDLE_TIMEOUT` app setting to `900` (900 seconds == 15 minutes) for your app in the Azure portal. More information [here](https://github.com/projectkudu/kudu/issues/2089#issuecomment-262499421).
 
 
 
