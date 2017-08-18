@@ -4,6 +4,7 @@
 @primary-text-color: #212121;
 @light-text-color: #fff;
 @gutter: 16px;
+
 html,
 body {
     font-family: Roboto, sans-serif;
@@ -31,12 +32,15 @@ md-sidenav-container.mat-sidenav-container {
 .pp-header {
     background-color: @secondary-color;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+
     .pp-header-container {
         padding: @gutter;
         color: @light-text-color;
+
         a {
             color: @light-text-color;
         }
+
         .pp-header-title,
         .pp-description {
             &,
@@ -45,15 +49,18 @@ md-sidenav-container.mat-sidenav-container {
                 display: inline-block;
             }
         }
+
         h1 {
             font-size: 1.4em;
             font-weight: 400;
         }
+
         h4 {
             font-size: 1em;
             margin-left: @gutter
         }
     }
+
     button {
         position: absolute;
         top: @gutter;
@@ -66,30 +73,37 @@ md-sidenav-container.mat-sidenav-container {
         background-color: @primary-color;
         padding: @gutter;
         box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+
         &,
         a {
             color: @light-text-color;
         }
     }
+
     .pp-meta-top {
         background-color: @tertiary-color;
         box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
     }
+
     .pp-post-content {
         padding: 2*@gutter 0;
     }
+
     .pp-post-datetime,
     .pp-comments-link,
     .pp-categories {
         display: inline-block;
     }
+
     .pp-post-datetime {
         padding: @gutter/4 @gutter @gutter/4 0;
     }
+
     .pp-comments-link,
     .pp-categories {
         padding: @gutter/4 @gutter;
     }
+
     .pp-comments-link {
         background-color: #81D4FA;
     }
@@ -102,6 +116,13 @@ md-sidenav-container.mat-sidenav-container {
         line-height: 32px;
         max-width: 940px;
     }
+
+    ul {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 32px;
+        max-width: 940px
+    }
 }
 
 .pp-meta-bottom-container {
@@ -110,13 +131,16 @@ md-sidenav-container.mat-sidenav-container {
     padding: @gutter;
     margin-bottom: @gutter;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
+
     .pp-post-display-name {
         font-size: 1.2em;
         color: @light-text-color;
     }
+
     .col-2 {
         padding: 0;
     }
+
     .pp-post-profile-picture {
         img {
             max-width: 100%;
@@ -129,28 +153,34 @@ md-sidenav-container.mat-sidenav-container {
     padding: @gutter;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .26);
     margin-bottom: @gutter;
+
     h3 {
         font-size: 1.2em;
         color: @secondary-color;
     }
+
     .pp-comment {
         border-top: 1px solid @secondary-color;
         margin: 0;
         padding: @gutter;
     }
+
     .pp-avatar {
         text-align: center;
         font-size: 80px;
     }
+
     .pp-comment-author {
         width: 50%;
         text-align: left;
         display: inline-block;
     }
+
     .pp-comment-datetime {
         width: 50%;
         float: right;
     }
+
     .pp-comment-text {
         margin: @gutter 0;
     }
@@ -161,8 +191,8 @@ md-sidenav-container.mat-sidenav-container {
         width: 100%;
     }
 
-    .pp-comment-form-text{
-        textarea{
+    .pp-comment-form-text {
+        textarea {
             height: 100px;
         }
     }
@@ -176,6 +206,7 @@ md-sidenav-container.mat-sidenav-container {
 .pp-pager-left,
 .pp-pager-right {
     background-color: @secondary-color;
+
     .mat-button-wrapper {
         color: @light-text-color;
     }
@@ -193,7 +224,7 @@ md-sidenav-container.mat-sidenav-container {
     margin-top: 2*@gutter;
 }
 
-.pp-footer{
+.pp-footer {
     background-color: @primary-color;
     color: @light-text-color;
     padding: @gutter 0;
