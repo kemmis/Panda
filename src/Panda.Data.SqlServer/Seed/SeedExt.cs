@@ -79,21 +79,48 @@ namespace Panda.Data.SqlServer.Seed
 
             await _context.Blogs.AddAsync(defaultBlog);
 
-            var posts = new Post[]
+            var pandaCategory = new Category
             {
+                Title = "Panda",
+                Slug = "panda"
+            };
+
+            await _context.Categories.AddAsync(pandaCategory);
+
+            var post =
                 new Post
                 {
                     Blog = defaultBlog,
-                    Slug="derp-derp-derp",
-                    Content="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    PublishDate= DateTime.Now,
-                    Title="Node Blows My Mind!",
+                    Slug = "welcome-to-panda",
+                    Content = @"<p>It looks like you got Panda up and running. Good job! Now it's time to make Panda your own.</p>
+                            <h3>Login and Change Your Password</h3>
+                            <p>First things first! Click on the Login button in the top-right corner of the screen. The default username is 'admin' and the default password is 'admin'. Use thoes credentials to login. You'll notice that after you login the button in the top-right corner of the screen now says 'Admin'. Clicking on that now opens the admin control panel. Change your password by clicking on the key icon towards the top of the control panel.</p>
+                            <h3>Give Your Blog a Name</h3>
+                            <p>Configuring Panda is easy. Give your blog a unique name by clicking on the ""Blog Settings"" button in the control panel. You can also give your blog a description. Both the name and description are displayed at the top of your blog, as well as in various other places on the blog. So make them good!</p>
+                            <h3>Give Yourself a Name</h3>
+                            <p>Now, you'll want to customize profile settings. Click on the profile icon towards the top of the control panel. Change the display name to something that identifies you as the blog author. The display name is used at the end of each post in the ""about the author"" section. You can also customize the ""about"" text and profile picture which are also both used in the ""about the author"" section. Finally, you'll want to update the email address in your profile. This email address is used for delivering notifications when people comments on your posts.It is not visible to the public.</p>
+                            <h3>Other Things to Consider</h3>
+                            <ul>
+                            <li>In order to get emails when people comment on your pots, you'll want to configure the email settings. These settings can be found under the 'Email' tab in the 'Blog Settings' section in the control panel.&nbsp;</li>
+                            <li>Panda is just a baby at this point. More features are coming soon! If you would like to help add features to Panda, get involved on our GitHub page, or tweet at<a href=""https://github.com/kemmis/Panda/issues"" target=""_blank"" rel=""noopener""> @PandaTheBlog</a>.</li>
+                            <li>Your feedback is important to us.If you have issues or feature request, please leave them<a href=""https://github.com/kemmis/Panda/issues"" target=""_blank"" rel=""noopener""> here</a>.</li>
+                            </ul>",
+                    PublishDate = DateTime.Now,
+                    Title = "Welcome to Panda",
                     Published = true,
                     UserId = adminUser.Id
-                }
+                };
+
+
+            await _context.Posts.AddAsync(post);
+
+            var postCat = new PostCategory
+            {
+                Category = pandaCategory,
+                Post = post
             };
 
-            await _context.Posts.AddRangeAsync(posts);
+            await _context.AddAsync(postCat);
 
             await _context.SaveChangesAsync();
         }
