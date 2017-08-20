@@ -1,9 +1,11 @@
 ﻿
-import { Component, OnInit, OnDestroy, Input, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, AfterViewChecked, EventEmitter, Output } from '@angular/core';
 import { Post } from "../../models/post";
 import { PostComment } from "../../models/post-comment";
 import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
+import { UserInfoService } from "../../services/user-info.service";
+import { EventService } from "../../services/event.service";
 
 @Component({
     selector: 'post',
@@ -11,7 +13,8 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class PostComponent implements AfterViewChecked {
 
-    constructor(private activatedRoute: ActivatedRoute) { }
+    constructor(private activatedRoute: ActivatedRoute, public _userInfoService: UserInfoService, private _events: EventService) { }
+
     @Input() post: Post;
     @Input() showComments: boolean = false;
     private scrollExecuted: boolean = false;
@@ -42,5 +45,9 @@ export class PostComponent implements AfterViewChecked {
 
     onCommentCreated(comment: PostComment) {
         this.post.comments.push(comment);
+    }
+
+    edit() {
+        this._events.editPost.emit(this.post);
     }
 }       

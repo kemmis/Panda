@@ -4,6 +4,9 @@
             <h1>
                 <a [routerLink]="['/post', post.slug]">{{post.title}}</a>
             </h1>
+            <div class="pp-admin-links" *ngIf="_userInfoService.isLoggedIn">
+                <a href="javascript:void(0)" (click)="edit()"><i class="fa fa-pencil"></i> Edit Post</a>
+            </div>
         </div>
     </div>
     <div class="pp-meta-top">

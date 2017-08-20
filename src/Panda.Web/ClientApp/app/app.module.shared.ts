@@ -30,6 +30,7 @@ import { TinyMceComponent } from "./components/control-panel/post-editor/tiny-mc
 import { PagerComponent } from "./components/pages/home/pager/pager.component";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
 import { UserInfoService } from "./services/user-info.service";
+import { EventService } from "./services/event.service";
 
 @NgModule({
     declarations: [
@@ -95,7 +96,7 @@ import { UserInfoService } from "./services/user-info.service";
         ProfileComponent,
         PostDeletedComponent,
         PostEditorComponent],
-    providers: [UserInfoService]
+    providers: [UserInfoService, EventService]
 })
 export class AppModuleShared {
 }

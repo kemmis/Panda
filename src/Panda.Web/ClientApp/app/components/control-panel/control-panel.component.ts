@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { LoginResponse } from "../../models/login-response";
 import { MdDialog } from "@angular/material";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -9,14 +9,21 @@ import { ProfileSettings } from "../../models/profile-settings";
 import { SettingsComponent } from "./settings/settings.component";
 import { PostEditorComponent } from "./post-editor/post-editor.component";
 import { Router } from "@angular/router";
+import { EventService } from "../../services/event.service";
+import { Post } from "../../models/post";
 
 @Component({
     selector: 'control-panel',
     templateUrl: './control-panel.component.html',
     styleUrls: ['./control-panel.component.less']
 })
-export class ControlPanelComponent {
-    constructor(private _dialog: MdDialog, private router: Router) { }
+export class ControlPanelComponent implements OnInit {
+    ngOnInit(): void {
+        this._events.editPost.subscribe((post: Post) => {
+            this.openEditorFor(post.id);
+        });
+    }
+    constructor(private _dialog: MdDialog, private router: Router, private _events: EventService) { }
     @Input() login: LoginResponse;
 
     @Output() logout: EventEmitter<void> = new EventEmitter();
