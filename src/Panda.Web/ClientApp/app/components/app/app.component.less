@@ -137,6 +137,15 @@ md-sidenav-container.mat-sidenav-container {
         border-top: 1px solid @secondary-color;
         margin: 0;
         padding: @gutter;
+        &.deleted {
+            background: lightgray;
+        }
+        .pp-deleted-msg {
+            color: @secondary-color;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 8px;
+        }
     }
     .pp-avatar {
         text-align: center;
@@ -154,15 +163,20 @@ md-sidenav-container.mat-sidenav-container {
     .pp-comment-text {
         margin: @gutter 0;
     }
+    .pp-comment-moderation{
+        button{
+            padding:8px;
+            line-height: 8px;
+        }
+    }
 }
 
 .pp-comment-form {
     md-input-container {
         width: 100%;
     }
-
-    .pp-comment-form-text{
-        textarea{
+    .pp-comment-form-text {
+        textarea {
             height: 100px;
         }
     }
@@ -193,7 +207,7 @@ md-sidenav-container.mat-sidenav-container {
     margin-top: 2*@gutter;
 }
 
-.pp-footer{
+.pp-footer {
     background-color: @primary-color;
     color: @light-text-color;
     padding: @gutter 0;

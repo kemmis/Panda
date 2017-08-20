@@ -43,7 +43,7 @@ namespace Panda.Data.SqlServer
         public Post GetPostById(int postId)
         {
             return _db.Posts.Where(p => !p.Deleted)
-                .Include(p => p.User).Include(p=>p.PostCategories).ThenInclude(pc=>pc.Category)
+                .Include(p => p.User).Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
                 .FirstOrDefault(p => p.Id == postId);
         }
 
@@ -158,7 +158,7 @@ namespace Panda.Data.SqlServer
             return _db.Blogs.FirstOrDefault();
         }
 
-        public Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername, 
+        public Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername,
             string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl, bool sendCommentEmail)
         {
             var blog = _db.Blogs.FirstOrDefault(b => b.Id == blogId);
@@ -274,6 +274,31 @@ namespace Panda.Data.SqlServer
                 return comment;
             }
             return null;
+        }
+
+        public void DeleteComment(int commentId)
+        {
+            var commentToDelete = _db.Comments.FirstOrDefault(c => c.Id == commentId);
+            if (commentToDelete != null)
+            {
+                commentToDelete.Deleted = true;
+                _db.SaveChanges();
+            }
+        }
+
+        public void UnDeleteComment(int commentId)
+        {
+            var commentToUnDelete = _db.Comments.FirstOrDefault(c => c.Id == commentId);
+            if (commentToUnDelete != null)
+            {
+                commentToUnDelete.Deleted = false;
+                _db.SaveChanges();
+            }
+        }
+
+        public Comment GetCommentById(int commentId)
+        {
+            return _db.Comments.FirstOrDefault(c => c.Id == commentId);
         }
 
         public void DeletePost(int postId)

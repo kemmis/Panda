@@ -255,6 +255,20 @@ namespace Panda.Service
             return _mapper.Map<CommentViewModel>(comment);
         }
 
+        public CommentViewModel DeleteComment(int commentId)
+        {
+            _dataProvider.DeleteComment(commentId);
+            var comment = _dataProvider.GetCommentById(commentId);
+            return _mapper.Map<CommentViewModel>(comment);
+        }
+
+        public CommentViewModel UnDeleteComment(int commentId)
+        {
+            _dataProvider.UnDeleteComment(commentId);
+            var comment = _dataProvider.GetCommentById(commentId);
+            return _mapper.Map<CommentViewModel>(comment);
+        }
+
         public HomeViewModel GetHomeData()
         {
             var blog = _dataProvider.GetBlog();

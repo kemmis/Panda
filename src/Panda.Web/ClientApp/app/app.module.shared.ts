@@ -29,6 +29,7 @@ import { PostEditorComponent } from "./components/control-panel/post-editor/post
 import { TinyMceComponent } from "./components/control-panel/post-editor/tiny-mce-component";
 import { PagerComponent } from "./components/pages/home/pager/pager.component";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
+import { UserInfoService } from "./services/user-info.service";
 
 @NgModule({
     declarations: [
@@ -93,7 +94,8 @@ import { NotFoundComponent } from "./components/pages/not-found/not-found.compon
         PasswordComponent,
         ProfileComponent,
         PostDeletedComponent,
-        PostEditorComponent]
+        PostEditorComponent],
+    providers: [UserInfoService]
 })
 export class AppModuleShared {
 }

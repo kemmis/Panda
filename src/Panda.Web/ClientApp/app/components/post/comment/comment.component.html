@@ -1,4 +1,5 @@
-<div class="pp-comment row">
+<div class="pp-comment row" [class.deleted]="comment.deleted">
+    <div class="pp-deleted-msg col-md-12" *ngIf="comment.deleted">**Deleted**</div>
     <div class="col-md-2 pp-avatar">
         <img src="https://www.gravatar.com/avatar/{{comment.gravatar}}?s=100" />
     </div>
@@ -11,7 +12,11 @@
                 {{comment.createdDateTime}}
             </div>
         </div>
-        <div class="pp-comment-text"  [innerHtml]="comment.text">
+        <div class="pp-comment-text" [innerHtml]="comment.text">
+        </div>
+        <div class="pp-comment-moderation" *ngIf="_userInfoService.isLoggedIn">
+            <button md-raised-button (click)="delete()" *ngIf="!comment.deleted">Delete Commment</button>
+            <button md-raised-button (click)="unDelete()" *ngIf="comment.deleted">Restore Comment</button>
         </div>
     </div>
 </div>

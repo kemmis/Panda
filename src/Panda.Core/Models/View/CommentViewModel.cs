@@ -8,5 +8,6 @@
         public int Id { get; set; }
         public bool Removed { get; set; }
         public string Gravatar { get; set; }
+        public bool Deleted { get; set; }
     }
 }

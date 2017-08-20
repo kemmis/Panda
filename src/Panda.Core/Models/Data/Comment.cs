@@ -12,6 +12,7 @@ namespace Panda.Core.Models.Data
         public string AuthorName { get; set; }
         public string AuthorEmail { get; set; }
         public string Gravatar { get; set; }
+        public bool Deleted { get; set; }
         public Post Post { get; set; }
     }
 }

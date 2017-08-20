@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Panda.Core.Contracts;
 using Panda.Core.Models.Request;
 using Panda.Core.Models.View;
@@ -21,6 +22,22 @@ namespace Panda.Web.Controllers
         public CommentViewModel Save([FromBody]CommentCreateRequest request)
         {
             return _blogService.SaveComment(request);
+        }
+
+        [Authorize]
+        [Route("Delete")]
+        [HttpGet]
+        public CommentViewModel Delete(int commentId)
+        {
+            return _blogService.DeleteComment(commentId);
+        }
+
+        [Authorize]
+        [Route("UnDelete")]
+        [HttpGet]
+        public CommentViewModel UnDelete(int commentId)
+        {
+            return _blogService.UnDeleteComment(commentId);
         }
     }
 }

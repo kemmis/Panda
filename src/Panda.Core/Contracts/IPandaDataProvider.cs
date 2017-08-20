@@ -35,5 +35,8 @@ namespace Panda.Core.Contracts
         void SaveProfilePicture(string userId, string profilePicture);
         void RemoveProfilePhoto(string userId);
         List<Comment> GetRecentComments();
+        void DeleteComment(int commentId);
+        void UnDeleteComment(int commentId);
+        Comment GetCommentById(int commentId);
     }
 }
