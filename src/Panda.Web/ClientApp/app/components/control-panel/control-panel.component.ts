@@ -81,7 +81,7 @@ export class ControlPanelComponent implements OnInit {
             data: { postId: postId }
         });
         editorDialog.componentInstance.navigate.subscribe((slug: string) => {
-            editorDialog.close();
+            this._dialog.closeAll();
             this.closeSidenav.emit();
             this.router.navigate(['/post', slug]);
         });
