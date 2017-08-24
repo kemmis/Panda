@@ -78,7 +78,8 @@ export class ControlPanelComponent implements OnInit {
         var editorDialog = this._dialog.open(PostEditorComponent, {
             width: window.innerWidth - 200 + "px",
             height: window.innerHeight - 200 + "px",
-            data: { postId: postId }
+            data: { postId: postId },
+            disableClose: true
         });
         editorDialog.componentInstance.navigate.subscribe((slug: string) => {
             this._dialog.closeAll();
