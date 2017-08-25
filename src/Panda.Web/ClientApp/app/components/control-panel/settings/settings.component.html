@@ -36,6 +36,15 @@
                 <br/>
                 <button md-raised-button class="pp-send-email-btn" (click)="sendTestEmail()" [disabled]="saving">Send Test Email</button>
             </md-tab>
+            <md-tab label="reCaptcha">
+                <md-checkbox name="useReCaptcha" #useReCaptcha [(ngModel)]="settings.useReCaptcha">Use Google reCaptcha</md-checkbox>
+                <md-input-container>
+                    <input name="captchaKey" mdInput placeholder="Site Key" [(ngModel)]="settings.captchaKey" [disabled]="!useReCaptcha.checked">
+                </md-input-container>
+                <md-input-container>
+                    <input name="captchaSecret" mdInput placeholder="Site Secret" [(ngModel)]="settings.captchaSecret" [disabled]="!useReCaptcha.checked">
+                </md-input-container>
+            </md-tab>
         </md-tab-group>
     </form>
     <br />

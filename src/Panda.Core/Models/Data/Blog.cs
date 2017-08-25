@@ -15,6 +15,9 @@ namespace Panda.Core.Models.Data
         public string EmailPrefix { get; set; }
         public bool SmtpUseSsl { get; set; }
         public bool SendCommentEmail { get; set; }
+        public bool useReCaptcha { get; set; }
+        public string captchaKey { get; set; }
+        public string captchaSecret { get; set; }
         public List<BlogApplicationUser> BlogApplicationUsers { get; set; } = new List<BlogApplicationUser>();
         public List<Post> Posts { get; set; }
     }

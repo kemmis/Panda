@@ -159,7 +159,8 @@ namespace Panda.Data.SqlServer
         }
 
         public Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername,
-            string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl, bool sendCommentEmail)
+            string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl, bool sendCommentEmail,
+            bool useReCaptcha, string captchaKey, string captchaSecret)
         {
             var blog = _db.Blogs.FirstOrDefault(b => b.Id == blogId);
             if (blog != null)
@@ -174,6 +175,9 @@ namespace Panda.Data.SqlServer
                 blog.EmailPrefix = emailPrefix;
                 blog.SmtpUseSsl = smtpUseSsl;
                 blog.SendCommentEmail = sendCommentEmail;
+                blog.useReCaptcha = useReCaptcha;
+                blog.captchaKey = captchaKey;
+                blog.captchaSecret = captchaSecret;
 
                 _db.SaveChanges();
             }

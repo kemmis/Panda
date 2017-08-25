@@ -31,7 +31,7 @@ export class ControlPanelComponent implements OnInit {
 
     openSettings() {
         this._dialog.open(SettingsComponent, {
-            width: "400px"
+            width: "600px"
         });
     }
 

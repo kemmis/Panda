@@ -169,7 +169,8 @@ namespace Panda.Service
 
             _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName, settings.Description, settings.PostsPerPage,
                 settings.SmtpUsername, encryptedSmtpPassword, settings.SmtpHost, settings.SmtpPort,
-                settings.EmailPrefix, settings.SmtpUseSsl, settings.SendCommentEmail);
+                settings.EmailPrefix, settings.SmtpUseSsl, settings.SendCommentEmail, settings.UseReCaptcha,
+                settings.CaptchaKey, settings.CaptchaSecret);
             return GetBlogSettings();
         }
 

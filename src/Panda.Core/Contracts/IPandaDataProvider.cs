@@ -19,7 +19,7 @@ namespace Panda.Core.Contracts
 
         Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername,
             string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl,
-            bool sendCommentEmail);
+            bool sendCommentEmail, bool useReCaptcha, string captchaKey, string captchaSecret);
         int GetNumPublishedPosts();
         int GetNumDrafts();
         IEnumerable<Post> GetPosts();
