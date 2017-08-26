@@ -18,5 +18,5 @@ export class Post {
     publishDate: string;
     categories: PostCategory[];
     useReCaptcha: boolean;
-    reCaptchaKey: string;
+    captchaKey: string;
 }

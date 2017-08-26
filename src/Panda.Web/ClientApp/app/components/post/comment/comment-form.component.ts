@@ -12,11 +12,24 @@ export class CommentFormComponent implements OnInit {
 
     constructor(private _commentService: CommentService,
         private _formBuilder: FormBuilder) {
-        (<any>window).verifyCallback = this.verifyCallback.bind(this);
+        if (typeof window !== 'undefined') {
+            if (this.useReCaptcha) {
+                (<any>window).verifyCallback = this.verifyCallback.bind(this);
+            }
+        }
     }
+
     form: FormGroup;
     @Input() postId: string;
-    @Input() useReCaptcha: boolean;
+
+    @Input() set useReCaptcha(value: boolean) {
+        if (typeof window !== 'undefined') {
+            if (value) {
+                this.displayRecaptcha();
+            }
+        }
+    }
+
     @Input() reCaptchaKey: string;
     @Output() commentCreated = new EventEmitter<PostComment>();
     saving: boolean = false;
@@ -35,8 +48,6 @@ export class CommentFormComponent implements OnInit {
             authorEmail: [authorEmail, Validators.required],
             text: ['', Validators.required]
         });
-
-        this.displayRecaptcha();
     }
 
     save() {

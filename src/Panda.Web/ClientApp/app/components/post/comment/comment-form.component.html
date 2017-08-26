@@ -17,7 +17,7 @@
                     <textarea mdInput name="text" placeholder="Comment" formControlName="text"></textarea>
                 </md-input-container>
             </div>
-            <div class="g-recaptcha" data-callback="verifyCallback" data-sitekey="6LftGi4UAAAAAF84xUV1zWoVOeFnhJMZxGLplbxL"></div>
+            <div class="g-recaptcha" data-callback="verifyCallback" [attr.data-sitekey]="reCaptchaKey"></div>
             <div class="pp-comment-form-save">
                 <button md-raised-button (click)="save()">Save Comment</button>
             </div>

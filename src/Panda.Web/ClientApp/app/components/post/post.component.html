@@ -44,6 +44,6 @@
     </div>
     <div class="container pp-comment-container" *ngIf="showComments">
         <comment-list [comments]="post.comments"></comment-list>
-        <comment-form [postId]="post.id" [useReCaptcha]="post.useReCaptcha" [reCaptchaKey]="post.reCaptchaKey" (commentCreated)="onCommentCreated($event)"></comment-form>
+        <comment-form [postId]="post.id" [useReCaptcha]="post.useReCaptcha" [reCaptchaKey]="post.captchaKey" (commentCreated)="onCommentCreated($event)"></comment-form>
     </div>
 </div>
