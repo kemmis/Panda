@@ -211,11 +211,11 @@ namespace Panda.Data.SqlServer.Migrations
 
                     b.Property<string>("SmtpUsername");
 
-                    b.Property<string>("captchaKey");
+                    b.Property<string>("CaptchaKey");
 
-                    b.Property<string>("captchaSecret");
+                    b.Property<string>("CaptchaSecret");
 
-                    b.Property<bool>("useReCaptcha");
+                    b.Property<bool>("UseReCaptcha");
 
                     b.HasKey("Id");
 

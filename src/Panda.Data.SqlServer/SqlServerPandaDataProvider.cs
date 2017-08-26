@@ -35,6 +35,7 @@ namespace Panda.Data.SqlServer
         {
             return _db.Posts.Where(p => !p.Deleted)
                 .Include(p => p.User)
+                .Include(p => p.Blog)
                 .Include(p => p.Comments)
                 .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
                 .FirstOrDefault(p => p.Slug == slug);
@@ -175,9 +176,9 @@ namespace Panda.Data.SqlServer
                 blog.EmailPrefix = emailPrefix;
                 blog.SmtpUseSsl = smtpUseSsl;
                 blog.SendCommentEmail = sendCommentEmail;
-                blog.useReCaptcha = useReCaptcha;
-                blog.captchaKey = captchaKey;
-                blog.captchaSecret = captchaSecret;
+                blog.UseReCaptcha = useReCaptcha;
+                blog.CaptchaKey = captchaKey;
+                blog.CaptchaSecret = captchaSecret;
 
                 _db.SaveChanges();
             }

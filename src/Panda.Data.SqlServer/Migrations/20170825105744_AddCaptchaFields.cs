@@ -9,19 +9,19 @@ namespace Panda.Data.SqlServer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "captchaKey",
+                name: "CaptchaKey",
                 table: "Blogs",
                 type: "nvarchar(max)",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
-                name: "captchaSecret",
+                name: "CaptchaSecret",
                 table: "Blogs",
                 type: "nvarchar(max)",
                 nullable: true);
 
             migrationBuilder.AddColumn<bool>(
-                name: "useReCaptcha",
+                name: "UseReCaptcha",
                 table: "Blogs",
                 type: "bit",
                 nullable: false,
@@ -31,15 +31,15 @@ namespace Panda.Data.SqlServer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "captchaKey",
+                name: "CaptchaKey",
                 table: "Blogs");
 
             migrationBuilder.DropColumn(
-                name: "captchaSecret",
+                name: "CaptchaSecret",
                 table: "Blogs");
 
             migrationBuilder.DropColumn(
-                name: "useReCaptcha",
+                name: "UseReCaptcha",
                 table: "Blogs");
         }
     }

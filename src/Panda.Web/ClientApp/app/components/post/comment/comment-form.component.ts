@@ -11,11 +11,17 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class CommentFormComponent implements OnInit {
 
     constructor(private _commentService: CommentService,
-        private _formBuilder: FormBuilder) { }
+        private _formBuilder: FormBuilder) {
+        (<any>window).verifyCallback = this.verifyCallback.bind(this);
+    }
     form: FormGroup;
     @Input() postId: string;
+    @Input() useReCaptcha: boolean;
+    @Input() reCaptchaKey: string;
     @Output() commentCreated = new EventEmitter<PostComment>();
     saving: boolean = false;
+    recaptchaToken: string = "";
+    recaptchaCompleted: boolean = false;
 
     ngOnInit(): void {
         var authorName: any = null;
@@ -29,11 +35,14 @@ export class CommentFormComponent implements OnInit {
             authorEmail: [authorEmail, Validators.required],
             text: ['', Validators.required]
         });
+
+        this.displayRecaptcha();
     }
 
     save() {
         var newComment = this.form.value;
         newComment.postId = this.postId;
+        newComment.reCaptchaToken = this.recaptchaToken;
         this.saving = true;
         if (localStorage) {
             localStorage.setItem("comment-authorName", newComment.authorName);
@@ -44,5 +53,20 @@ export class CommentFormComponent implements OnInit {
             this.form.patchValue({ text: "" });
             this.commentCreated.emit(comment);
         });
+    }
+
+    displayRecaptcha() {
+        var doc = <HTMLDivElement>document.getElementById('comment-form');
+        var script = document.createElement('script');
+        script.innerHTML = '';
+        script.src = 'https://www.google.com/recaptcha/api.js';
+        script.async = true;
+        script.defer = true;
+        doc.appendChild(script);
+    }
+
+    verifyCallback(response: any) {
+        this.recaptchaCompleted = true;
+        this.recaptchaToken = response;
     }
 }

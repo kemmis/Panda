@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Panda.Core.Contracts;
 using Panda.Core.Models.Request;
 using Panda.Core.Models.View;
+using System.Threading.Tasks;
 
 namespace Panda.Web.Controllers
 {
@@ -19,9 +20,9 @@ namespace Panda.Web.Controllers
 
         [Route("Save")]
         [HttpPost]
-        public CommentViewModel Save([FromBody]CommentCreateRequest request)
+        public async Task<CommentViewModel> Save([FromBody]CommentCreateRequest request)
         {
-            return _blogService.SaveComment(request);
+            return await _blogService.SaveComment(request);
         }
 
         [Authorize]

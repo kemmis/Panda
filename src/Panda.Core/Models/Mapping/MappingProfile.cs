@@ -16,7 +16,9 @@ namespace Panda.Core.Models.Mapping
                     opts => opts.MapFrom(src => src.PostCategories.Select(pc => pc.Category)))
                 .ForMember(dest => dest.UserAbout, opts => opts.MapFrom(src => src.User.About))
                 .ForMember(dest => dest.ProfilePicture, opts => opts.MapFrom(src => src.User.ProfilePicture))
-                .ForMember(dest => dest.Comments, opts => opts.MapFrom(src => src.Comments.Where(c => !c.Deleted)));
+                .ForMember(dest => dest.Comments, opts => opts.MapFrom(src => src.Comments.Where(c => !c.Deleted)))
+                .ForMember(dest => dest.UseReCaptcha, opts => opts.MapFrom(src => src.Blog.UseReCaptcha))
+                .ForMember(dest => dest.CaptchaKey, opts => opts.MapFrom(src => src.Blog.CaptchaKey));
             CreateMap<ApplicationUser, ProfileSettingsViewModel>();
             CreateMap<Blog, SettingsViewModel>()
                 .ForMember(dest => dest.BlogName, opts => opts.MapFrom(src => src.Name))

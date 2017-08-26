@@ -31,7 +31,7 @@ namespace Panda.Core.Contracts
         void DeleteCategory(int categoryId);
         ProfileSettingsViewModel GetProfileSettings(string userId);
         ProfileSettingsViewModel UpdateProfileSettings(string userId, ProfileSettingsUpdateRequest request);
-        CommentViewModel SaveComment(CommentCreateRequest request);
+        Task<CommentViewModel> SaveComment(CommentCreateRequest request);
         HomeViewModel GetHomeData();
         void DeletePost(int postId);
         void UnDeletePost(int postId);

@@ -18,6 +18,7 @@ using Panda.Core.Models.Data;
 using Panda.Data.SqlServer;
 using Panda.Data.SqlServer.Seed;
 using Panda.Service;
+using System.Net.Http;
 
 namespace Panda.Web
 {
@@ -67,6 +68,8 @@ namespace Panda.Web
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IGravatarService, GravatarService>();
             services.AddTransient<IHtmlProcessor, HtmlProcessor>();
+            services.AddTransient<HttpClient>();
+            services.AddTransient<IReCaptchaValidator, ReCaptchaValidator>();
 
             #region MetaWeblog dependencies
 
