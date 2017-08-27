@@ -34,8 +34,7 @@
                         <div class="pp-post-display-name">
                             About {{post.userDisplayName}}
                         </div>
-                        <div class="pp-post-author-description">
-                            {{post.userAbout}}
+                        <div class="pp-post-author-description" [innerHtml]="post.userAbout">
                         </div>
                     </div>
                 </div>

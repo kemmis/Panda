@@ -31,6 +31,7 @@ import { PagerComponent } from "./components/pages/home/pager/pager.component";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
 import { UserInfoService } from "./services/user-info.service";
 import { EventService } from "./services/event.service";
+import { TinyMceProfileComponent } from './components/control-panel/profile/tiny-mce-component';
 
 @NgModule({
     declarations: [
@@ -55,6 +56,7 @@ import { EventService } from "./services/event.service";
         CategoryPageComponent,
         PostEditorComponent,
         TinyMceComponent,
+        TinyMceProfileComponent,
         PagerComponent,
         NotFoundComponent
     ],

@@ -1,7 +1,8 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output, ViewChild, AfterViewInit } from "@angular/core";
 import { ProfileService } from "../../../services/profile.service";
 import { ProfileSettings } from "../../../models/profile-settings";
 import { MdDialogRef, MdSnackBar } from "@angular/material";
+import { TinyMceProfileComponent } from "./tiny-mce-component";
 
 @Component({
     selector: 'profile',
@@ -9,11 +10,12 @@ import { MdDialogRef, MdSnackBar } from "@angular/material";
     styleUrls: ['./profile.component.less'],
     providers: [ProfileService]
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements AfterViewInit {
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this._profileService.getProfileSettings().subscribe((settings: ProfileSettings) => {
             this.settings = settings;
+            this.tmce.content = settings.about;
         });
     }
 
@@ -23,12 +25,15 @@ export class ProfileComponent implements OnInit {
 
     @Output() settingsUpdated = new EventEmitter<ProfileSettings>();
     @ViewChild("file") file: any;
+    @ViewChild("tmce") tmce: TinyMceProfileComponent;
 
     settings = new ProfileSettings();
     saving:boolean = false;
 
     save() {
         this.saving = true;
+        this.settings.about = this.tmce.content;
+
         this._profileService.saveProfileSettings(this.settings).subscribe((settings: ProfileSettings) => {
             this.saving = false;
             this.settingsUpdated.emit(settings);
