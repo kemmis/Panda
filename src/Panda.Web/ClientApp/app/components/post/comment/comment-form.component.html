@@ -4,23 +4,23 @@
         <form [formGroup]="form">
             <div class="pp-comment-form-name">
                 <md-input-container>
-                    <input mdInput name="name" placeholder="Name" formControlName="authorName">
+                    <input mdInput name="name" #name placeholder="Name" formControlName="authorName">
                 </md-input-container>
             </div>
             <div class="pp-comment-form-email">
                 <md-input-container>
-                    <input mdInput name="email" placeholder="Email" formControlName="authorEmail">
+                    <input mdInput name="email" #email placeholder="Email" formControlName="authorEmail">
                 </md-input-container>
             </div>
             <div class="pp-comment-form-text">
                 <md-input-container>
-                    <textarea mdInput name="text" placeholder="Comment" formControlName="text"></textarea>
+                    <textarea mdInput name="text" #text placeholder="Comment" formControlName="text"></textarea>
                 </md-input-container>
             </div>
             <div class="g-recaptcha" data-callback="verifyCallback" [attr.data-sitekey]="reCaptchaKey"></div>
             <div class="pp-comment-form-save">
-                <button md-raised-button (click)="save()" [disabled]="(_userReCaptcha && !recaptchaCompleted)">Save Comment</button>
+                <button md-raised-button (click)="save()" [disabled]="(_userReCaptcha && !recaptchaCompleted) || !form.valid">Save Comment</button>
             </div>
         </form>
     </div>
-</div>
+</div>  
