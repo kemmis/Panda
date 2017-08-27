@@ -35,6 +35,8 @@ export class CommentFormComponent implements OnInit {
     recaptchaToken: string = "";
     recaptchaCompleted: boolean = false;
 
+
+
     ngOnInit(): void {
         var authorName: any = null;
         var authorEmail: any = null;
@@ -63,6 +65,10 @@ export class CommentFormComponent implements OnInit {
             this.form.patchValue({ text: "" });
             if (this._userReCaptcha) {
                 grecaptcha.reset();
+                this._zone.run(() => {
+                    this.recaptchaCompleted = false;
+                    this.recaptchaToken = "";
+                });
             }
             this.commentCreated.emit(comment);
         });
@@ -80,7 +86,9 @@ export class CommentFormComponent implements OnInit {
     }
 
     verifyCallback(response: any) {
-        this.recaptchaCompleted = true;
-        this.recaptchaToken = response;
+        this._zone.run(() => {
+            this.recaptchaCompleted = true;
+            this.recaptchaToken = response;
+        });
     }
 }
