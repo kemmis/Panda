@@ -1,4 +1,4 @@
-<div class="pp-comment row" [class.deleted]="comment.deleted">
+<div class="pp-comment row" [class.deleted]="comment.deleted" [class.admin]="comment.fromAdmin">
     <div class="pp-deleted-msg col-md-12" *ngIf="comment.deleted">**Deleted**</div>
     <div class="col-md-2 pp-avatar">
         <img src="https://www.gravatar.com/avatar/{{comment.gravatar}}?s=100" />

@@ -9,5 +9,6 @@
         public bool Removed { get; set; }
         public string Gravatar { get; set; }
         public bool Deleted { get; set; }
+        public bool FromAdmin { get; set; }
     }
 }

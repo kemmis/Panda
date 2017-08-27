@@ -6,4 +6,5 @@ export class PostComment {
     removed: boolean;
     gravatar: string;
     deleted: boolean;
+    fromAdmin: boolean;
 }

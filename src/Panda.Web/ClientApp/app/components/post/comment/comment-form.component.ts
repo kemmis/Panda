@@ -3,6 +3,8 @@ import { CommentService } from "../../../services/comment.service";
 import { CommentSaveRequest } from "../../../models/comment-save-request";
 import { PostComment } from "../../../models/post-comment";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UserInfoService } from '../../../services/user-info.service';
+import { LoginResponse } from '../../../models/login-response';
 
 declare var grecaptcha: any;
 
@@ -13,7 +15,7 @@ declare var grecaptcha: any;
 export class CommentFormComponent implements OnInit {
 
     constructor(private _commentService: CommentService,
-        private _formBuilder: FormBuilder, private _zone: NgZone) {
+        private _formBuilder: FormBuilder, private _zone: NgZone, private _userInfoService: UserInfoService) {
     }
 
     form: FormGroup;
@@ -49,6 +51,33 @@ export class CommentFormComponent implements OnInit {
             authorEmail: [authorEmail, Validators.required],
             text: ['', Validators.required]
         });
+        if (this._userInfoService.isLoggedIn) {
+            this.loadAdminInfo();
+        }
+        this._userInfoService.userLogin.subscribe(() => {
+            this.loadAdminInfo();
+        });
+        this._userInfoService.userLogOut.subscribe(() => {
+            this.clearAdminInfo();
+        });
+    }
+
+    loadAdminInfo(): void {
+        let login = this._userInfoService.login;
+
+        this.form.patchValue({
+            authorName: login.displayName,
+            authorEmail: login.email
+        });
+    }
+
+    clearAdminInfo(): void {
+        let login = this._userInfoService.login;
+
+        this.form.patchValue({
+            authorName: '',
+            authorEmail: ''
+        });
     }
 
     save() {
@@ -56,10 +85,14 @@ export class CommentFormComponent implements OnInit {
         newComment.postId = this.postId;
         newComment.reCaptchaToken = this.recaptchaToken;
         this.saving = true;
-        if (localStorage) {
-            localStorage.setItem("comment-authorName", newComment.authorName);
-            localStorage.setItem("comment-authorEmail", newComment.authorEmail);
+        
+        if (!this._userInfoService.isLoggedIn) {
+            if (localStorage) {
+                localStorage.setItem("comment-authorName", newComment.authorName);
+                localStorage.setItem("comment-authorEmail", newComment.authorEmail);
+            }
         }
+
         this._commentService.saveComment(newComment).subscribe((comment: PostComment) => {
             this.saving = false;
             this.form.patchValue({ text: "" });

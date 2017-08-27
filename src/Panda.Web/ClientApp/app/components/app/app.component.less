@@ -3,6 +3,7 @@
 @tertiary-color: #E3F2FD;
 @primary-text-color: #212121;
 @light-text-color: #fff;
+@alt-tertiary-color: #81D4FA;
 @gutter: 16px;
 html,
 body {
@@ -91,7 +92,7 @@ md-sidenav-container.mat-sidenav-container {
         padding: @gutter/4 @gutter;
     }
     .pp-comments-link {
-        background-color: #81D4FA;
+        background-color: @alt-tertiary-color;
     }
 }
 
@@ -133,6 +134,9 @@ md-sidenav-container.mat-sidenav-container {
         font-size: 1.2em;
         color: @secondary-color;
     }
+    .pp-comment-list {
+        margin-bottom: @gutter;
+    }
     .pp-comment {
         border-top: 1px solid @secondary-color;
         margin: 0;
@@ -145,6 +149,9 @@ md-sidenav-container.mat-sidenav-container {
             font-weight: bold;
             text-transform: uppercase;
             padding: 8px;
+        }
+        &.admin {
+            background: @alt-tertiary-color;
         }
     }
     .pp-avatar {

@@ -242,7 +242,7 @@ namespace Panda.Service
             return _mapper.Map<ProfileSettingsViewModel>(user);
         }
 
-        public async Task<CommentViewModel> SaveComment(CommentCreateRequest request)
+        public async Task<CommentViewModel> SaveComment(CommentCreateRequest request, bool isAdmin)
         {
             var blog = _dataProvider.GetBlog();
 
@@ -260,7 +260,7 @@ namespace Panda.Service
             var gravatarHash = _gravatarService.GetGravatarHash(request.AuthorEmail);
             request.Text = request.Text.Replace("\n", "<br />");
             var comment =
-                _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text, gravatarHash);
+                _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text, gravatarHash, isAdmin);
 
             if (blog.SendCommentEmail)
             {
