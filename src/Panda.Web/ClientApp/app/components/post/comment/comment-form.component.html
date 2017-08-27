@@ -9,7 +9,7 @@
             </div>
             <div class="pp-comment-form-email">
                 <md-input-container>
-                    <input mdInput name="email" #email placeholder="Email" formControlName="authorEmail">
+                    <input type="email" mdInput name="email" #email placeholder="Email" formControlName="authorEmail" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
                 </md-input-container>
             </div>
             <div class="pp-comment-form-text">
