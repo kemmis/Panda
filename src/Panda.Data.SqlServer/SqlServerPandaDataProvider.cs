@@ -35,6 +35,7 @@ namespace Panda.Data.SqlServer
         {
             return _db.Posts.Where(p => !p.Deleted)
                 .Include(p => p.User)
+                .Include(p => p.Blog)
                 .Include(p => p.Comments)
                 .Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
                 .FirstOrDefault(p => p.Slug == slug);
@@ -43,7 +44,7 @@ namespace Panda.Data.SqlServer
         public Post GetPostById(int postId)
         {
             return _db.Posts.Where(p => !p.Deleted)
-                .Include(p => p.User).Include(p=>p.PostCategories).ThenInclude(pc=>pc.Category)
+                .Include(p => p.User).Include(p => p.PostCategories).ThenInclude(pc => pc.Category)
                 .FirstOrDefault(p => p.Id == postId);
         }
 
@@ -158,8 +159,9 @@ namespace Panda.Data.SqlServer
             return _db.Blogs.FirstOrDefault();
         }
 
-        public Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername, 
-            string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl, bool sendCommentEmail)
+        public Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername,
+            string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl, bool sendCommentEmail,
+            bool useReCaptcha, string captchaKey, string captchaSecret)
         {
             var blog = _db.Blogs.FirstOrDefault(b => b.Id == blogId);
             if (blog != null)
@@ -174,6 +176,9 @@ namespace Panda.Data.SqlServer
                 blog.EmailPrefix = emailPrefix;
                 blog.SmtpUseSsl = smtpUseSsl;
                 blog.SendCommentEmail = sendCommentEmail;
+                blog.UseReCaptcha = useReCaptcha;
+                blog.CaptchaKey = captchaKey;
+                blog.CaptchaSecret = captchaSecret;
 
                 _db.SaveChanges();
             }
@@ -254,7 +259,7 @@ namespace Panda.Data.SqlServer
             return user;
         }
 
-        public Comment CreateComment(int postId, string authorName, string authorEmail, string text, string gravatarHash)
+        public Comment CreateComment(int postId, string authorName, string authorEmail, string text, string gravatarHash, bool isAdmin)
         {
             var post = _db.Posts.FirstOrDefault(p => p.Id == postId);
             if (post != null)
@@ -267,13 +272,39 @@ namespace Panda.Data.SqlServer
                     CreatedDateTime = DateTime.UtcNow,
                     Removed = false,
                     Text = text,
-                    Gravatar = gravatarHash
+                    Gravatar = gravatarHash,
+                    FromAdmin = isAdmin
                 };
                 _db.Comments.Add(comment);
                 _db.SaveChanges();
                 return comment;
             }
             return null;
+        }
+
+        public void DeleteComment(int commentId)
+        {
+            var commentToDelete = _db.Comments.FirstOrDefault(c => c.Id == commentId);
+            if (commentToDelete != null)
+            {
+                commentToDelete.Deleted = true;
+                _db.SaveChanges();
+            }
+        }
+
+        public void UnDeleteComment(int commentId)
+        {
+            var commentToUnDelete = _db.Comments.FirstOrDefault(c => c.Id == commentId);
+            if (commentToUnDelete != null)
+            {
+                commentToUnDelete.Deleted = false;
+                _db.SaveChanges();
+            }
+        }
+
+        public Comment GetCommentById(int commentId)
+        {
+            return _db.Comments.FirstOrDefault(c => c.Id == commentId);
         }
 
         public void DeletePost(int postId)

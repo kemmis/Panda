@@ -6,5 +6,6 @@
         public string AuthorEmail { get; set; }
         public string Text { get; set; }
         public int PostId { get; set; }
+        public string ReCaptchaToken { get; set; }
     }
 }

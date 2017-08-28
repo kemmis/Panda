@@ -1,25 +1,26 @@
-<div class="pp-comment-form row">
+<div class="pp-comment-form row" id="comment-form">
     <div class="col-10 offset-2">
         <h3>Add Comment</h3>
         <form [formGroup]="form">
             <div class="pp-comment-form-name">
                 <md-input-container>
-                    <input mdInput name="name" placeholder="Name" formControlName="authorName">
+                    <input mdInput name="name" #name placeholder="Name" formControlName="authorName">
                 </md-input-container>
             </div>
             <div class="pp-comment-form-email">
                 <md-input-container>
-                    <input mdInput name="email" placeholder="Email" formControlName="authorEmail">
+                    <input type="email" mdInput name="email" #email placeholder="Email" formControlName="authorEmail" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
                 </md-input-container>
             </div>
             <div class="pp-comment-form-text">
                 <md-input-container>
-                    <textarea mdInput name="text" placeholder="Comment" formControlName="text"></textarea>
+                    <textarea mdInput name="text" #text placeholder="Comment" formControlName="text"></textarea>
                 </md-input-container>
             </div>
+            <div class="g-recaptcha" data-callback="verifyCallback" [attr.data-sitekey]="reCaptchaKey"></div>
             <div class="pp-comment-form-save">
-                <button md-raised-button (click)="save()">Save Comment</button>
+                <button md-raised-button (click)="save()" [disabled]="(_userReCaptcha && !recaptchaCompleted) || !form.valid">Save Comment</button>
             </div>
         </form>
     </div>
-</div>
+</div>  

@@ -7,6 +7,7 @@ import { LoginResponse } from "../../models/login-response";
 import { CommentService } from "../../services/comment.service";
 import { BlogInfo } from "../../models/blog-info";
 import { BlogService } from "../../services/blog.service";
+import { UserInfoService } from "../../services/user-info.service";
 
 @Component({
     selector: 'app',
@@ -18,7 +19,7 @@ import { BlogService } from "../../services/blog.service";
 export class AppComponent implements OnInit {
 
     constructor(private _dialog: MdDialog, private _snackBar: MdSnackBar,
-        private _accountService: AccountService, private _blogService: BlogService) { }
+        private _accountService: AccountService, private _blogService: BlogService, private _userInfoService: UserInfoService) { }
 
     info: BlogInfo = new BlogInfo();
     login: LoginResponse = new LoginResponse();
@@ -28,6 +29,9 @@ export class AppComponent implements OnInit {
         this._accountService.isLoggedIn().subscribe((login: LoginResponse) => {
             if (login.succeeded) {
                 this.login = login;
+                this._userInfoService.isLoggedIn = true;
+                this._userInfoService.login = login;
+                this._userInfoService.userLogin.emit(login);    
             }
         });
 
@@ -40,6 +44,9 @@ export class AppComponent implements OnInit {
         var ref = this._dialog.open(LoginComponent);
         ref.componentInstance.loginSuccess.subscribe((login: LoginResponse) => {
             this.login = login;
+            this._userInfoService.isLoggedIn = true;
+            this._userInfoService.login = login;
+            this._userInfoService.userLogin.emit(login);
             ref.close();
         });
         ref.componentInstance.loginFailure.subscribe((login: LoginResponse) => {
@@ -50,6 +57,9 @@ export class AppComponent implements OnInit {
     logOut() {
         this._accountService.logOut().subscribe(res => {
             this.login = new LoginResponse();
+            this._userInfoService.isLoggedIn = false;
+            this._userInfoService.userLogOut.emit();
+            this._userInfoService.login = new LoginResponse();
             this.adminNav.close();
         });
     }

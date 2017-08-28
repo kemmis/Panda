@@ -11,9 +11,10 @@ using System;
 namespace Panda.Data.SqlServer.Migrations
 {
     [DbContext(typeof(PandaDbContext))]
-    partial class PandaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170820132718_AddDeletedFieldToComment")]
+    partial class AddDeletedFieldToComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,10 +191,6 @@ namespace Panda.Data.SqlServer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CaptchaKey");
-
-                    b.Property<string>("CaptchaSecret");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("EmailPrefix");
@@ -213,8 +210,6 @@ namespace Panda.Data.SqlServer.Migrations
                     b.Property<bool>("SmtpUseSsl");
 
                     b.Property<string>("SmtpUsername");
-
-                    b.Property<bool>("UseReCaptcha");
 
                     b.HasKey("Id");
 
@@ -262,8 +257,6 @@ namespace Panda.Data.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTime");
 
                     b.Property<bool>("Deleted");
-
-                    b.Property<bool>("FromAdmin");
 
                     b.Property<string>("Gravatar");
 

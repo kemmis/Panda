@@ -8,6 +8,8 @@ declare var $: any;
 export class TinyMceComponent implements AfterViewInit, OnDestroy {
     constructor(private _elementRef: ElementRef, @Inject('BASE_URL') private originUrl: string) { }
     @Input() elementId: String;
+    @Output() save = new EventEmitter();
+
     editor: any;
 
     get content(): string {
@@ -28,13 +30,16 @@ export class TinyMceComponent implements AfterViewInit, OnDestroy {
             selector: '#' + this.elementId,
             height: tinyHeight,
             skin_url: '../tinymce/skins/lightgray',
-            plugins: ['image', 'paste', 'code', 'lists', 'link'],
+            plugins: ['image', 'paste', 'code', 'lists', 'link', 'save'],
             automatic_uploads: true,
             images_upload_url: `${this.originUrl}api/upload/`,
             paste_data_images: true,
             setup: (editor: any) => {
                 this.editor = editor;
             },
+            save_onsavecallback: ()=>{
+                this.save.emit('Post Saved!');
+            }
         });
     }
 

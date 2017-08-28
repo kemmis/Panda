@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, AfterViewInit, Inject, ViewChild } from "@angular/core";
+import { Component, OnInit, EventEmitter, Output, AfterViewInit, Inject, ViewChild, HostListener, NgZone } from "@angular/core";
 import { CategoryService } from "../../../services/category.service";
 import { BlogCategoryContent } from "../../../models/blog-content";
 import * as _ from 'underscore';
@@ -17,7 +17,7 @@ export class PostEditorComponent implements AfterViewInit {
     constructor(private _categoryService: CategoryService,
         @Inject(MD_DIALOG_DATA) public data: any,
         private _postEditService: PostEditService,
-        private _snackBar: MdSnackBar) {
+        private _snackBar: MdSnackBar, private _zone: NgZone) {
     }
     @Output() navigate = new EventEmitter<string>();
 
@@ -47,14 +47,17 @@ export class PostEditorComponent implements AfterViewInit {
     }
 
     save(successMessage: string) {
-        this.saving = true;
-        this.post.content = this.tmce.content;
-        this._postEditService.savePost(this.post).subscribe((post: EditPost) => {
-            this.saving = false;
-            this.post = post;
-            this.tmce.content = this.post.content;
-            this._snackBar.open(successMessage, "", { duration: 3000 });
+        this._zone.run(() => {
+            this.saving = true;
+            this.post.content = this.tmce.content;
+            this._postEditService.savePost(this.post).subscribe((post: EditPost) => {
+                this.saving = false;
+                this.post = post;
+                this.tmce.content = this.post.content;
+                this._snackBar.open(successMessage, "", { duration: 3000 });
+            });
         });
+
     }
 
     publish() {
@@ -68,5 +71,17 @@ export class PostEditorComponent implements AfterViewInit {
 
     goToPost() {
         this.navigate.emit(this.post.slug);
+    }
+
+    @HostListener('document:keydown', ['$event'])
+    handleKeyboardEvent(event: any) {
+        if (event.ctrlKey) {
+            let charCode = String.fromCharCode(event.which).toLowerCase();
+            if (charCode === 's') {
+                event.preventDefault();
+                this.save("Post Saved!");
+                return false;
+            }
+        }
     }
 }

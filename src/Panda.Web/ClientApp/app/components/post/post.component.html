@@ -4,6 +4,9 @@
             <h1>
                 <a [routerLink]="['/post', post.slug]">{{post.title}}</a>
             </h1>
+            <div class="pp-admin-links" *ngIf="_userInfoService.isLoggedIn">
+                <a href="javascript:void(0)" (click)="edit()"><i class="fa fa-pencil"></i> Edit Post</a>
+            </div>
         </div>
     </div>
     <div class="pp-meta-top">
@@ -31,8 +34,7 @@
                         <div class="pp-post-display-name">
                             About {{post.userDisplayName}}
                         </div>
-                        <div class="pp-post-author-description">
-                            {{post.userAbout}}
+                        <div class="pp-post-author-description" [innerHtml]="post.userAbout">
                         </div>
                     </div>
                 </div>
@@ -41,6 +43,6 @@
     </div>
     <div class="container pp-comment-container" *ngIf="showComments">
         <comment-list [comments]="post.comments"></comment-list>
-        <comment-form [postId]="post.id" (commentCreated)="onCommentCreated($event)"></comment-form>
+        <comment-form [postId]="post.id" [useReCaptcha]="post.useReCaptcha" [reCaptchaKey]="post.captchaKey" (commentCreated)="onCommentCreated($event)"></comment-form>
     </div>
 </div>

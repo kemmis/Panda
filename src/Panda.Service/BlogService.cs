@@ -24,11 +24,12 @@ namespace Panda.Service
         private readonly IEmailService _emailService;
         private readonly IDataProtector _protector;
         private readonly IGravatarService _gravatarService;
+        private readonly IReCaptchaValidator _reCaptchaValidator;
 
         public BlogService(IPandaDataProvider dataProvider, IMapper mapper,
             IMediaStorageService mediaStorageService, ISlugService slugService,
             IEmailService emailService, IDataProtectionProvider dataProtectionProvider,
-            IGravatarService gravatarService)
+            IGravatarService gravatarService, IReCaptchaValidator reCaptchaValidator)
         {
             _dataProvider = dataProvider;
             _mapper = mapper;
@@ -37,6 +38,7 @@ namespace Panda.Service
             _emailService = emailService;
             _protector = dataProtectionProvider.CreateProtector("Panda.BlogService");
             _gravatarService = gravatarService;
+            _reCaptchaValidator = reCaptchaValidator;
         }
 
         public void DeletePost(string blogId, string postId)
@@ -169,7 +171,8 @@ namespace Panda.Service
 
             _dataProvider.UpdateBlog(settings.BlogId, settings.BlogName, settings.Description, settings.PostsPerPage,
                 settings.SmtpUsername, encryptedSmtpPassword, settings.SmtpHost, settings.SmtpPort,
-                settings.EmailPrefix, settings.SmtpUseSsl, settings.SendCommentEmail);
+                settings.EmailPrefix, settings.SmtpUseSsl, settings.SendCommentEmail, settings.UseReCaptcha,
+                settings.CaptchaKey, settings.CaptchaSecret);
             return GetBlogSettings();
         }
 
@@ -239,19 +242,45 @@ namespace Panda.Service
             return _mapper.Map<ProfileSettingsViewModel>(user);
         }
 
-        public CommentViewModel SaveComment(CommentCreateRequest request)
+        public async Task<CommentViewModel> SaveComment(CommentCreateRequest request, bool isAdmin)
         {
             var blog = _dataProvider.GetBlog();
+
+            var validation = await _reCaptchaValidator.Validate(new ReCaptchaValidationRequest
+            {
+                Resonse = request.ReCaptchaToken,
+                Secret = blog.CaptchaSecret
+            });
+
+            if (!validation.success)
+            {
+                return null;
+            }
+
             var gravatarHash = _gravatarService.GetGravatarHash(request.AuthorEmail);
             request.Text = request.Text.Replace("\n", "<br />");
             var comment =
-                _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text, gravatarHash);
+                _dataProvider.CreateComment(request.PostId, request.AuthorName, request.AuthorEmail, request.Text, gravatarHash, isAdmin);
 
             if (blog.SendCommentEmail)
             {
-                _emailService.SendCommentEmail(request);
+                await _emailService.SendCommentEmail(request);
             }
 
+            return _mapper.Map<CommentViewModel>(comment);
+        }
+
+        public CommentViewModel DeleteComment(int commentId)
+        {
+            _dataProvider.DeleteComment(commentId);
+            var comment = _dataProvider.GetCommentById(commentId);
+            return _mapper.Map<CommentViewModel>(comment);
+        }
+
+        public CommentViewModel UnDeleteComment(int commentId)
+        {
+            _dataProvider.UnDeleteComment(commentId);
+            var comment = _dataProvider.GetCommentById(commentId);
             return _mapper.Map<CommentViewModel>(comment);
         }
 

@@ -31,7 +31,7 @@ namespace Panda.Core.Contracts
         void DeleteCategory(int categoryId);
         ProfileSettingsViewModel GetProfileSettings(string userId);
         ProfileSettingsViewModel UpdateProfileSettings(string userId, ProfileSettingsUpdateRequest request);
-        CommentViewModel SaveComment(CommentCreateRequest request);
+        Task<CommentViewModel> SaveComment(CommentCreateRequest request, bool isAdmin);
         HomeViewModel GetHomeData();
         void DeletePost(int postId);
         void UnDeletePost(int postId);
@@ -42,5 +42,7 @@ namespace Panda.Core.Contracts
         Task<ProfileSettingsViewModel> SaveProfilePicture(string userId, IFormFile file);
         Task<MediaViewModel> UploadMedia(IFormFile file);
         ProfileSettingsViewModel RemoveProfilePhoto(string userId);
+        CommentViewModel DeleteComment(int commentId);
+        CommentViewModel UnDeleteComment(int commentId);
     }
 }

@@ -1,8 +1,12 @@
-import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, EventEmitter, Output, ViewChild, NgZone } from '@angular/core';
 import { CommentService } from "../../../services/comment.service";
 import { CommentSaveRequest } from "../../../models/comment-save-request";
 import { PostComment } from "../../../models/post-comment";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UserInfoService } from '../../../services/user-info.service';
+import { LoginResponse } from '../../../models/login-response';
+
+declare var grecaptcha: any;
 
 @Component({
     selector: 'comment-form',
@@ -11,11 +15,29 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class CommentFormComponent implements OnInit {
 
     constructor(private _commentService: CommentService,
-        private _formBuilder: FormBuilder) { }
+        private _formBuilder: FormBuilder, private _zone: NgZone, private _userInfoService: UserInfoService) {
+    }
+
     form: FormGroup;
     @Input() postId: string;
+
+    _userReCaptcha: boolean;
+    @Input() set useReCaptcha(value: boolean) {
+        if (typeof window !== 'undefined') {
+            this._userReCaptcha = value;
+            if (value) {
+                this.displayRecaptcha();
+            }
+        }
+    }
+
+    @Input() reCaptchaKey: string;
     @Output() commentCreated = new EventEmitter<PostComment>();
     saving: boolean = false;
+    recaptchaToken: string = "";
+    recaptchaCompleted: boolean = false;
+
+
 
     ngOnInit(): void {
         var authorName: any = null;
@@ -29,20 +51,77 @@ export class CommentFormComponent implements OnInit {
             authorEmail: [authorEmail, Validators.required],
             text: ['', Validators.required]
         });
+        if (this._userInfoService.isLoggedIn) {
+            this.loadAdminInfo();
+        }
+        this._userInfoService.userLogin.subscribe(() => {
+            this.loadAdminInfo();
+        });
+        this._userInfoService.userLogOut.subscribe(() => {
+            this.clearAdminInfo();
+        });
+    }
+
+    loadAdminInfo(): void {
+        let login = this._userInfoService.login;
+
+        this.form.patchValue({
+            authorName: login.displayName,
+            authorEmail: login.email
+        });
+    }
+
+    clearAdminInfo(): void {
+        let login = this._userInfoService.login;
+
+        this.form.patchValue({
+            authorName: '',
+            authorEmail: ''
+        });
     }
 
     save() {
         var newComment = this.form.value;
         newComment.postId = this.postId;
+        newComment.reCaptchaToken = this.recaptchaToken;
         this.saving = true;
-        if (localStorage) {
-            localStorage.setItem("comment-authorName", newComment.authorName);
-            localStorage.setItem("comment-authorEmail", newComment.authorEmail);
+        
+        if (!this._userInfoService.isLoggedIn) {
+            if (localStorage) {
+                localStorage.setItem("comment-authorName", newComment.authorName);
+                localStorage.setItem("comment-authorEmail", newComment.authorEmail);
+            }
         }
+
         this._commentService.saveComment(newComment).subscribe((comment: PostComment) => {
             this.saving = false;
             this.form.patchValue({ text: "" });
+            if (this._userReCaptcha) {
+                grecaptcha.reset();
+                this._zone.run(() => {
+                    this.recaptchaCompleted = false;
+                    this.recaptchaToken = "";
+                });
+            }
             this.commentCreated.emit(comment);
+        });
+    }
+
+    displayRecaptcha() {
+        (<any>window).verifyCallback = this.verifyCallback.bind(this);
+        var doc = <HTMLDivElement>document.getElementById('comment-form');
+        var script = document.createElement('script');
+        script.innerHTML = '';
+        script.src = 'https://www.google.com/recaptcha/api.js';
+        script.async = true;
+        script.defer = true;
+        doc.appendChild(script);
+    }
+
+    verifyCallback(response: any) {
+        this._zone.run(() => {
+            this.recaptchaCompleted = true;
+            this.recaptchaToken = response;
         });
     }
 }

@@ -29,6 +29,9 @@ import { PostEditorComponent } from "./components/control-panel/post-editor/post
 import { TinyMceComponent } from "./components/control-panel/post-editor/tiny-mce-component";
 import { PagerComponent } from "./components/pages/home/pager/pager.component";
 import { NotFoundComponent } from "./components/pages/not-found/not-found.component";
+import { UserInfoService } from "./services/user-info.service";
+import { EventService } from "./services/event.service";
+import { TinyMceProfileComponent } from './components/control-panel/profile/tiny-mce-component';
 
 @NgModule({
     declarations: [
@@ -53,6 +56,7 @@ import { NotFoundComponent } from "./components/pages/not-found/not-found.compon
         CategoryPageComponent,
         PostEditorComponent,
         TinyMceComponent,
+        TinyMceProfileComponent,
         PagerComponent,
         NotFoundComponent
     ],
@@ -93,7 +97,8 @@ import { NotFoundComponent } from "./components/pages/not-found/not-found.compon
         PasswordComponent,
         ProfileComponent,
         PostDeletedComponent,
-        PostEditorComponent]
+        PostEditorComponent],
+    providers: [UserInfoService, EventService]
 })
 export class AppModuleShared {
 }
