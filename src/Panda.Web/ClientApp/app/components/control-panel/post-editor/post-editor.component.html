@@ -4,7 +4,7 @@
             <md-input-container>
                 <input mdInput placeholder="Post Title" required [(ngModel)]="post.title" name="title">
             </md-input-container>
-            <tiny-mce #tmce elementId="tmce"></tiny-mce>
+            <tiny-mce #tmce elementId="tmce" (save)="save($event)"></tiny-mce>
         </div>
         <div class="col-md-3 pe-actions">
             <button md-raised-button (click)="publish()" *ngIf="!post.published" [disabled]="!form.valid"><i class="fa fa-arrow-circle-o-up"></i> Publish</button>

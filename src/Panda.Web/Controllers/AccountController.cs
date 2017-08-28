@@ -40,6 +40,7 @@ namespace Panda.Web.Controllers
                     var user = await _userManager.FindByNameAsync(model.Username);
                     response.Username = user.UserName;
                     response.DisplayName = user.DisplayName;
+                    response.Email = user.Email;
                     response.Succeeded = true;
                 }
                 else

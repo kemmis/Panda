@@ -48,30 +48,4 @@ export class PostService {
             .post(`${this.originUrl}api/post/getcategorylist`, body, options)
             .map(res => res.json() || 0);
     }
-
-    getSettings(): Observable<BlogSettings> {
-        return this._http.get(`${this.originUrl}api/settings/get/`).map(res => {
-            return res.json();
-        });
-    }
-
-    saveSettings(settings:BlogSettings):Observable<BlogSettings>{
-        const body = JSON.stringify(settings);
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-        const options = new RequestOptions({ headers: headers });
-
-        return this._http
-            .post(`${this.originUrl}api/settings/save`, body, options)
-            .map(res => res.json());
-    }
-
-    sendTestEmail(settings:BlogSettings):Observable<boolean>{
-        const body = JSON.stringify(settings);
-        const headers = new Headers({ 'Content-Type': 'application/json' });
-        const options = new RequestOptions({ headers: headers });
-
-        return this._http
-            .post(`${this.originUrl}api/settings/sendtestemail`, body, options)
-            .map(res => res.json());
-    }
 }

@@ -1,8 +1,14 @@
 using AutoMapper;
 using cloudscribe.MetaWeblog;
+using cloudscribe.SimpleContent.Models;
+using cloudscribe.SimpleContent.Services;
+using cloudscribe.Syndication.Models.Rss;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +18,7 @@ using Panda.Core.Models.Data;
 using Panda.Data.SqlServer;
 using Panda.Data.SqlServer.Seed;
 using Panda.Service;
+using System.Net.Http;
 
 namespace Panda.Web
 {
@@ -31,6 +38,9 @@ namespace Panda.Web
             services.AddAutoMapper();
             services.AddDataProtection();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
             #region EF / SqlServer
 
             services.AddDbContext<PandaDbContext>(options =>
@@ -39,7 +49,6 @@ namespace Panda.Web
             }, ServiceLifetime.Transient, ServiceLifetime.Transient);
 
             #endregion
-
 
             #region Identity
 
@@ -58,6 +67,9 @@ namespace Panda.Web
             services.AddTransient<ISlugService, SlugService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IGravatarService, GravatarService>();
+            services.AddTransient<IHtmlProcessor, HtmlProcessor>();
+            services.AddTransient<HttpClient>();
+            services.AddTransient<IReCaptchaValidator, ReCaptchaValidator>();
 
             #region MetaWeblog dependencies
 
@@ -66,6 +78,26 @@ namespace Panda.Web
             services.AddTransient<IMetaWeblogSecurity, MetaWeblogSecurity>();
 
             #endregion
+
+            #region RssChannel 
+
+            services.AddTransient<IChannelProvider, RssChannelProvider>();
+
+            #endregion
+
+            #endregion
+
+
+            #region MvcOptions
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.CacheProfiles.Add("RssCacheProfile",
+                     new CacheProfile
+                     {
+                         Duration = 100
+                     });
+            });
 
             #endregion
 

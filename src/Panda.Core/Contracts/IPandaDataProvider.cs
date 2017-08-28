@@ -19,7 +19,7 @@ namespace Panda.Core.Contracts
 
         Blog UpdateBlog(int blogId, string blogName, string description, int postsPerPage, string smtpUsername,
             string smtpPassword, string smtpHost, string smtpPort, string emailPrefix, bool smtpUseSsl,
-            bool sendCommentEmail);
+            bool sendCommentEmail, bool useReCaptcha, string captchaKey, string captchaSecret);
         int GetNumPublishedPosts();
         int GetNumDrafts();
         IEnumerable<Post> GetPosts();
@@ -28,12 +28,15 @@ namespace Panda.Core.Contracts
         void DeleteCategory(int categoryId);
         ApplicationUser GetUserById(string userId);
         ApplicationUser UpdateUser(string userId, string displayName, string about, string email);
-        Comment CreateComment(int postId, string authorName, string authorEmail, string text, string gravatarHash);
+        Comment CreateComment(int postId, string authorName, string authorEmail, string text, string gravatarHash, bool isAdmin);
         void DeletePost(int postId);
         void UnDeletePost(int postId);
         (IEnumerable<Post> posts, int totalPosts) GetPostsByCategorySlug(int pageSize, int pageIndex, string slug);
         void SaveProfilePicture(string userId, string profilePicture);
         void RemoveProfilePhoto(string userId);
         List<Comment> GetRecentComments();
+        void DeleteComment(int commentId);
+        void UnDeleteComment(int commentId);
+        Comment GetCommentById(int commentId);
     }
 }

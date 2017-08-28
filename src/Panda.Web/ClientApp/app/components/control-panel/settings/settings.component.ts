@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialogRef, MdSnackBar } from "@angular/material";
 import { PostService } from "../../../services/post.service";
 import { BlogSettings } from "../../../models/blog-settings";
+import { SettingsService } from '../../../services/settings.service';
 
 
 @Component({
     selector: 'settings',
     templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.less']
+    styleUrls: ['./settings.component.less'],
+    providers: [SettingsService]
 })
 export class SettingsComponent implements OnInit {
 
-    constructor(private _postService: PostService,
+    constructor(private _settingsService: SettingsService,
         private _dialog: MdDialogRef<SettingsComponent>,
         private _snackBar: MdSnackBar) { }
 
@@ -23,14 +25,14 @@ export class SettingsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._postService.getSettings().subscribe((settings: BlogSettings) => {
+        this._settingsService.getSettings().subscribe((settings: BlogSettings) => {
             this.settings = settings;
         });
     }
 
     save() {
         this.saving = true;
-        this._postService.saveSettings(this.settings).subscribe(s => {
+        this._settingsService.saveSettings(this.settings).subscribe(s => {
             this.saving = false;
             this._dialog.close();
             this._snackBar.open("Settings Saved!", "", { duration: 2000 });
@@ -39,7 +41,7 @@ export class SettingsComponent implements OnInit {
 
     sendTestEmail() {
         this.saving = true;
-        this._postService.sendTestEmail(this.settings).subscribe((success: boolean) => {
+        this._settingsService.sendTestEmail(this.settings).subscribe((success: boolean) => {
             this.saving = false;
             if (success) {
                 this._snackBar.open("Test email sent successfully!", "", { duration: 3000 });
