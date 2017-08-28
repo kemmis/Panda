@@ -102,8 +102,8 @@ namespace Panda.Data.SqlServer.Seed
                             <h3>Other Things to Consider</h3>
                             <ul>
                             <li>In order to get emails when people comment on your pots, you'll want to configure the email settings. These settings can be found under the 'Email' tab in the 'Blog Settings' section in the control panel.&nbsp;</li>
-                            <li>Panda is just a baby at this point. More features are coming soon! If you would like to help add features to Panda, get involved on our GitHub page, or tweet at<a href=""https://github.com/kemmis/Panda/issues"" target=""_blank"" rel=""noopener""> @PandaTheBlog</a>.</li>
-                            <li>Your feedback is important to us.If you have issues or feature request, please leave them<a href=""https://github.com/kemmis/Panda/issues"" target=""_blank"" rel=""noopener""> here</a>.</li>
+                            <li>Panda is just a baby at this point. More features are coming soon! If you would like to help add features to Panda, get involved on our GitHub page, or tweet at <a href=""https://twitter.com/pandatheblog"" target=""_blank"" rel=""noopener"">@PandaTheBlog</a>.</li>
+                            <li>Your feedback is important to us.If you have issues or feature request, please leave them <a href=""https://github.com/kemmis/Panda/issues"" target=""_blank"" rel=""noopener"">here</a>.</li>
                             </ul>",
                     PublishDate = DateTime.Now,
                     Title = "Welcome to Panda",
