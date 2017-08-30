@@ -15,6 +15,29 @@ If you're hosting on Azure, we recommend auto deploying your blog files from Git
 5. (Optional) If you happen to be deploying from a branch other than master, then you'll want to add the `SCM_USE_LIBGIT2SHARP_REPOSITORY` setting with a value of `0` (zero). This avoids a bug that currently exists with libgit2sharp. 
 6. Under "Deployment Options" in the Azure portal, configure the deployment source to use  your new fork of Panda on GitHub.
 
+### Configuration
+As of Panda version 1.1, the only configuration that is necessary is to set the database connection string for the application. You will find the `DefaultConnection` connection string defined inside the `appsettings.json` file. You will need to configure this connection string to point to the SqlServer and database that you wish to use. When Panda starts for the first time, it will create the tables and seed the data that it needs to run. No need to manually execute any sql scripts to install Panda.
+
+### Running Panda Locally
+Running Panda locally requires that you have the .NET Core 2 SDK, Node.js, and some flavor of SQL Server installed. Once you have these dependencies installed, you're ready to run Panda.
+
+#### Running Panda From Binaries via the dotnet Command Line
+1. Download the Panda binaries for latest version and unzip them to your desired directory.
+2. Open your favorite command line and navigate to the directory where you unzipped the Panda binaries.
+3. Run `dotnet panda.web.dll`
+
+#### Running Panda From Source via the dotnet Command Line
+1. Acquired the Panda source by either cloning the git repository or downloading the source to your computer.
+2. Open your favorite command line and navigate tot he directory where the Panda source files live.
+3. Change directories to the `/src/Panda.Web/` folder.
+4. Run `npm install`
+5. Run `dotnet run`
+
+#### Running Panda From Visual Studio
+1. Acquired the Panda source by either cloning the git repository or downloading the source to your computer.
+2. Open Panda.sln
+3. Make sure the Panda.Web project is selected in the solution explorer pane, and hit F5 to start the app with debugging.
+
 ### Problems & Solutions
 
 #### *Module not found: Error: Can't resolve './$$_gendir/app/app.module.ngfactory'* when running webpack
