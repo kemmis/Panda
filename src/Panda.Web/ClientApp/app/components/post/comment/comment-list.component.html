@@ -1,7 +1,7 @@
 <div class="pp-comment-list" id="comments">
     <h3>Comments</h3>
     <comment *ngFor="let c of comments" [comment]="c"></comment>
-    <div class="pp-no-comments" *ngIf="comments.length == 0">
+    <div class="pp-no-comments" [class.hidden]="comments.length > 0">
         No comments yet.
     </div>
 </div>

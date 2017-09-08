@@ -102,7 +102,8 @@ namespace Panda.Web
             #endregion
 
             // uncomment for node debugging
-            //services.AddNodeServices(options => {
+            //services.AddNodeServices(options =>
+            //{
             //    options.LaunchWithDebugging = true;
             //    options.DebuggingPort = 9229;
             //});

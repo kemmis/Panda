@@ -246,15 +246,18 @@ namespace Panda.Service
         {
             var blog = _dataProvider.GetBlog();
 
-            var validation = await _reCaptchaValidator.Validate(new ReCaptchaValidationRequest
+            if (blog.UseReCaptcha)
             {
-                Resonse = request.ReCaptchaToken,
-                Secret = blog.CaptchaSecret
-            });
+                var validation = await _reCaptchaValidator.Validate(new ReCaptchaValidationRequest
+                {
+                    Resonse = request.ReCaptchaToken,
+                    Secret = blog.CaptchaSecret
+                });
 
-            if (!validation.success)
-            {
-                return null;
+                if (!validation.success)
+                {
+                    return null;
+                }
             }
 
             var gravatarHash = _gravatarService.GetGravatarHash(request.AuthorEmail);
