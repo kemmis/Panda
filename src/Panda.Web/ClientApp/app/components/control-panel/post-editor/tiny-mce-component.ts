@@ -34,10 +34,12 @@ export class TinyMceComponent implements AfterViewInit, OnDestroy {
             automatic_uploads: true,
             images_upload_url: `${this.originUrl}api/upload/`,
             paste_data_images: true,
+            relative_urls: true,
+            document_base_url: `${this.originUrl}`,
             setup: (editor: any) => {
                 this.editor = editor;
             },
-            save_onsavecallback: ()=>{
+            save_onsavecallback: () => {
                 this.save.emit('Post Saved!');
             }
         });
