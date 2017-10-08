@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output, AfterViewInit, Inject, ViewChi
 import { CategoryService } from "../../../services/category.service";
 import { BlogCategoryContent } from "../../../models/blog-content";
 import * as _ from 'underscore';
-import { MD_DIALOG_DATA, MdSnackBar } from "@angular/material";
+import { MAT_DIALOG_DATA, MatSnackBar } from "@angular/material";
 import { TinyMceComponent } from "./tiny-mce-component";
 import { PostEditService } from "../../../services/post-edit.service";
 import { EditPost } from "../../../models/edit-post";
@@ -15,9 +15,9 @@ import { EditPost } from "../../../models/edit-post";
 })
 export class PostEditorComponent implements AfterViewInit {
     constructor(private _categoryService: CategoryService,
-        @Inject(MD_DIALOG_DATA) public data: any,
+        @Inject(MAT_DIALOG_DATA) public data: any,
         private _postEditService: PostEditService,
-        private _snackBar: MdSnackBar, private _zone: NgZone) {
+        private _snackBar: MatSnackBar, private _zone: NgZone) {
     }
     @Output() navigate = new EventEmitter<string>();
 

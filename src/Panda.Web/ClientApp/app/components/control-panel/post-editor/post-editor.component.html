@@ -1,28 +1,28 @@
 <form #form="ngForm">
     <div class="row">
         <div class="col-md-9">
-            <md-input-container>
-                <input mdInput placeholder="Post Title" required [(ngModel)]="post.title" name="title">
-            </md-input-container>
+            <mat-form-field>
+                <input matInput placeholder="Post Title" required [(ngModel)]="post.title" name="title">
+            </mat-form-field>
             <tiny-mce #tmce elementId="tmce" (save)="save($event)"></tiny-mce>
         </div>
         <div class="col-md-3 pe-actions">
-            <button md-raised-button (click)="publish()" *ngIf="!post.published" [disabled]="!form.valid"><i class="fa fa-arrow-circle-o-up"></i> Publish</button>
-            <button md-raised-button (click)="goToPost()" *ngIf="post.published"><i class="fa fa-link"></i> Go to Post</button>
-            <button md-raised-button (click)="unpublish()" *ngIf="post.published" [disabled]="!form.valid"><i class="fa fa-undo"></i> Unpublish</button>
-            <button md-raised-button (click)="save('Post Saved!')" [disabled]="!form.valid"><i class="fa fa-save"></i> Save</button>
-            <button md-raised-button md-dialog-close><i class="fa fa-close"></i> Cancel</button>
+            <button mat-raised-button (click)="publish()" *ngIf="!post.published" [disabled]="!form.valid"><i class="fa fa-arrow-circle-o-up"></i> Publish</button>
+            <button mat-raised-button (click)="goToPost()" *ngIf="post.published"><i class="fa fa-link"></i> Go to Post</button>
+            <button mat-raised-button (click)="unpublish()" *ngIf="post.published" [disabled]="!form.valid"><i class="fa fa-undo"></i> Unpublish</button>
+            <button mat-raised-button (click)="save('Post Saved!')" [disabled]="!form.valid"><i class="fa fa-save"></i> Save</button>
+            <button mat-raised-button matDialogClose><i class="fa fa-close"></i> Cancel</button>
 
-            <md-select placeholder="Categories" multiple="true" [(ngModel)]="post.categories" name="categories">
-                <md-option *ngFor="let c of allCategories" [value]="c">
+            <mat-select placeholder="Categories" multiple="true" [(ngModel)]="post.categories" name="categories">
+                <mat-option *ngFor="let c of allCategories" [value]="c">
                     {{c}}
-                </md-option>
-            </md-select>
+                </mat-option>
+            </mat-select>
         </div>
 
     </div>
 </form>
 
 <div class="progress-container" *ngIf="saving">
-    <md-progress-bar mode="indeterminate"></md-progress-bar>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>

@@ -9,7 +9,11 @@ import { HomePageComponent } from "./components/pages/home/home.component";
 import { PostPageComponent } from "./components/pages/post/post.component";
 import { PostComponent } from "./components/post/post.component";
 import { LoginComponent } from "./components/login/login.component";
-import { MdDialogModule, OverlayModule, MdInputModule, MdButtonModule, MdCheckboxModule, MdSidenavModule, MdSnackBarModule, MdProgressBarModule, MdCardModule, MdListModule, MdTabsModule, MdTableModule, MdTooltipModule, MdPaginatorModule, MdGridListModule, MdSelectModule } from "@angular/material";
+import {
+    MatDialogModule, MatInputModule, MatButtonModule, MatCheckboxModule, MatSidenavModule, MatSnackBarModule,
+    MatProgressBarModule, MatCardModule, MatListModule, MatTabsModule, MatTableModule, MatTooltipModule, MatPaginatorModule,
+    MatGridListModule, MatSelectModule
+} from "@angular/material";
 import { ControlPanelComponent } from "./components/control-panel/control-panel.component";
 import { DashboardComponent } from "./components/control-panel/dashboard/dashboard.component";
 import { ContentComponent } from "./components/control-panel/content/content.component";
@@ -65,22 +69,22 @@ import { TinyMceProfileComponent } from './components/control-panel/profile/tiny
         HttpModule,
         FormsModule,
         ReactiveFormsModule,
-        MdDialogModule,
-        MdInputModule,
-        MdButtonModule,
-        MdCheckboxModule,
-        MdSidenavModule,
-        MdSnackBarModule,
-        MdProgressBarModule,
-        MdCardModule,
-        MdListModule,
-        MdTabsModule,
-        MdTableModule,
+        MatDialogModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatSidenavModule,
+        MatSnackBarModule,
+        MatProgressBarModule,
+        MatCardModule,
+        MatListModule,
+        MatTabsModule,
+        MatTableModule,
         CdkTableModule,
-        MdTooltipModule,
-        MdPaginatorModule,
-        MdGridListModule,
-        MdSelectModule,
+        MatTooltipModule,
+        MatPaginatorModule,
+        MatGridListModule,
+        MatSelectModule,
         RouterModule.forRoot([
             { path: '', component: HomePageComponent },
             { path: 'page/:index', component: HomePageComponent },

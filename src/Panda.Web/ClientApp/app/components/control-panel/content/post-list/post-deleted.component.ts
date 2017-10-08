@@ -1,7 +1,7 @@
 import { Input, Component, Output, EventEmitter, Inject } from "@angular/core";
 import { BlogPostContent } from "../../../../models/blog-content";
 import { ContentService } from "../../../../services/content.service";
-import { MD_SNACK_BAR_DATA } from "@angular/material";
+import { MAT_SNACK_BAR_DATA } from "@angular/material";
 
 @Component({
     selector: 'post-deleted',
@@ -10,7 +10,7 @@ import { MD_SNACK_BAR_DATA } from "@angular/material";
     providers: [ContentService]
 })
 export class PostDeletedComponent {
-    constructor(private _contentService: ContentService, @Inject(MD_SNACK_BAR_DATA) public data: any) { }
+    constructor(private _contentService: ContentService, @Inject(MAT_SNACK_BAR_DATA) public data: any) { }
 
     @Output() postRestored = new EventEmitter<BlogPostContent>();
     @Output() dismissed = new EventEmitter<void>();

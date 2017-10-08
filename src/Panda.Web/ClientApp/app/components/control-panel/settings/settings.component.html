@@ -1,58 +1,58 @@
 <div id="pp-settings">
-    <h2 md-dialog-title>Blog Settings</h2>
+    <h2 matDialogTitle>Blog Settings</h2>
     <form #settingsForm="ngForm" ng-disabled="saving">
-        <md-tab-group>
-            <md-tab label="General">
-                <md-input-container>
-                    <input id="blogName" name="blogName" mdInput placeholder="Blog Name" [(ngModel)]="settings.blogName">
-                </md-input-container>
+        <mat-tab-group>
+            <mat-tab label="General">
+                <mat-form-field>
+                    <input id="blogName" name="blogName" matInput placeholder="Blog Name" [(ngModel)]="settings.blogName">
+                </mat-form-field>
                 <br />
-                <md-input-container>
-                    <input id="description" name="description" mdInput placeholder="Description" [(ngModel)]="settings.description">
-                </md-input-container>
+                <mat-form-field>
+                    <input id="description" name="description" matInput placeholder="Description" [(ngModel)]="settings.description">
+                </mat-form-field>
                 <br />
-                <md-select name="postsPerPage" placeholder="Posts Per Page" [(ngModel)]="settings.postsPerPage">
-                    <md-option *ngFor="let size of pageSizes" [value]="size">{{ size }}</md-option>
-                </md-select>
-            </md-tab>
-            <md-tab label="E-mail">
-                <md-checkbox name="sendCommentEmail" [(ngModel)]="settings.sendCommentEmail">Send comment e-mail</md-checkbox>
-                <md-input-container>
-                    <input name="smtpUsername" mdInput placeholder="SMTP Username" [(ngModel)]="settings.smtpUsername">
-                </md-input-container>
-                <md-input-container>
-                    <input type="password" name="smtpPassword" mdInput placeholder="SMTP Password" [(ngModel)]="settings.smtpPassword">
-                </md-input-container>
-                <md-input-container>
-                    <input name="smtpHost" mdInput placeholder="SMTP Host Name" [(ngModel)]="settings.smtpHost">
-                </md-input-container>
-                <md-input-container>
-                    <input name="smtpPort" mdInput placeholder="SMTP Port Number" [(ngModel)]="settings.smtpPort">
-                </md-input-container>
-                <md-input-container>
-                    <input name="emailPrefix" mdInput placeholder="E-mail Subject Prefix" [(ngModel)]="settings.emailPrefix">
-                </md-input-container>
-                <md-checkbox name="smtpUseSsl" [(ngModel)]="settings.smtpUseSsl">Use SSL</md-checkbox>
+                <mat-select name="postsPerPage" placeholder="Posts Per Page" [(ngModel)]="settings.postsPerPage">
+                    <mat-option *ngFor="let size of pageSizes" [value]="size">{{ size }}</mat-option>
+                </mat-select>
+            </mat-tab>
+            <mat-tab label="E-mail">
+                <mat-checkbox name="sendCommentEmail" [(ngModel)]="settings.sendCommentEmail">Send comment e-mail</mat-checkbox>
+                <mat-form-field>
+                    <input name="smtpUsername" matInput placeholder="SMTP Username" [(ngModel)]="settings.smtpUsername">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="password" name="smtpPassword" matInput placeholder="SMTP Password" [(ngModel)]="settings.smtpPassword">
+                </mat-form-field>
+                <mat-form-field>
+                    <input name="smtpHost" matInput placeholder="SMTP Host Name" [(ngModel)]="settings.smtpHost">
+                </mat-form-field>
+                <mat-form-field>
+                    <input name="smtpPort" matInput placeholder="SMTP Port Number" [(ngModel)]="settings.smtpPort">
+                </mat-form-field>
+                <mat-form-field>
+                    <input name="emailPrefix" matInput placeholder="E-mail Subject Prefix" [(ngModel)]="settings.emailPrefix">
+                </mat-form-field>
+                <mat-checkbox name="smtpUseSsl" [(ngModel)]="settings.smtpUseSsl">Use SSL</mat-checkbox>
                 <br/>
-                <button md-raised-button class="pp-send-email-btn" (click)="sendTestEmail()" [disabled]="saving">Send Test Email</button>
-            </md-tab>
-            <md-tab label="reCaptcha">
-                <md-checkbox name="useReCaptcha" #useReCaptcha [(ngModel)]="settings.useReCaptcha">Use Google reCaptcha</md-checkbox>
-                <md-input-container>
-                    <input name="captchaKey" mdInput placeholder="Site Key" [(ngModel)]="settings.captchaKey" [disabled]="!useReCaptcha.checked">
-                </md-input-container>
-                <md-input-container>
-                    <input name="captchaSecret" mdInput placeholder="Site Secret" [(ngModel)]="settings.captchaSecret" [disabled]="!useReCaptcha.checked">
-                </md-input-container>
-            </md-tab>
-        </md-tab-group>
+                <button mat-raised-button class="pp-send-email-btn" (click)="sendTestEmail()" [disabled]="saving">Send Test Email</button>
+            </mat-tab>
+            <mat-tab label="reCaptcha">
+                <mat-checkbox name="useReCaptcha" #useReCaptcha [(ngModel)]="settings.useReCaptcha">Use Google reCaptcha</mat-checkbox>
+                <mat-form-field>
+                    <input name="captchaKey" matInput placeholder="Site Key" [(ngModel)]="settings.captchaKey" [disabled]="!useReCaptcha.checked">
+                </mat-form-field>
+                <mat-form-field>
+                    <input name="captchaSecret" matInput placeholder="Site Secret" [(ngModel)]="settings.captchaSecret" [disabled]="!useReCaptcha.checked">
+                </mat-form-field>
+            </mat-tab>
+        </mat-tab-group>
     </form>
     <br />
-    <md-dialog-actions>
-        <button md-raised-button (click)="save()">Save</button>
-        <button md-raised-button md-dialog-close>Cancel</button>
-    </md-dialog-actions>
+    <mat-dialog-actions>
+        <button mat-raised-button (click)="save()">Save</button>
+        <button mat-raised-button matDialogClose>Cancel</button>
+    </mat-dialog-actions>
 </div>
 <div class="progress-container" *ngIf="saving">
-    <md-progress-bar mode="indeterminate"></md-progress-bar>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>

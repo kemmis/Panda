@@ -3,7 +3,7 @@ import { Component, Input, ViewChild, EventEmitter, Output } from "@angular/core
 import { BlogPostContent } from "../../../../models/blog-content";
 import { DataSource } from "@angular/cdk/table";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { MdPaginator, MdSnackBar } from "@angular/material";
+import { MatPaginator, MatSnackBar } from "@angular/material";
 import { Observable } from "rxjs/Observable";
 import { ContentService } from "../../../../services/content.service";
 import { PostDeletedComponent } from "./post-deleted.component";
@@ -15,13 +15,13 @@ import { PostDeletedComponent } from "./post-deleted.component";
 })
 export class PostContentListComponent {
     constructor(private _contentService: ContentService,
-        private _snackBar: MdSnackBar) { }
+        private _snackBar: MatSnackBar) { }
 
     @Input() set posts(posts: BlogPostContent[]) {
         this.postsArray = posts;
         this.dataChange.next(this.postsArray);
     }
-    @ViewChild("paginator") paginator: MdPaginator;
+    @ViewChild("paginator") paginator: MatPaginator;
 
     @Output() editPost = new EventEmitter<string>();
 

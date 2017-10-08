@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef, MdSnackBar } from "@angular/material";
+import { MatDialogRef, MatSnackBar } from "@angular/material";
 import { PostService } from "../../../services/post.service";
 import { BlogSettings } from "../../../models/blog-settings";
 import { SettingsService } from '../../../services/settings.service';
@@ -14,8 +14,8 @@ import { SettingsService } from '../../../services/settings.service';
 export class SettingsComponent implements OnInit {
 
     constructor(private _settingsService: SettingsService,
-        private _dialog: MdDialogRef<SettingsComponent>,
-        private _snackBar: MdSnackBar) { }
+        private _dialog: MatDialogRef<SettingsComponent>,
+        private _snackBar: MatSnackBar) { }
 
     settings: BlogSettings = new BlogSettings();
     saving: boolean = false;

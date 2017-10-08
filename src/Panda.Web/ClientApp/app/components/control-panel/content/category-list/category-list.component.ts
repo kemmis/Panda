@@ -6,7 +6,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { CategoryService } from "../../../../services/category.service";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/merge';
-import { MdPaginator, MdSnackBar } from "@angular/material";
+import { MatPaginator, MatSnackBar } from "@angular/material";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
@@ -18,7 +18,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class CategoryContentListComponent implements OnInit {
 
     constructor(private _categoryService: CategoryService,
-        private _snackBar: MdSnackBar,
+        private _snackBar: MatSnackBar,
         private _formBuilder: FormBuilder) { }
 
     @Input() set categories(categories: BlogCategoryContent[]) {
@@ -26,7 +26,7 @@ export class CategoryContentListComponent implements OnInit {
         this.dataChange.next(this.cateogriesArray);
     }
 
-    @ViewChild("paginator") paginator: MdPaginator;
+    @ViewChild("paginator") paginator: MatPaginator;
     @ViewChild("title") titleInput: ElementRef;
 
     displayedColumns = ['title', 'description', 'numPosts', 'delete'];

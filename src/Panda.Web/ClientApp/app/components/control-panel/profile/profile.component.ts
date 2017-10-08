@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, AfterViewInit } from "@angular/core";
 import { ProfileService } from "../../../services/profile.service";
 import { ProfileSettings } from "../../../models/profile-settings";
-import { MdDialogRef, MdSnackBar } from "@angular/material";
+import { MatDialogRef, MatSnackBar } from "@angular/material";
 import { TinyMceProfileComponent } from "./tiny-mce-component";
 
 @Component({
@@ -20,8 +20,8 @@ export class ProfileComponent implements AfterViewInit {
     }
 
     constructor(private _profileService: ProfileService,
-        private _dialog: MdDialogRef<ProfileComponent>,
-        private _snackBar: MdSnackBar) { }
+        private _dialog: MatDialogRef<ProfileComponent>,
+        private _snackBar: MatSnackBar) { }
 
     @Output() settingsUpdated = new EventEmitter<ProfileSettings>();
     @ViewChild("file") file: any;

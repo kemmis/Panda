@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PostService } from "../../services/post.service";
-import { MdDialog, MdSidenav, MdSnackBar } from "@angular/material";
+import { MatDialog, MatSidenav, MatSnackBar } from "@angular/material";
 import { LoginComponent } from "../login/login.component";
 import { AccountService } from "../../services/account.service";
 import { LoginResponse } from "../../models/login-response";
@@ -14,16 +14,16 @@ import { UserInfoService } from "../../services/user-info.service";
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.less'],
     encapsulation: ViewEncapsulation.None,
-    providers: [PostService, MdDialog, AccountService, MdSnackBar, CommentService, BlogService]
+    providers: [PostService, MatDialog, AccountService, MatSnackBar, CommentService, BlogService]
 })
 export class AppComponent implements OnInit {
 
-    constructor(private _dialog: MdDialog, private _snackBar: MdSnackBar,
+    constructor(private _dialog: MatDialog, private _snackBar: MatSnackBar,
         private _accountService: AccountService, private _blogService: BlogService, private _userInfoService: UserInfoService) { }
 
     info: BlogInfo = new BlogInfo();
     login: LoginResponse = new LoginResponse();
-    @ViewChild("adminNav") adminNav: MdSidenav;
+    @ViewChild("adminNav") adminNav: MatSidenav;
 
     ngOnInit(): void {
         this._accountService.isLoggedIn().subscribe((login: LoginResponse) => {

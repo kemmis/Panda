@@ -1,40 +1,40 @@
 <div class="post-list mat-elevation-z8">
-    <md-table #table [dataSource]="getThis()">
+    <mat-table #table [dataSource]="getThis()">
 
         <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Progress Column -->
         <ng-container cdkColumnDef="title">
-            <md-header-cell *cdkHeaderCellDef> Title </md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.title}} </md-cell>
+            <mat-header-cell *cdkHeaderCellDef> Title </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.title}} </mat-cell>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container cdkColumnDef="published">
-            <md-header-cell *cdkHeaderCellDef> Published </md-header-cell>
-            <md-cell *cdkCellDef="let row"> {{row.published ? row.publishDate : ""}} </md-cell>
+            <mat-header-cell *cdkHeaderCellDef> Published </mat-header-cell>
+            <mat-cell *cdkCellDef="let row"> {{row.published ? row.publishDate : ""}} </mat-cell>
         </ng-container>     
 
         <ng-container cdkColumnDef="edit">
-                <md-header-cell *cdkHeaderCellDef> Edit </md-header-cell>
-                <md-cell *cdkCellDef="let row">
-                    <button md-button (click)="edit(row)"><i class="fa fa-edit"></i></button>
-                </md-cell>
+                <mat-header-cell *cdkHeaderCellDef> Edit </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <button mat-button (click)="edit(row)"><i class="fa fa-edit"></i></button>
+                </mat-cell>
             </ng-container>
             
         <ng-container cdkColumnDef="delete">
-            <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
-            <md-cell *cdkCellDef="let row">
-                <button md-button (click)="delete(row)"><i class="fa fa-close"></i></button>
-            </md-cell>
+            <mat-header-cell *cdkHeaderCellDef> Delete </mat-header-cell>
+            <mat-cell *cdkCellDef="let row">
+                <button mat-button (click)="delete(row)"><i class="fa fa-close"></i></button>
+            </mat-cell>
         </ng-container>
 
-        <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
 
-        <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
 
-    </md-table>
-    <md-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [length]="totalNum">
-    </md-paginator>
+    </mat-table>
+    <mat-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [length]="totalNum">
+    </mat-paginator>
 </div>

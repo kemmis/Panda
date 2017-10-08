@@ -20,11 +20,11 @@ export class TinyMceComponent implements AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        let dialog = $(this._elementRef.nativeElement).closest("md-dialog-container");
+        let dialog = $(this._elementRef.nativeElement).closest("mat-dialog-container");
         let dialogHeight = dialog.height();
         let dialogPadding = 2 * parseInt(dialog.css("padding"));
-        let titleHeight = dialog.find("md-input-container").height();
-        let titlePadding = 2 * parseInt(dialog.find("md-input-container").css("padding"));
+        let titleHeight = dialog.find("mat-form-field").height();
+        let titlePadding = 2 * parseInt(dialog.find("mat-form-field").css("padding"));
         var tinyHeight = dialogHeight - dialogPadding - titleHeight - titlePadding - 80;
         tinymce.init({
             selector: '#' + this.elementId,

@@ -1,55 +1,55 @@
 <div class="category-list">
     <form [formGroup]="form">
         <div class="add-form">
-            <md-grid-list cols="5" gutterSize="16px" rowHeight="70px">
-                <md-grid-tile [colspan]="2">
-                    <md-input-container>
-                        <input name="title" #title formControlName="title" mdInput placeholder="New Category Title" required />
-                    </md-input-container>
-                </md-grid-tile>
-                <md-grid-tile [colspan]="2">
-                    <md-input-container>
-                        <input name="description" formControlName="description" mdInput placeholder="New Category Description" />
-                    </md-input-container>
-                </md-grid-tile>
-                <md-grid-tile [colspan]="1">
-                    <button md-raised-button (click)="saveCategory()" [disabled]="!form.valid">Add Category</button>
-                </md-grid-tile>
-            </md-grid-list>
+            <mat-grid-list cols="5" gutterSize="16px" rowHeight="70px">
+                <mat-grid-tile [colspan]="2">
+                    <mat-form-field>
+                        <input name="title" #title formControlName="title" matInput placeholder="New Category Title" required />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2">
+                    <mat-form-field>
+                        <input name="description" formControlName="description" matInput placeholder="New Category Description" />
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1">
+                    <button mat-raised-button (click)="saveCategory()" [disabled]="!form.valid">Add Category</button>
+                </mat-grid-tile>
+            </mat-grid-list>
         </div>
     </form>
     <div class="example-container mat-elevation-z8">
-        <md-table #table [dataSource]="getThis()">
+        <mat-table #table [dataSource]="getThis()">
 
             <ng-container cdkColumnDef="title">
-                <md-header-cell *cdkHeaderCellDef> Title </md-header-cell>
-                <md-cell *cdkCellDef="let row"> {{row.title}} </md-cell>
+                <mat-header-cell *cdkHeaderCellDef> Title </mat-header-cell>
+                <mat-cell *cdkCellDef="let row"> {{row.title}} </mat-cell>
             </ng-container>
 
             <ng-container cdkColumnDef="description">
-                <md-header-cell *cdkHeaderCellDef> Description </md-header-cell>
-                <md-cell *cdkCellDef="let row"> {{row.description}} </md-cell>
+                <mat-header-cell *cdkHeaderCellDef> Description </mat-header-cell>
+                <mat-cell *cdkCellDef="let row"> {{row.description}} </mat-cell>
             </ng-container>
 
             <ng-container cdkColumnDef="numPosts">
-                <md-header-cell *cdkHeaderCellDef> Posts </md-header-cell>
-                <md-cell *cdkCellDef="let row"> {{row.numPosts}} </md-cell>
+                <mat-header-cell *cdkHeaderCellDef> Posts </mat-header-cell>
+                <mat-cell *cdkCellDef="let row"> {{row.numPosts}} </mat-cell>
             </ng-container>
 
             <ng-container cdkColumnDef="delete">
-                <md-header-cell *cdkHeaderCellDef> Delete </md-header-cell>
-                <md-cell *cdkCellDef="let row">
-                    <button md-button (click)="delete(row)"><i class="fa fa-close"></i></button>
-                </md-cell>
+                <mat-header-cell *cdkHeaderCellDef> Delete </mat-header-cell>
+                <mat-cell *cdkCellDef="let row">
+                    <button mat-button (click)="delete(row)"><i class="fa fa-close"></i></button>
+                </mat-cell>
             </ng-container>
 
-            <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
 
-            <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
 
-        </md-table>
+        </mat-table>
 
-        <md-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [length]="totalNum">
-        </md-paginator>
+        <mat-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [length]="totalNum">
+        </mat-paginator>
     </div>
 </div>

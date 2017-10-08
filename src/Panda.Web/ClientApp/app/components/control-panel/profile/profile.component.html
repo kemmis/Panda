@@ -1,31 +1,31 @@
 <div class="row">
     <div class="col-5">
-        <h3 md-dialog-title>Profile Picture</h3>
+        <h3 matDialogTitle>Profile Picture</h3>
         <img src="{{settings.profilePicture}}" class="profile-pic" />
-        <button md-raised-button (click)="removePhoto()" *ngIf="settings.profilePicture">Remove</button>
+        <button mat-raised-button (click)="removePhoto()" *ngIf="settings.profilePicture">Remove</button>
         <input type="file" name="file" id="file" #file accept=".jpg,.gif,.png" (change)="uploadPhoto($event)" />
     </div>
     <div class="col-7">
-        <h3 md-dialog-title>Profile Settings</h3>
+        <h3 matDialogTitle>Profile Settings</h3>
         <form #profileForm="ngForm">
-            <md-input-container>
-                <input name="displayName" mdInput placeholder="Display Name" required [(ngModel)]="settings.displayName">
-            </md-input-container>
+            <mat-form-field>
+                <input name="displayName" matInput placeholder="Display Name" required [(ngModel)]="settings.displayName">
+            </mat-form-field>
             <br/>
-            <md-input-container>
-                <input name="email" mdInput placeholder="Email Address" required [(ngModel)]="settings.email">
-            </md-input-container>
+            <mat-form-field>
+                <input name="email" matInput placeholder="Email Address" required [(ngModel)]="settings.email">
+            </mat-form-field>
             <br />
             <tiny-mce-profile name="about" #tmce elementId="tmce"></tiny-mce-profile>
             <br>
-            <md-dialog-actions>
-                <button md-raised-button (click)="save()" [disabled]="!profileForm.valid">Save</button>
-                <button md-raised-button md-dialog-close>Cancel</button>
-            </md-dialog-actions>
+            <mat-dialog-actions>
+                <button mat-raised-button (click)="save()" [disabled]="!profileForm.valid">Save</button>
+                <button mat-raised-button matDialogClose>Cancel</button>
+            </mat-dialog-actions>
         </form>
     </div>
 </div>
 
 <div class="progress-container" *ngIf="saving">
-    <md-progress-bar mode="indeterminate"></md-progress-bar>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 import { LoginResponse } from "../../models/login-response";
-import { MdDialog } from "@angular/material";
+import { MatDialog } from "@angular/material";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ContentComponent } from "./content/content.component";
 import { PasswordComponent } from "./password/password.component";
@@ -23,7 +23,7 @@ export class ControlPanelComponent implements OnInit {
             this.openEditorFor(post.id);
         });
     }
-    constructor(private _dialog: MdDialog, private router: Router, private _events: EventService) { }
+    constructor(private _dialog: MatDialog, private router: Router, private _events: EventService) { }
     @Input() login: LoginResponse;
 
     @Output() logout: EventEmitter<void> = new EventEmitter();

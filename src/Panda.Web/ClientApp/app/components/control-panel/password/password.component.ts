@@ -2,7 +2,7 @@
 import { Component } from "@angular/core";
 import { AccountService } from "../../../services/account.service";
 import { PasswordChangeRequest, PasswordChangeResult } from "../../../models/password-change-request";
-import { MdDialogRef, MdSnackBar } from "@angular/material";
+import { MatDialogRef, MatSnackBar } from "@angular/material";
 
 @Component({
     selector: 'change-password',
@@ -11,8 +11,8 @@ import { MdDialogRef, MdSnackBar } from "@angular/material";
 })
 export class PasswordComponent {
     constructor(private _accountService: AccountService,
-        private _dialog: MdDialogRef<PasswordComponent>,
-        private _snackBar: MdSnackBar) { }
+        private _dialog: MatDialogRef<PasswordComponent>,
+        private _snackBar: MatSnackBar) { }
 
     saving:boolean = false;
     changeRequest: PasswordChangeRequest = new PasswordChangeRequest();

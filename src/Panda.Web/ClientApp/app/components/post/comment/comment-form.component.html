@@ -3,23 +3,23 @@
         <h3>Add Comment</h3>
         <form [formGroup]="form">
             <div class="pp-comment-form-name">
-                <md-input-container>
-                    <input mdInput name="name" #name placeholder="Name" formControlName="authorName">
-                </md-input-container>
+                <mat-form-field>
+                    <input matInput name="name" #name placeholder="Name" formControlName="authorName">
+                </mat-form-field>
             </div>
             <div class="pp-comment-form-email">
-                <md-input-container>
-                    <input type="email" mdInput name="email" #email placeholder="Email" formControlName="authorEmail" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
-                </md-input-container>
+                <mat-form-field>
+                    <input type="email" matInput name="email" #email placeholder="Email" formControlName="authorEmail" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+                </mat-form-field>
             </div>
             <div class="pp-comment-form-text">
-                <md-input-container>
-                    <textarea mdInput name="text" #text placeholder="Comment" formControlName="text"></textarea>
-                </md-input-container>
+                <mat-form-field>
+                    <textarea matInput name="text" #text placeholder="Comment" formControlName="text"></textarea>
+                </mat-form-field>
             </div>
             <div class="g-recaptcha" data-callback="verifyCallback" [attr.data-sitekey]="reCaptchaKey"></div>
             <div class="pp-comment-form-save">
-                <button md-raised-button (click)="save()" [disabled]="(_userReCaptcha && !recaptchaCompleted) || !form.valid">Save Comment</button>
+                <button mat-raised-button (click)="save()" [disabled]="(_userReCaptcha && !recaptchaCompleted) || !form.valid">Save Comment</button>
             </div>
         </form>
     </div>

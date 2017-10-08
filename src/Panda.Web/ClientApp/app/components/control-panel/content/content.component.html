@@ -1,12 +1,12 @@
-<md-tab-group>
-  <md-tab label="Posts">
+<mat-tab-group>
+  <mat-tab label="Posts">
     <post-content-list [posts]="content.posts" (editPost)="onEditPost($event)"></post-content-list>
-  </md-tab>
-  <md-tab label="Categories">
+  </mat-tab>
+  <mat-tab label="Categories">
     <category-content-list [categories]="content.categories"></category-content-list>
-  </md-tab>
-</md-tab-group>
+  </mat-tab>
+</mat-tab-group>
 
 <div class="progress-container" *ngIf="loading">
-  <md-progress-bar mode="indeterminate"></md-progress-bar>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>

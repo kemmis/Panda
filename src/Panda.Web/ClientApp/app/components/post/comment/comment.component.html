@@ -15,8 +15,8 @@
         <div class="pp-comment-text" [innerHtml]="comment.text">
         </div>
         <div class="pp-comment-moderation" *ngIf="_userInfoService.isLoggedIn">
-            <button md-raised-button (click)="delete()" *ngIf="!comment.deleted">Delete Commment</button>
-            <button md-raised-button (click)="unDelete()" *ngIf="comment.deleted">Restore Comment</button>
+            <button mat-raised-button (click)="delete()" *ngIf="!comment.deleted">Delete Commment</button>
+            <button mat-raised-button (click)="unDelete()" *ngIf="comment.deleted">Restore Comment</button>
         </div>
     </div>
 </div>
