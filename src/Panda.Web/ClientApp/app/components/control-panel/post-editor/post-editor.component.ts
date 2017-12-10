@@ -42,7 +42,7 @@ export class PostEditorComponent implements AfterViewInit {
         }
         else {
             this.post = new EditPost();
-            this.tmce.content = "";
+            //this.tmce.content = "";
         }
     }
 
