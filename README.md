@@ -39,6 +39,7 @@ Running Panda locally requires that you have the .NET Core 2 SDK, Node.js, and s
 3. Make sure the Panda.Web project is selected in the solution explorer pane, and hit F5 to start the app with debugging.
 
 #### Manually Building Webpack (Helpful for debugging Webpack issues)
+- Change directories to the `/src/Panda.Web/` folder.
 - Run `webpack --config .\webpack.config.vendor.js`
 - Run `webpack --config .\webpack.config.js`
 
